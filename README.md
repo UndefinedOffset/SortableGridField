@@ -22,7 +22,6 @@ To enable sorting on the grid field add the following to your grid field's confi
 
 ## Known Isuses
 * Many_many relationship is largely untested and may not work as expected
-* Documentation on GridFieldSortableObject is very poor
 
 
 ## Credits

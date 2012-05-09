@@ -22,12 +22,6 @@ class GridFieldSortableObject extends DataExtension {
         }
     }
 
-    public static function add_sortable_classes(array $classes) {
-        foreach($classes as $class) {
-            self::add_sortable_class($class);
-        }
-    }
-
     public static function add_sortable_many_many_relation($ownerClass, $componentName) {
         list($parentClass, $componentClass, $parentField, $componentField, $table)=singleton($ownerClass)->many_many($componentName);
         

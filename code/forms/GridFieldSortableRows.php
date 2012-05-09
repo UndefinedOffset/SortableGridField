@@ -132,10 +132,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         for($sort=0;$sort<count($data['Items']);$sort++) {
             $id=intval($data['Items'][$sort]);
             if($many_many) {
-                DB::query("UPDATE \"$table\" SET \"SortOrder\" = $sort WHERE \"{$className}ID\" = $id AND \"{$ownerClass}ID\" = $controllerID");
+                DB::query('UPDATE "'.$table.'" SET "SortOrder" = '.($sort+1).' WHERE "'.$className.'ID" = $id AND "'.$ownerClass.'ID" = '.$controllerID);
             }else {
                 $obj=DataObject::get_by_id($className, $id);
-                $obj->SortOrder=$sort;
+                $obj->SortOrder=$sort+1;
                 $obj->write();
             }
         }

@@ -63,7 +63,7 @@ class GridFieldSortableObject extends DataExtension {
      * @param {string} $className Name of the DataObject to check
      */
     public static function is_sortable_class($className) {
-        if(in_array($classname, self::$sortable_classes)) {
+        if(in_array($className, self::$sortable_classes)) {
             return true;
         }
         

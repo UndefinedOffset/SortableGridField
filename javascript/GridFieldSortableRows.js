@@ -4,6 +4,13 @@
             var refCheckbox=$(this);
             
             var gridField=$(this).getGridField();
+            
+            if($(this).is(':checked')) {
+                gridField.find('table').addClass('dragSorting');
+            }else {
+                gridField.find('table').removeClass('dragSorting');
+            }
+            
             gridField.find('tbody').sortable({
                                             disabled: ($(this).is(':checked')==false),
                                             helper: function(e, ui) {

@@ -24,7 +24,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         }
         
         
-        
         //Sort order toggle
         $sortOrderToggle=new GridField_FormAction($gridField, 'sortablerows_toggle', 'Allow drag and drop re-ordering', 'saveGridRowSort', null);
         $sortOrderToggle->addExtraClass('sortablerows_toggle');

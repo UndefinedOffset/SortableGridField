@@ -5,3 +5,7 @@
 .cms table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows button {
     display: none;
 }
+
+.cms table.ss-gridfield-table.dragSorting tbody tr td {
+    cursor: move;
+}

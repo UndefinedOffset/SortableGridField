@@ -60,6 +60,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @return {DataList} Modified Data List
 	 */
     public function getManipulatedData(GridField $gridField, SS_List $dataList) {
+        $state=$gridField->State->GridFieldSortableHeader;
+		if ($state && !empty($state->SortColumn)) {
+			return $dataList;
+		}
+        
         return $dataList->sort($this->sortColumn);
     }
     

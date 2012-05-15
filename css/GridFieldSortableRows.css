@@ -1,11 +1,11 @@
 .cms table.ss-gridfield-table thead tr th.sortablerowsheading {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .cms table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows button {
-    display: none;
+	display: none;
 }
 
 .cms table.ss-gridfield-table.dragSorting tbody tr td {
-    cursor: move;
+	cursor: move;
 }

@@ -1,0 +1,13 @@
+GridFieldAction_SortOrder_Team:
+	team1:
+		Name: Team 1
+		City: Cologne
+		SortOrder: 1
+	team2:
+		Name: Team 2
+		City: Wellington
+		SortOrder: 2
+	team3:
+		Name: Team 3
+		City: Auckland
+		SortOrder: 3

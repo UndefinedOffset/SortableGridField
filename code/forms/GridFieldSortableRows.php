@@ -25,6 +25,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$state->sortableToggle = false;
 		}
 		
+		//Ensure user can edit
+		if(!singleton($gridField->getModelClass())->canEdit()){
+			return array();
+		}
+		
 		
 		//Sort order toggle
 		$sortOrderToggle = Object::create(
@@ -122,6 +127,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @param Array $data Data submitted in the request
 	 */
 	private function saveGridRowSort(GridField $gridField, $data) {
+		if(!singleton($gridField->getModelClass())->canEdit()){
+			throw new ValidationException(_t('GridFieldSortableRows.EditPermissionsFailure', "No edit permissions"),0);
+		}
+		
 		if (empty($data['Items'])) {
 			user_error('No items to sort', E_USER_ERROR);
 		}
@@ -138,6 +147,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		
+		//Start transaction if supported
+		if(DB::getConn()->supportsTransactions()) {
+			DB::getConn()->transactionStart();
+		}
+		
 		$data['Items'] = explode(',', $data['Items']);
 		for($sort = 0;$sort<count($data['Items']);$sort++) {
 			$id = intval($data['Items'][$sort]);
@@ -150,6 +164,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$obj->$sortColumn = $sort+1;
 				$obj->write();
 			}
+		}
+		
+		//End transaction if supported
+		if(DB::getConn()->supportsTransactions()) {
+			DB::getConn()->transactionEnd();
 		}
 	}
 }

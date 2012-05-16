@@ -106,11 +106,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		if (!is_bool($state->sortableToggle)) {
 			$state->sortableToggle = false;
 		} else if ($state->sortableToggle == true) {
-			if ($gridField->getConfig()->getComponentsByType('GridFieldPaginator')) {
-				$gridField->getConfig()->removeComponentsByType('GridFieldPaginator');
-				$gridField->getConfig()->addComponent(new GridFieldFooter());
-			}
-			
 			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
@@ -140,6 +135,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$items = $gridField->getList();
 		$many_many = ($items instanceof ManyManyList);
 		$sortColumn = $this->sortColumn;
+        $pageOffset = 0;
+        
+        if ($paginator=$gridField->getConfig()->getComponentsByType('GridFieldPaginator')->First()) {
+            $pageState=$gridField->State->GridFieldPaginator;
+            if($pageState->currentPage && $pageState->currentPage>1) {
+                $pageOffset=$paginator->getItemsPerPage()*($pageState->currentPage-1);
+            }
+        }
 		
 		
 		if ($many_many) {
@@ -157,11 +160,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$id = intval($data['Items'][$sort]);
 			if ($many_many) {
 				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . ($sort+1)
+						. '" SET "' . $sortColumn.'" = ' . (($sort+1)+$pageOffset)
 						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
 				$obj = $items->byID($data['Items'][$sort]);
-				$obj->$sortColumn = $sort+1;
+				$obj->$sortColumn = ($sort+1)+$pageOffset;
 				$obj->write();
 			}
 		}

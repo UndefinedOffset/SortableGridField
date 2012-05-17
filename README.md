@@ -17,3 +17,4 @@ To move an item to another page drag the row over the respective page button and
 ## @TODO
 * Optimize re-ordering of a has_many relationship when sorting on a single page
 * Add visual cue that a row can be dropped over the page icons
+* Implement shifting when sorting cross pages

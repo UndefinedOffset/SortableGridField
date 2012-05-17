@@ -152,7 +152,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		$className = $gridField->getModelClass();
 		$owner = $gridField->Form->getRecord();
-		$items = $gridField->getList();
+		$items = clone $gridField->getList();
 		$many_many = ($items instanceof ManyManyList);
 		$sortColumn = $this->sortColumn;
 		$pageOffset = 0;
@@ -218,7 +218,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		$className = $gridField->getModelClass();
 		$owner = $gridField->Form->getRecord();
-		$items = $gridField->getList();
+		$items = clone $gridField->getList();
 		$many_many = ($items instanceof ManyManyList);
 		$sortColumn = $this->sortColumn;
 		$targetItem = $items->byID(intval($data['ItemID']));

@@ -4,6 +4,7 @@
 			 <input type="checkbox" value="1"$Checked/> <%t GridFieldSortableRows.ALLOW_DRAG_DROP "_Allow drag and drop re-ordering" %>
 			 $SortableToggle
 			 $PagenatorToggle
+             $SortToPage
 		</div>
 	</th>
 </tr>

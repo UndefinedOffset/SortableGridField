@@ -1,6 +1,7 @@
 (function($) {
 	$('.ss-gridfield .gridfield-sortablerows input').entwine({
 		onmatch: function() {
+            var self=this;
 			var refCheckbox=$(this);
 			
 			var gridField=$(this).getGridField();
@@ -12,6 +13,7 @@
 			}
 			
 			gridField.find('tbody').sortable({
+                                            opacity: 0.6,
 											disabled: ($(this).is(':checked')==false),
 											helper: function(e, ui) {
 												//Maintains width of the columns
@@ -32,37 +34,64 @@
 												}
 												
 												
-												var form = gridField.closest('form'), 
-													focusedElName = gridField.find(':input:focus').attr('name'); // Save focused element for restoring after refresh
-												var ajaxOpts = {data: [
-																		{
-																			name: button.attr('name'),
-																			value: button.val()},
-																		{
-																			name: 'Items',
-																			value: dataRows
-																		}
-																	]};
-												
-												ajaxOpts.data = ajaxOpts.data.concat(form.find(':input').serializeArray());
-												
-												// Include any GET parameters from the current URL, as the view state might depend on it.
-												// For example, a list prefiltered through external search criteria might be passed to GridField.
-												if(window.location.search) {
-													ajaxOpts.data = window.location.search.replace(/^\?/, '') + '&' + $.param(ajaxOpts.data);
-												}
-												
-												$.ajax($.extend({}, {
-													headers: {"X-Pjax" : 'CurrentField'},
-													type: "POST",
-													url: gridField.data('url'),
-													dataType: 'html',
-													error: function(e) {
-														alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION'));
-													}
-												}, ajaxOpts));
+												self._makeRequest({data: [
+                                                                            {
+                                                                                name: button.attr('name'),
+                                                                                value: button.val()
+                                                                            },
+                                                                            {
+                                                                                name: 'Items',
+                                                                                value: dataRows
+                                                                            }
+                                                                        ]});
 											}
 										}).disableSelection();
+            
+            gridField.find('.datagrid-pagination button').each(function() {
+                                                            $(this).droppable({
+                                                                        disabled: $(this).is(':disabled'),
+                                                                        accept: 'tr.ss-gridfield-item',
+                                                                        tolerance: 'pointer',
+                                                                        drop: function(event, ui) {
+                                                                            gridField.find('tbody').sortable('cancel');
+                                                                            
+                                                                            var button=refCheckbox.parent().find('.sortablerows-sorttopage');
+                                                                            var itemID=$(ui.draggable).data('id');
+                                                                            var target='';
+                                                                            
+                                                                            
+                                                                            if($(this).hasClass('ss-gridfield-firstpage')) {
+                                                                                target='firstpage';
+                                                                            }else if($(this).hasClass('ss-gridfield-previouspage')) {
+                                                                                target='previouspage';
+                                                                            }else if($(this).hasClass('ss-gridfield-nextpage')) {
+                                                                                target='nextpage';
+                                                                            }else if($(this).hasClass('ss-gridfield-lastpage')) {
+                                                                                target='lastpage';
+                                                                            }
+                                                                            
+                                                                            
+                                                                            //Move and Reload the grid
+                                                                            gridField.reload({data: [
+                                                                                                        {
+                                                                                                            name: button.attr('name'),
+                                                                                                            value: button.val()
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: 'ItemID',
+                                                                                                            value: itemID
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: 'Target',
+                                                                                                            value: target
+                                                                                                        }
+                                                                                                    ]});
+                                                                            
+                                                                            event.stopPropagation();
+                                                                            event.stopImmediatePropagation();
+                                                                        }
+                                                                    });
+                                                        });
 		},
 		
 		onchange: function(e) {
@@ -73,6 +102,31 @@
 			
 			var button=$(this).parent().find('.sortablerows-disablepagenator');
 			gridField.reload({data: [{name: button.attr('name'), value: button.val()}]});
-		}
+		},
+        
+        _makeRequest: function(ajaxOpts, callback) {
+            var gridField=$(this).getGridField();
+            var form = gridField.closest('form'), 
+                focusedElName = gridField.find(':input:focus').attr('name'); // Save focused element for restoring after refresh
+            
+            ajaxOpts.data = ajaxOpts.data.concat(form.find(':input').serializeArray());
+            
+            // Include any GET parameters from the current URL, as the view state might depend on it.
+            // For example, a list prefiltered through external search criteria might be passed to GridField.
+            if(window.location.search) {
+                ajaxOpts.data = window.location.search.replace(/^\?/, '') + '&' + $.param(ajaxOpts.data);
+            }
+            
+            $.ajax($.extend({}, {
+                headers: {"X-Pjax" : 'CurrentField'},
+                type: "POST",
+                url: gridField.data('url'),
+                dataType: 'html',
+                success: callback,
+                error: function(e) {
+                    alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION'));
+                }
+            }, ajaxOpts));
+        }
 	});
 })(jQuery);

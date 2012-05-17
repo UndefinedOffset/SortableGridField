@@ -89,9 +89,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @return DataList Modified Data List
 	 */
 	public function getManipulatedData(GridField $gridField, SS_List $dataList) {
-		$state = $gridField->State->GridFieldSortableHeader;
-		if ($state && !empty($state->SortColumn)) {
+		$headerState = $gridField->State->GridFieldSortableHeader;
+        $state = $gridField->State->GridFieldSortableRows;
+		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
 			return $dataList;
+		}
+        
+        if ($state->sortableToggle == true) {
+			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
+			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
 		
 		return $dataList->sort($this->sortColumn);
@@ -261,7 +267,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			if ($many_many) {
 				DB::query('UPDATE "' . $table
 						. '" SET "' . $sortColumn.'" = ' . $targetItem->$sortColumn
-						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+						. ' WHERE "' . $componentField . '" = ' . $swapItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
 				$swapItem->$sortColumn = $targetItem->$sortColumn;
 				$swapItem->write();

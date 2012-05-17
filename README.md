@@ -11,3 +11,9 @@ To enable drag and drop sorting on the grid field add the following to your grid
 
     :::php
     $myGridConfig->addComponent(new GridFieldSortableRows('{Column to store sort}'));
+
+To move an item to another page drag the row over the respective page button and release.
+
+## @TODO
+* Optimize re-ordering of a has_many relationship when sorting on a single page
+* Add visual cue that a row can be dropped over the page icons

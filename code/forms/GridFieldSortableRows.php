@@ -90,17 +90,68 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	public function getManipulatedData(GridField $gridField, SS_List $dataList) {
 		$headerState = $gridField->State->GridFieldSortableHeader;
-        $state = $gridField->State->GridFieldSortableRows;
+		$state = $gridField->State->GridFieldSortableRows;
 		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
 			return $dataList;
 		}
-        
-        if ($state->sortableToggle == true) {
+		
+		if ($state->sortableToggle == true) {
 			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
 		
+		
+		//Detect and correct items with a sort column value of 0 (push to bottom)
+		$this->fixSortColumn($dataList);
+		
+		
 		return $dataList->sort($this->sortColumn);
+	}
+	
+	/**
+	 * Detects and corrects items with a sort column value of 0, by appending them to the bottom of the list
+	 * @param SS_List $dataList Data List of items to be checked
+	 */
+	protected function fixSortColumn(SS_List $dataList) {
+		$list=clone $dataList;
+		$list->limit(0);
+		$max = $list->Max($this->sortColumn);
+		if($list->filter($this->sortColumn, 0)->Count()>0) {
+			//Start transaction if supported
+			if(DB::getConn()->supportsTransactions()) {
+				DB::getConn()->transactionStart();
+			}
+			
+			
+			$owner = $gridField->Form->getRecord();
+			$sortColumn = $this->sortColumn;
+			$i = 1;
+			$many_many = ($list instanceof ManyManyList);
+			if ($many_many) {
+				list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
+			}
+			
+			
+			//@TODO Need to optimize this to eliminate some of the resource load could use raw queries to be more efficient
+			foreach($list as $obj) {
+				if($many_many) {
+					DB::query('UPDATE "' . $table
+							. '" SET "' . $sortColumn.'" = ' . ($max + $i)
+							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+				}else {
+					$obj->$sortColumn = ($max + $i);
+					$obj->write();
+				}
+				
+				$i++;
+			}
+			
+			
+			//End transaction if supported
+			if(DB::getConn()->supportsTransactions()) {
+				DB::getConn()->transactionEnd();
+			}
+		}
 	}
 	
 	/**

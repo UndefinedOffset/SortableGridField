@@ -278,7 +278,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			user_error('Target item not found', E_USER_ERROR);
 		}
 		
-		$sortPosition = $targetItem->$sortColumn;
 		$currentPage = 1;
 		
 		
@@ -293,53 +292,84 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		
-		if ($data['Target'] == 'firstpage') {
-			$sortPosition = $paginator->getItemsPerPage();
-		} else if ($data['Target'] == 'previouspage') {
-			$sortPosition = $paginator->getItemsPerPage() * ($currentPage - 1);
+		if ($data['Target'] == 'previouspage') {
+			$sortPositions = $items->limit($paginator->getItemsPerPage() + 1, ($paginator->getItemsPerPage() * ($currentPage - 1)) - 1)->column($sortColumn);
 		} else if ($data['Target'] == 'nextpage') {
-			$sortPosition = ($paginator->getItemsPerPage() * $currentPage) + 1;
-		} else if ($data['Target'] == 'lastpage') {
-			$sortPosition = ($paginator->getItemsPerPage() * (ceil($items->count() / $paginator->getItemsPerPage()) - 1)) + 1;
+			$sortPositions = $items->limit($paginator->getItemsPerPage() + 1, $paginator->getItemsPerPage() * ($currentPage - 1))->column($sortColumn);
 		} else {
 			user_error('Not implemented: '.$data['Target'], E_USER_ERROR);
 		}
 		
 		
-		if($targetItem->$sortColumn != $sortPosition) {
-			//Start transaction if supported
-			if(DB::getConn()->supportsTransactions()) {
-				DB::getConn()->transactionStart();
-			}
-			
-			
-			//Swap with the item around the target position
-			$swapItem = $items->where('"'.$sortColumn.'" >= '.$sortPosition)->First();
+		//Start transaction if supported
+		if(DB::getConn()->supportsTransactions()) {
+			DB::getConn()->transactionStart();
+		}
+		
+		if($data['Target']=='previouspage') {
 			if ($many_many) {
 				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . $targetItem->$sortColumn
-						. ' WHERE "' . $componentField . '" = ' . $swapItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
-			} else {
-				$swapItem->$sortColumn = $targetItem->$sortColumn;
-				$swapItem->write();
-			}
-			
-			
-			//Update target item position
-			if ($many_many) {
-				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . $sortPosition
+						. '" SET "' . $sortColumn.'" = ' . $sortPositions[0]
 						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
-				$targetItem->$sortColumn = $sortPosition;
+				$targetItem->$sortColumn = $sortPositions[0];
 				$targetItem->write();
 			}
 			
 			
-			//End transaction if supported
-			if(DB::getConn()->supportsTransactions()) {
-				DB::getConn()->transactionEnd();
+			$i = 1;
+			foreach ($items as $obj) {
+				if ($obj->ID == $targetItem->ID) {
+					continue;
+				}
+				
+				
+				if ($many_many) {
+					DB::query('UPDATE "' . $table
+							. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
+							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+				} else {
+					$obj->$sortColumn = $sortPositions[$i];
+					$obj->write();
+				}
+				
+				$i++;
 			}
+		} else {
+			if ($many_many) {
+				DB::query('UPDATE "' . $table
+						. '" SET "' . $sortColumn.'" = ' . $sortPositions[count($sortPositions) - 1]
+						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+			} else {
+				$targetItem->$sortColumn = $sortPositions[count($sortPositions) - 1];
+				$targetItem->write();
+			}
+			
+			
+			$i = 0;
+			foreach ($items as $obj) {
+				if ($obj->ID == $targetItem->ID) {
+					continue;
+				}
+				
+				
+				if ($many_many) {
+					DB::query('UPDATE "' . $table
+							. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
+							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+				} else {
+					$obj->$sortColumn = $sortPositions[$i];
+					$obj->write();
+				}
+				
+				$i++;
+			}
+		}
+		
+		
+		//End transaction if supported
+		if(DB::getConn()->supportsTransactions()) {
+			DB::getConn()->transactionEnd();
 		}
 	}
 }

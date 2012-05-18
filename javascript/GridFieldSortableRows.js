@@ -47,10 +47,11 @@
 											}
 										}).disableSelection();
 			
-			gridField.find('.datagrid-pagination button').each(function() {
+			gridField.find('.datagrid-pagination .ss-gridfield-previouspage, .datagrid-pagination .ss-gridfield-nextpage').each(function() {
 															$(this).droppable({
 																		disabled: $(this).is(':disabled'),
 																		accept: 'tr.ss-gridfield-item',
+																		activeClass: 'sortablerows-droptarget',
 																		tolerance: 'pointer',
 																		drop: function(event, ui) {
 																			gridField.find('tbody').sortable('cancel');
@@ -60,14 +61,10 @@
 																			var target='';
 																			
 																			
-																			if($(this).hasClass('ss-gridfield-firstpage')) {
-																				target='firstpage';
-																			}else if($(this).hasClass('ss-gridfield-previouspage')) {
+																			if($(this).hasClass('ss-gridfield-previouspage')) {
 																				target='previouspage';
 																			}else if($(this).hasClass('ss-gridfield-nextpage')) {
 																				target='nextpage';
-																			}else if($(this).hasClass('ss-gridfield-lastpage')) {
-																				target='lastpage';
 																			}
 																			
 																			

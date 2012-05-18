@@ -9,3 +9,7 @@
 .cms table.ss-gridfield-table.dragSorting tbody tr td {
 	cursor: move;
 }
+
+.cms table.ss-gridfield-table .datagrid-pagination button.sortablerows-droptarget {
+	background-image: url(./../images/pagination-arrows-drop.gif) !important;
+}

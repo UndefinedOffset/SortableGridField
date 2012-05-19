@@ -102,7 +102,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		//Detect and correct items with a sort column value of 0 (push to bottom)
-		$this->fixSortColumn($dataList);
+		$this->fixSortColumn($gridField, $dataList);
 		
 		
 		return $dataList->sort($this->sortColumn);
@@ -110,9 +110,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	
 	/**
 	 * Detects and corrects items with a sort column value of 0, by appending them to the bottom of the list
+	 * @param GridField $gridField Grid Field Reference
 	 * @param SS_List $dataList Data List of items to be checked
 	 */
-	protected function fixSortColumn(SS_List $dataList) {
+	protected function fixSortColumn($gridField, SS_List $dataList) {
 		$list=clone $dataList;
 		$list->limit(0);
 		$max = $list->Max($this->sortColumn);

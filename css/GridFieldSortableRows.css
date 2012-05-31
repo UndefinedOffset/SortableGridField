@@ -2,6 +2,14 @@
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.cms table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows input[type=checkbox] {
+	height: auto;
+}
+
+.cms table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows {
+	line-height: 28px;
+}
+
 .cms table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows button {
 	display: none;
 }

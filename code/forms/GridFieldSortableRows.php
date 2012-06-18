@@ -115,7 +115,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	protected function fixSortColumn($gridField, SS_List $dataList) {
 		$list=clone $dataList;
-		$list->limit(0);
+        $list->dataQuery()->limit(array());
 		$max = $list->Max($this->sortColumn);
 		if($list->filter($this->sortColumn, 0)->Count()>0) {
 			//Start transaction if supported

@@ -3,6 +3,9 @@ SortableGridField
 
 Adds drag and drop functionality to SilverStripe 3.0's GridField
 
+## Requirments
+* SilverStripe 3.0 RC1
+
 ## Usage
 To enable sorting on a has_many relationship set up an interger field on your data object.
 

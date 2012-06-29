@@ -4,12 +4,12 @@ SortableGridField
 Adds drag and drop functionality to SilverStripe 3.0's GridField
 
 ## Requirments
-* SilverStripe 3.0 RC1
+* SilverStripe 3.0
 
 ## Installation
 * Download the module from here https://github.com/UndefinedOffset/SortableGridField/downloads
 * Extract the downloaded archive into your site root so that the destination folder is called SortableGridField, opening the extracted folder should contain _config.php in the root along with other files/folders
-* Run dev/build?flush=all to re-gernate the manifest
+* Run dev/build?flush=all to regenerate the manifest
 * Upon entering the cms and using GridFieldSortableRows component for the first time you make need to add ?flush=all to the end of the address to force the templates to regenerate
 
 ## Usage

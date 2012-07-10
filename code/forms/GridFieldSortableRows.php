@@ -117,7 +117,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$list=clone $dataList;
         $list->dataQuery()->limit(array());
 		$max = $list->Max($this->sortColumn);
-		if($list->filter($this->sortColumn, 0)->Count()>0) {
+		if($list->where('"'.$this->sortColumn.'"=0')->Count()>0) {
 			//Start transaction if supported
 			if(DB::getConn()->supportsTransactions()) {
 				DB::getConn()->transactionStart();

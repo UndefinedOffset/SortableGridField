@@ -1,3 +1,5 @@
+many_many Example
+=================
 	:::php
 	/*** TestPage.php ***/
 	class TestPage extends Page {

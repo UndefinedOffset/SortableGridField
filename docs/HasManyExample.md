@@ -1,4 +1,6 @@
-	:::php
+has_many Example
+=================
+    :::php
 	/*** TestPage.php ***/
 	class TestPage extends Page {
 		public static $has_many=array(

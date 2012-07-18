@@ -26,7 +26,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		//Ensure user can edit
-		if(!singleton($gridField->getModelClass())->canEdit() || !$gridField->getList() || $gridField->getList()->Count()>1){
+		if(!singleton($gridField->getModelClass())->canEdit()){
 			return array();
 		}
 		

@@ -91,8 +91,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	public function getManipulatedData(GridField $gridField, SS_List $dataList) {
 		//Detect and correct items with a sort column value of 0 (push to bottom)
 		$this->fixSortColumn($gridField, $dataList);
-        
-        
+		
+		
 		$headerState = $gridField->State->GridFieldSortableHeader;
 		$state = $gridField->State->GridFieldSortableRows;
 		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
@@ -115,7 +115,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	protected function fixSortColumn($gridField, SS_List $dataList) {
 		$list=clone $dataList;
-        $list->dataQuery()->limit(array());
+		$list->dataQuery()->limit(array());
 		$max = $list->Max($this->sortColumn);
 		if($list->where('"'.$this->sortColumn.'"=0')->Count()>0) {
 			//Start transaction if supported

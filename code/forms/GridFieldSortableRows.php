@@ -89,6 +89,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @return DataList Modified Data List
 	 */
 	public function getManipulatedData(GridField $gridField, SS_List $dataList) {
+		//Detect and correct items with a sort column value of 0 (push to bottom)
+		$this->fixSortColumn($gridField, $dataList);
+        
+        
 		$headerState = $gridField->State->GridFieldSortableHeader;
 		$state = $gridField->State->GridFieldSortableRows;
 		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
@@ -99,10 +103,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
-		
-		
-		//Detect and correct items with a sort column value of 0 (push to bottom)
-		$this->fixSortColumn($gridField, $dataList);
 		
 		
 		return $dataList->sort($this->sortColumn);

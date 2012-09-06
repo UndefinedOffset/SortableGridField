@@ -1,0 +1,10 @@
+GridFieldAction_SortOrder_Player:
+	player1:
+		Name: Player 1
+		SortOrder: 0
+	player2:
+		Name: Player 2
+		SortOrder: 0
+	player3:
+		Name: Player 3
+		SortOrder: 0

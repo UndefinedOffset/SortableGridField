@@ -211,7 +211,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		if ($paginator = $gridField->getConfig()->getComponentsByType('GridFieldPaginator')->First()) {
 			$pageState = $gridField->State->GridFieldPaginator;
-			if($pageState->currentPage && $pageState->currentPage>1) {
+			
+			if($pageState->currentPage && is_int($pageState->currentPage) && $pageState->currentPage>1) {
 				$pageOffset = $paginator->getItemsPerPage() * ($pageState->currentPage - 1);
 			}
 		}

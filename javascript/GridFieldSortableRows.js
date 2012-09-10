@@ -41,7 +41,7 @@
 																					value: button.val()
 																				},
 																				{
-																					name: 'Items',
+																					name: 'ItemIDs',
 																					value: dataRows
 																				}
 																			]});

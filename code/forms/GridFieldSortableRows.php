@@ -198,7 +198,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			throw new ValidationException(_t('GridFieldSortableRows.EditPermissionsFailure', "No edit permissions"),0);
 		}
 		
-		if (empty($data['Items'])) {
+		if (empty($data['ItemIDs'])) {
 			user_error('No items to sort', E_USER_ERROR);
 		}
 		

@@ -1,0 +1,6 @@
+de:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Drag & Drop neuordnen"
+    DISABLE_PAGINATOR: "Paginator deaktivieren"
+    SORT_TO_PAGE: "Seite zuordnen"
+    EditPermissionsFailure: "Keine Berechtigung zu Editieren"

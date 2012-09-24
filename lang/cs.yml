@@ -1,0 +1,6 @@
+cs:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Povolit přesuny Táhni & Pusť"
+    DISABLE_PAGINATOR: "Vypnout stránkování"
+    SORT_TO_PAGE: "Setřídit na stránku"
+    EditPermissionsFailure: "Nemáte práva k editaci"

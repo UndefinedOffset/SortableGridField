@@ -1,0 +1,6 @@
+es:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Permitir arrastrar y soltar"
+    DISABLE_PAGINATOR: "Deshabilitar paginador"
+    SORT_TO_PAGE: "Ordenar a la página"
+    EditPermissionsFailure: "No tienes permisos de edición"

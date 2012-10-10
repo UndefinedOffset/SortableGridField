@@ -23,11 +23,8 @@ has_many Example
 	/*** TestObject.php ***/
 	class TestObject extends DataObject {
 		public static $db=array(
-			'Title'=>'Text'
-		);
-		
-		public static $belongs_many_many=array(
-			'TestPages'=>'TestPage'
+			'Title'=>'Text',
+			'SortOrder'=>'Int'
 		);
 		
 		public static $default_sort='SortOrder';

@@ -116,6 +116,18 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	protected function fixSortColumn($gridField, SS_List $dataList) {
 		$list=clone $dataList;
 		$list->dataQuery()->limit(array());
+        
+        $many_many = ($list instanceof ManyManyList);
+        if (!$many_many) {
+            $sng=singleton($gridField->getModelClass());
+            $fieldType=$sng->db($this->sortColumn);
+            if(!$fieldType || !($fieldType=='Int' || is_subclass_of('Int', $fieldType))) {
+                user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$fieldType, E_USER_ERROR);
+                exit;
+            }
+        }
+        
+        
 		$max = $list->Max($this->sortColumn);
 		if($list->where('"'.$this->sortColumn.'"=0')->Count()>0) {
 			//Start transaction if supported
@@ -127,12 +139,18 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$owner = $gridField->Form->getRecord();
 			$sortColumn = $this->sortColumn;
 			$i = 1;
-			$many_many = ($list instanceof ManyManyList);
-			if ($many_many) {
-				list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
-			}
 			
-			
+            if ($many_many) {
+                list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
+                $extraFields=$owner->many_many_extraFields($gridField->getName());
+                
+                if(!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn]=='Int' || is_subclass_of('Int', $extraFields[$this->sortColumn]))) {
+                    user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$fieldType, E_USER_ERROR);
+                    exit;
+                }
+            }
+            
+            
 			//@TODO Need to optimize this to eliminate some of the resource load could use raw queries to be more efficient
 			foreach($list as $obj) {
 				if($many_many) {

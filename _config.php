@@ -1,3 +1,3 @@
 <?php
-define('SORTABLE_GRIDFIELD_BASE', Director::absoluteBaseURL() . basename(dirname(__FILE__)));
+define('SORTABLE_GRIDFIELD_BASE', basename(dirname(__FILE__)));
 ?>

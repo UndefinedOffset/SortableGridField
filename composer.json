@@ -1,5 +1,5 @@
 {
-	"name": "UndefinedOffset/SortableGridField",
+	"name": "undefinedoffset/sortablegridfield",
 	"description": "Adds drag and drop functionality to SilverStripe 3.0's GridField",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "gridfield"],
@@ -7,7 +7,7 @@
 		{
 			"name": "Ed Chipman",
 			"homepage": "http://www.edchipman.ca",
-			"role": "Developer"
+            "role": "Developer"
 		}
 	],
 

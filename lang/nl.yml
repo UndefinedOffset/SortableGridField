@@ -1,0 +1,6 @@
+nl:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Rangschikken met drag & drop toestaan"
+    DISABLE_PAGINATOR: "Rangschikken uitzetten"
+    SORT_TO_PAGE: "Sorteer op Pagina"
+    EditPermissionsFailure: "Geen toegang"

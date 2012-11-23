@@ -38,6 +38,13 @@ SortableGridField is not the same as SortableDataObject, since it is only a comp
 UPDATE YourTable SET SortOrder=SortOrder+1;
 ```
 
+It's also important to add the 'SortOrder' field to the $db array of any sortable classes, as this was defined in the SortableDataObject decorator before:
+
+```php
+static $db = array(
+    'SortOrder' => 'Int'
+);
+```
 
 ## @TODO
 * Optimize re-ordering of a has_many relationship when sorting on a single page

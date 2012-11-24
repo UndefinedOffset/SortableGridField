@@ -32,11 +32,11 @@ $myGridConfig->addComponent(new GridFieldSortableRows('{Column to store sort}'))
 To move an item to another page drag the row over the respective page button and release.
 
 #### Full code Examples
-* [has_many relationship] (docs/HasManyExample.md)
-* [many_many relationship] (docs/ManyManyExample.md)
+* [has_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/HasManyExample.md)
+* [many_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ManyManyExample.md)
 
 ## Migrating from SilverStripe 2.4 and Data Object Manager's SortableDataObject
-SortableGridField is not the same as SortableDataObject, since it is only a component of GridField it does not have the ability to catch the object when it is saved for the first time. So SortableGridField uses 1 as the first sort index because 0 is the default for an integer field/column in the database. For migrations from 2.4 with SortableDataObject you need to setup your DataObject [based on the instructions above] (#usage) however you must name your sort column "SortOrder" to maintain your sort indexes defined by SortableDataObject. Then you need to run the following query on the table containing your sort field, for many_many relationships this will be something like {RelationshipClass}_{RelationshipName}. This query will maintain your sort order from SortableDataObject but increment the index by 1 giving it a starting number of 1.
+SortableGridField is not the same as SortableDataObject, since it is only a component of GridField it does not have the ability to catch the object when it is saved for the first time. So SortableGridField uses 1 as the first sort index because 0 is the default for an integer field/column in the database. For migrations from 2.4 with SortableDataObject you need to setup your DataObject based on the instructions above however you must name your sort column "SortOrder" to maintain your sort indexes defined by SortableDataObject. Then you need to run the following query on the table containing your sort field, for many_many relationships this will be something like {RelationshipClass}_{RelationshipName}. This query will maintain your sort order from SortableDataObject but increment the index by 1 giving it a starting number of 1.
 
 ```sql
 UPDATE YourTable SET SortOrder=SortOrder+1;

@@ -47,3 +47,4 @@ SortableGridField is not compatable or atleast not guarenteed to work on 3.1, I'
 
 ## @TODO
 * Optimize re-ordering of a has_many relationship when sorting on a single page
+* SilverStripe 3.1 compatability

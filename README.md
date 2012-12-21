@@ -4,7 +4,7 @@ SortableGridField
 Adds drag and drop functionality to SilverStripe 3.0's GridField
 
 ## Requirements
-* SilverStripe 3.0
+* SilverStripe 3.0.x
 
 ## Installation
 * Download the module from here https://github.com/UndefinedOffset/SortableGridField/downloads
@@ -42,6 +42,8 @@ SortableGridField is not the same as SortableDataObject, since it is only a comp
 UPDATE YourTable SET SortOrder=SortOrder+1;
 ```
 
+## SilverStripe 3.1 Notice
+SortableGridField is not compatable or atleast not guarenteed to work on 3.1, I've been getting reports that there are issues at this time.
 
 ## @TODO
 * Optimize re-ordering of a has_many relationship when sorting on a single page

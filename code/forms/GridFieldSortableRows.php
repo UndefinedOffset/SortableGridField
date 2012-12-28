@@ -117,7 +117,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$list=clone $dataList;
 		$list=$list->alterDataQuery(function($query, SS_List $tmplist) {
             $query->limit(array());
-            return $query
+            return $query;
         });
 		
 		$many_many = ($list instanceof ManyManyList);

@@ -116,9 +116,9 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	protected function fixSortColumn($gridField, SS_List $dataList) {
 		$list=clone $dataList;
 		$list=$list->alterDataQuery(function($query, SS_List $tmplist) {
-            $query->limit(array());
-            return $query;
-        });
+			$query->limit(array());
+			return $query;
+		});
 		
 		$many_many = ($list instanceof ManyManyList);
 		if (!$many_many) {

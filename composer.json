@@ -7,12 +7,13 @@
 		{
 			"name": "Ed Chipman",
 			"homepage": "http://www.edchipman.ca",
-            "role": "Developer"
+			"role": "Developer"
 		}
 	],
 
 	"require":
 	{
-		"silverstripe/framework": "3.*"
+		"silverstripe/framework": "3.*",
+		"composer/installers": "*"
 	}
 }

@@ -30,7 +30,7 @@ class GridFieldSortableRowsTest extends SapphireTest {
 		
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'saveGridRowSort', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array('Items'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemIDs'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		$this->assertEquals(3, $this->list->last()->ID, 'User should\'t be able to sort records without correct permissions.');
 	}
@@ -39,7 +39,7 @@ class GridFieldSortableRowsTest extends SapphireTest {
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'saveGridRowSort', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array('Items'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemIDs'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		$this->assertEquals(2, $this->list->last()->ID, 'User should be able to sort records with ADMIN permission.');
 	}

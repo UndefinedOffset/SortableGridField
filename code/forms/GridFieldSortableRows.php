@@ -104,7 +104,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
 		
-		
 		return $dataList->sort($this->sortColumn);
 	}
 	
@@ -133,12 +132,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		$max = $list->Max($this->sortColumn);
 		if($list->where('"'.$this->sortColumn.'"=0')->Count()>0) {
-			//Start transaction if supported
-			if(DB::getConn()->supportsTransactions()) {
-				DB::getConn()->transactionStart();
-			}
-			
-			
 			$owner = $gridField->Form->getRecord();
 			$sortColumn = $this->sortColumn;
 			$i = 1;
@@ -151,18 +144,45 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$fieldType, E_USER_ERROR);
 					exit;
 				}
+			}else {
+				//Find table containing the sort column
+				$table=false;
+				$class=$gridField->getModelClass();
+				
+				if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+					$table=$class;
+				}else {
+					$classes=ClassInfo::ancestry($class, true);
+					foreach($classes as $class) {
+						if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+							$table=$class;
+							break;
+						}
+					}
+				}
+				
+				if($table===false) {
+					user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
+					exit;
+				}
 			}
 			
 			
-			//@TODO Need to optimize this to eliminate some of the resource load could use raw queries to be more efficient
+			//Start transaction if supported
+			if(DB::getConn()->supportsTransactions()) {
+				DB::getConn()->transactionStart();
+			}
+			
+			
 			foreach($list as $obj) {
 				if($many_many) {
 					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn.'" = ' . ($max + $i)
+							. '" SET "' . $sortColumn .'" = ' . ($max + $i)
 							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 				}else {
-					$obj->$sortColumn = ($max + $i);
-					$obj->write();
+					DB::query('UPDATE "' . $table
+							. '" SET "' . $sortColumn . '" = ' . $sortColumn = ($max + $i)
+							. ' WHERE "ID" = '. $obj->ID);
 				}
 				
 				$i++;
@@ -241,6 +261,27 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		if ($many_many) {
 			list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
+		}else {
+			//Find table containing the sort column
+			$table=false;
+			$class=$gridField->getModelClass();
+			
+			if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+				$table=$class;
+			}else {
+				$classes=ClassInfo::ancestry($class, true);
+				foreach($classes as $class) {
+					if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+						$table=$class;
+						break;
+					}
+				}
+			}
+			
+			if($table===false) {
+				user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
+				exit;
+			}
 		}
 		
 		
@@ -250,7 +291,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		
-		//@TODO Need to optimize this to eliminate some of the resource load could use raw queries to be more efficient
 		$ids = explode(',', $data['ItemIDs']);
 		for($sort = 0;$sort<count($ids);$sort++) {
 			$id = intval($ids[$sort]);
@@ -259,9 +299,9 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. '" SET "' . $sortColumn.'" = ' . (($sort + 1) + $pageOffset)
 						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
-				$obj = $items->byID($ids[$sort]);
-				$obj->$sortColumn = ($sort + 1) + $pageOffset;
-				$obj->write();
+				DB::query('UPDATE "' . $table
+						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
+						. ' WHERE "ID" = '. $id);
 			}
 		}
 		

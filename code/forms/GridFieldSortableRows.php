@@ -181,7 +181,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 				}else {
 					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn . '" = ' . $sortColumn = ($max + $i)
+							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
 							. ' WHERE "ID" = '. $obj->ID);
 				}
 				

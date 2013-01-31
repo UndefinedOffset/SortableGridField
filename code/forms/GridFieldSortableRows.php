@@ -149,12 +149,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$table=false;
 				$class=$gridField->getModelClass();
 				
-				if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+				$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
+				if(!empty($db) && array_key_exists($sortColumn, $db)) {
 					$table=$class;
 				}else {
 					$classes=ClassInfo::ancestry($class, true);
 					foreach($classes as $class) {
-						if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+						$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
+						if(!empty($db) && array_key_exists($sortColumn, $db)) {
 							$table=$class;
 							break;
 						}
@@ -264,14 +266,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}else {
 			//Find table containing the sort column
 			$table=false;
-			$class=$gridField->getModelClass();
-			
-			if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+			$class=$gridField->getModelClass();			
+			$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
+			if(!empty($db) && array_key_exists($sortColumn, $db)) {
 				$table=$class;
 			}else {
 				$classes=ClassInfo::ancestry($class, true);
 				foreach($classes as $class) {
-					if(!empty($class::$db) && array_key_exists($sortColumn, $class::$db)) {
+					$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
+					if(!empty($db) && array_key_exists($sortColumn, $db)) {
 						$table=$class;
 						break;
 					}

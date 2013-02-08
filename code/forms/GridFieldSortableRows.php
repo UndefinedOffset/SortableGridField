@@ -20,6 +20,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @return Array Map where the keys are fragment names and the values are pieces of HTML to add to these fragments.
 	 */
 	public function getHTMLFragments($gridField) {
+		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
+			return array();
+		}
+		
 		$state = $gridField->State->GridFieldSortableRows;
 		if(!is_bool($state->sortableToggle)) {
 			$state->sortableToggle = false;
@@ -113,6 +117,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @param SS_List $dataList Data List of items to be checked
 	 */
 	protected function fixSortColumn($gridField, SS_List $dataList) {
+		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
+			return;
+		}
+		
 		$list=clone $dataList;
 		$list=$list->alterDataQuery(function($query, SS_List $tmplist) {
 			$query->limit(array());
@@ -238,6 +246,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @param Array $data Data submitted in the request
 	 */
 	protected function saveGridRowSort(GridField $gridField, $data) {
+		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
+			user_error('Cannot sort an UnsavedRelationList', E_USER_ERROR);
+			return;
+		}
+		
 		if(!singleton($gridField->getModelClass())->canEdit()){
 			throw new ValidationException(_t('GridFieldSortableRows.EditPermissionsFailure', "No edit permissions"),0);
 		}

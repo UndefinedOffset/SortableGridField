@@ -20,6 +20,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @return Array Map where the keys are fragment names and the values are pieces of HTML to add to these fragments.
 	 */
 	public function getHTMLFragments($gridField) {
+		$dataList = $gridField->getList();
+
 		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
 			return array();
 		}
@@ -246,6 +248,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @param Array $data Data submitted in the request
 	 */
 	protected function saveGridRowSort(GridField $gridField, $data) {
+		$dataList = $gridField->getList();
+
 		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
 			user_error('Cannot sort an UnsavedRelationList', E_USER_ERROR);
 			return;

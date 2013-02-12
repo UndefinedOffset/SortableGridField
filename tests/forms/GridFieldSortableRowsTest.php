@@ -27,21 +27,27 @@ class GridFieldSortableRowsTest extends SapphireTest {
 	public function testSortActionWithoutCorrectPermission() {
 		if(Member::currentUser()) { Member::currentUser()->logOut(); }
 		$this->setExpectedException('ValidationException');
+		$team1 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team1');
+		$team2 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team2');
+		$team3 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team3');
 		
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'saveGridRowSort', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array('Items'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemIDs'=>"$team1->ID, $team3->ID, $team2->ID"), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
-		$this->assertEquals(3, $this->list->last()->ID, 'User should\'t be able to sort records without correct permissions.');
+		$this->assertEquals($team3->ID, $this->list->last()->ID, 'User should\'t be able to sort records without correct permissions.');
 	}
 	
 	public function testSortActionWithAdminPermission() {
+		$team1 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team1');
+		$team2 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team2');
+		$team3 = $this->objFromFixture('GridFieldAction_SortOrder_Team', 'team3');
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'saveGridRowSort', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array('Items'=>'1,3,2'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemIDs'=>"$team1->ID, $team3->ID, $team2->ID"), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
-		$this->assertEquals(2, $this->list->last()->ID, 'User should be able to sort records with ADMIN permission.');
+		$this->assertEquals($team2->ID, $this->list->last()->ID, 'User should be able to sort records with ADMIN permission.');
 	}
 }
 

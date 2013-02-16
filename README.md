@@ -41,6 +41,3 @@ SortableGridField is not the same as SortableDataObject, since it is only a comp
 ```sql
 UPDATE YourTable SET SortOrder=SortOrder+1;
 ```
-
-## @TODO
-* Optimize re-ordering of a has_many relationship when sorting on a single page

@@ -4,7 +4,6 @@
 			onmatch: function() {
 				var self=this;
 				var refCheckbox=$(this);
-				
 				var gridField=this.getGridField();
 				
 				if($(this).is(':checked')) {
@@ -55,7 +54,8 @@
 																			activeClass: 'sortablerows-droptarget',
 																			tolerance: 'pointer',
 																			drop: function(event, ui) {
-																				gridField.find('tbody').sortable('cancel');
+																				event.stopPropagation();
+																				event.stopImmediatePropagation();
 																				
 																				var button=refCheckbox.parent().find('.sortablerows-sorttopage');
 																				var itemID=$(ui.draggable).data('id');
@@ -84,9 +84,6 @@
 																												value: target
 																											}
 																										]});
-																				
-																				event.stopPropagation();
-																				event.stopImmediatePropagation();
 																			}
 																		});
 															});

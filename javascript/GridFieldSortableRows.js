@@ -5,6 +5,7 @@
 				var self=this;
 				var refCheckbox=$(this);
 				var gridField=this.getGridField();
+				var pageSort=false;
 				
 				if($(this).is(':checked')) {
 					gridField.find('table').addClass('dragSorting');
@@ -24,6 +25,11 @@
 													return ui;
 												},
 												update: function(event, ui) {
+													if(pageSort) {
+														pageSort=false;
+														return;
+													}
+													
 													var dataRows=[];
 													var gridItems=gridField.getItems();
 													var button=refCheckbox.parent().find('.sortablerows-toggle');
@@ -54,8 +60,7 @@
 																			activeClass: 'sortablerows-droptarget',
 																			tolerance: 'pointer',
 																			drop: function(event, ui) {
-																				event.stopPropagation();
-																				event.stopImmediatePropagation();
+																				pageSort=true;
 																				
 																				var button=refCheckbox.parent().find('.sortablerows-sorttopage');
 																				var itemID=$(ui.draggable).data('id');

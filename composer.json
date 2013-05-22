@@ -10,10 +10,15 @@
 			"role": "Developer"
 		}
 	],
-
 	"require":
 	{
 		"silverstripe/framework": "3.*",
 		"composer/installers": "*"
+	},
+	"support": {
+		"issues": "https://github.com/undefinedoffset/SortableGridField/issues"
+	},
+	"extra": {
+		"installer-name": "sortablegridfield"
 	}
 }

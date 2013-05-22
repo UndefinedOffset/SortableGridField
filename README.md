@@ -1,5 +1,6 @@
 SortableGridField
 =================
+[![Build Status](https://travis-ci.org/UndefinedOffset/SortableGridField.png)](https://travis-ci.org/UndefinedOffset/SortableGridField)
 
 Adds drag and drop functionality to SilverStripe 3's GridField
 
@@ -41,6 +42,3 @@ SortableGridField is not the same as SortableDataObject, since it is only a comp
 ```sql
 UPDATE YourTable SET SortOrder=SortOrder+1;
 ```
-
-## @TODO
-* Optimize re-ordering of a has_many relationship when sorting on a single page

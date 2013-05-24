@@ -199,7 +199,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 				}else {
 					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
+							. '" SET "' . $sortColumn . '" = ' . ($max + $i) . ','
+							. '"LastEdited"=\'' . date('Y-m-d H:i:s') . '\''
 							. ' WHERE "ID" = '. $obj->ID);
 				}
 				
@@ -326,7 +327,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
 				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
+						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset) . ','
+						. '"LastEdited"=\'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
 			}
 		}

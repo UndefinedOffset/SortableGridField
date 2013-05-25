@@ -183,12 +183,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
 					exit;
 				}
-				
-				//Find table containing the last edited column
-				$lastEditTable=false;
-				$class=$gridField->getModelClass();
-				$classes=array_keys(ClassInfo::ancestry($class, true));
-				$lastEditTable=$classes[0];
 			}
 			
 			
@@ -208,7 +202,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
 							. ' WHERE "ID" = '. $obj->ID);
 							
-					DB::query('UPDATE "' . $lastEditTable
+					DB::query('UPDATE "' . ClassInfo::baseDataClass($gridField->getModelClass())
 							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 							. ' WHERE "ID" = '. $obj->ID);
 				}
@@ -318,12 +312,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
 				exit;
 			}
-			
-			//Find table containing the last edited column
-			$lastEditTable=false;
-			$class=$gridField->getModelClass();
-			$classes=array_keys(ClassInfo::ancestry($class, true));
-			$lastEditTable=$classes[0];
 		}
 		
 		
@@ -345,7 +333,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
 						. ' WHERE "ID" = '. $id);
 				
-				DB::query('UPDATE "' . $lastEditTable
+				DB::query('UPDATE "' . ClassInfo::baseDataClass($gridField->getModelClass())
 						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
 			}

@@ -183,6 +183,12 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
 					exit;
 				}
+				
+				//Find table containing the last edited column
+				$lastEditTable=false;
+				$class=$gridField->getModelClass();
+				$classes=array_keys(ClassInfo::ancestry($class, true));
+				$lastEditTable=$classes[0];
 			}
 			
 			
@@ -199,8 +205,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 				}else {
 					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn . '" = ' . ($max + $i) . ','
-							. '"LastEdited"=\'' . date('Y-m-d H:i:s') . '\''
+							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
+							. ' WHERE "ID" = '. $obj->ID);
+							
+					DB::query('UPDATE "' . $lastEditTable
+							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 							. ' WHERE "ID" = '. $obj->ID);
 				}
 				
@@ -309,6 +318,12 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
 				exit;
 			}
+			
+			//Find table containing the last edited column
+			$lastEditTable=false;
+			$class=$gridField->getModelClass();
+			$classes=array_keys(ClassInfo::ancestry($class, true));
+			$lastEditTable=$classes[0];
 		}
 		
 		
@@ -327,8 +342,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
 			} else {
 				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset) . ','
-						. '"LastEdited"=\'' . date('Y-m-d H:i:s') . '\''
+						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
+						. ' WHERE "ID" = '. $id);
+				
+				DB::query('UPDATE "' . $lastEditTable
+						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
 			}
 		}

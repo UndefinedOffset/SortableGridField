@@ -1,0 +1,6 @@
+it:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Consenti il trascinamento"
+    DISABLE_PAGINATOR: "Disabilita impaginatore"
+    SORT_TO_PAGE: "Ordina alla pagina"
+    EditPermissionsFailure: "Non hai i permessi per modificare"

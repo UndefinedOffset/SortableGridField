@@ -5,6 +5,7 @@
 				var self=this;
 				var refCheckbox=$(this);
 				var gridField=this.getGridField();
+				var form=gridField.closest('form');
 				var pageSort=false;
 				
 				if($(this).is(':checked')) {
@@ -49,7 +50,9 @@
 																					name: 'ItemIDs',
 																					value: dataRows
 																				}
-																			]});
+																			]},function() {
+																				form.removeClass('loading');
+																			});
 												}
 											}).disableSelection();
 				
@@ -108,6 +111,8 @@
 				var gridField=this.getGridField();
 				var form = gridField.closest('form'), 
 					focusedElName = gridField.find(':input:focus').attr('name'); // Save focused element for restoring after refresh
+				
+				form.addClass('loading');
 				
 				ajaxOpts.data = ajaxOpts.data.concat(form.find(':input').serializeArray());
 				

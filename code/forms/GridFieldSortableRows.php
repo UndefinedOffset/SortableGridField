@@ -394,12 +394,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		if ($data['Target'] == 'previouspage') {
-			$sortPositions = $items->limit($paginator->getItemsPerPage() + 1, ($paginator->getItemsPerPage() * ($currentPage - 1)) - 1)->column($sortColumn);
+			$items = $items->limit($paginator->getItemsPerPage() + 1, ($paginator->getItemsPerPage() * ($currentPage - 1)) - 1);
 		} else if ($data['Target'] == 'nextpage') {
-			$sortPositions = $items->limit($paginator->getItemsPerPage() + 1, $paginator->getItemsPerPage() * ($currentPage - 1))->column($sortColumn);
+			$items = $items->limit($paginator->getItemsPerPage() + 1, $paginator->getItemsPerPage() * ($currentPage - 1));
 		} else {
 			user_error('Not implemented: '.$data['Target'], E_USER_ERROR);
 		}
+		
+		$sortPositions = $items->column($sortColumn);
 		
 		
 		//Start transaction if supported

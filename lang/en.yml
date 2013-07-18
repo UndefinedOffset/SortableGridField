@@ -1,6 +1,4 @@
 en:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: "Allow Drag and Drop"
-    DISABLE_PAGINATOR: "Disable Paginator"
-    SORT_TO_PAGE: "Sort To Page"
     EditPermissionsFailure: "No edit permissions"

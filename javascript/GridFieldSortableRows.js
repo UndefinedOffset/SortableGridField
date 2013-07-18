@@ -33,7 +33,7 @@
 													
 													var dataRows=[];
 													var gridItems=gridField.getItems();
-													var button=refCheckbox.parent().find('.sortablerows-toggle');
+													var button=refCheckbox.parent().find('.sortablerows-savesort');
 													
 													
 													for(var i=0;i<gridItems.length;i++) {
@@ -103,7 +103,7 @@
 				gridField.setState('GridFieldSortableRows', {sortableToggle: $(this).is(':checked')});
 				
 				
-				var button=$(this).parent().find('.sortablerows-disablepagenator');
+				var button=$(this).parent().find('.sortablerows-toggle');
 				gridField.reload({data: [{name: button.attr('name'), value: button.val()}]});
 			},
 			

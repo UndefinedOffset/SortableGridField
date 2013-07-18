@@ -1,6 +1,4 @@
 fi:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: "Salli raahaus ja pudotus"
-    DISABLE_PAGINATOR: "Kytke sivutus pois"
-    SORT_TO_PAGE: "Järjestä sivulle"
     EditPermissionsFailure: "Ei oikeuksia muokata"

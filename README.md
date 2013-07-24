@@ -14,7 +14,7 @@ Adds drag and drop functionality to SilverStripe 3's GridField
 * Upon entering the cms and using GridFieldSortableRows component for the first time you make need to add ?flush=all to the end of the address to force the templates to regenerate
 
 ## Usage
-To enable sorting on a has_many relationship set up an integer field on your data object. Also for has_many relationships make sure to set the $default_sort on the dataobject to this new integer field to ensure that the sort order is applied when the relationship is requested. For many_many relationships you must add a $many_many_extraFields static to the data object defining the relationship, see the SilverStripe documentation for more information on this. If you are using a many_many relationship you will need to do a custom getter to set the sort order of this relationship for use on the front end see bellow for an example. For new DataObjects you do not need to increment the Sort order yourself in your DataObject GridFieldSortableRows will automatically do this the next time the grid is displayed.
+To enable sorting on a has_many relationship set up an integer field on your data object. Also for has_many relationships make sure to set the $default_sort on the dataobject to this new integer field to ensure that the sort order is applied when the relationship is requested. For many_many relationships you must add a $many_many_extraFields static to the data object defining the relationship, see the SilverStripe documentation for more information on this. If you are using a many_many relationship you will need to do a custom getter to set the sort order of this relationship for use on the front end see below for an example. For new DataObjects you do not need to increment the Sort order yourself in your DataObject GridFieldSortableRows will automatically do this the next time the grid is displayed.
 
 ```php
 public function getMyManyManyRelationship() {
@@ -42,3 +42,6 @@ SortableGridField is not the same as SortableDataObject, since it is only a comp
 ```sql
 UPDATE YourTable SET SortOrder=SortOrder+1;
 ```
+
+## Reporting an issue
+When you're reporting an issue please ensure you specify what version of SilverStripe you are using i.e. 3.0.5, 3.1beta3, 3.0-master etc. Also be sure to include any JavaScript or PHP errors you receive, for PHP errors please ensure you include the full stack trace. Also please include your implementation code (where your setting up your grid field) as well as how you produced the issue. You may also be asked to provide some of the classes to aid in re-producing the issue. Stick with the issue, remember that you seen the issue not the maintainer of the module so it may take allot of questions to arrive at a fix or answer.

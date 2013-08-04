@@ -315,12 +315,21 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		
+		//Event to notify the Controller or owner DataObject before list sort
+		if($owner && $owner instanceof DataObject && method_exists($owner, 'onBeforeGridFieldRowSort')) {
+			$owner->onBeforeGridFieldRowSort(clone $items);
+		}else if(Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldRowSort')) {
+			Controller::curr()->onBeforeGridFieldRowSort(clone $items);
+		}
+		
+		
 		//Start transaction if supported
 		if(DB::getConn()->supportsTransactions()) {
 			DB::getConn()->transactionStart();
 		}
 		
 		
+		//Perform sorting
 		$ids = explode(',', $data['ItemIDs']);
 		for($sort = 0;$sort<count($ids);$sort++) {
 			$id = intval($ids[$sort]);
@@ -339,9 +348,18 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			}
 		}
 		
+		
 		//End transaction if supported
 		if(DB::getConn()->supportsTransactions()) {
 			DB::getConn()->transactionEnd();
+		}
+		
+		
+		//Event to notify the Controller or owner DataObject after list sort
+		if($owner && $owner instanceof DataObject && method_exists($owner, 'onAfterGridFieldRowSort')) {
+			$owner->onAfterGridFieldRowSort(clone $items);
+		}else if(Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldRowSort')) {
+			Controller::curr()->onAfterGridFieldRowSort(clone $items);
 		}
 	}
 	
@@ -398,6 +416,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 		
 		$sortPositions = $items->column($sortColumn);
+		
+		
+		//Event to notify the Controller or owner DataObject before list sort
+		if($owner && $owner instanceof DataObject && method_exists($owner, 'onBeforeGridFieldPageSort')) {
+			$owner->onBeforeGridFieldPageSort(clone $items);
+		}else if(Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldPageSort')) {
+			Controller::curr()->onBeforeGridFieldPageSort(clone $items);
+		}
 		
 		
 		//Start transaction if supported
@@ -469,6 +495,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		//End transaction if supported
 		if(DB::getConn()->supportsTransactions()) {
 			DB::getConn()->transactionEnd();
+		}
+		
+		
+		//Event to notify the Controller or owner DataObject after list sort
+		if($owner && $owner instanceof DataObject && method_exists($owner, 'onAfterGridFieldPageSort')) {
+			$owner->onAfterGridFieldPageSort(clone $items);
+		}else if(Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldPageSort')) {
+			Controller::curr()->onAfterGridFieldPageSort(clone $items);
 		}
 	}
 }

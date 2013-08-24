@@ -1,5 +1,6 @@
 many_many Example
 =================
+Please note this example is written with 3.0.x in mind, if you are using 3.1.x make sure you scope all static properties to private not public.
 ```php
 /*** TestPage.php ***/
 class TestPage extends Page {

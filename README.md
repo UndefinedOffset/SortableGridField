@@ -35,6 +35,7 @@ To move an item to another page drag the row over the respective page button and
 #### Full code Examples
 * [has_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/HasManyExample.md)
 * [many_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ManyManyExample.md)
+* [ModelAdmin implementation] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ModelAdminExample.md)
 
 #### Events
 GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGridFieldRowSort(), onBeforeGridFieldPageSort() and onAfterGridFieldPageSort(). These "events" are passed a clone of the DataList used in GridFieldSortableRows, in the case of page sorting this list has a limit that shows you the current page plus/minus one object. For GridFieldSortableRows that are on ModelAdmin decendents these events are called on the ModelAdmin if they do not have a owner DataObject, if you are using GridFieldSortableRows on a GridField for a DataObject's relationship the events are called on that DataObject.

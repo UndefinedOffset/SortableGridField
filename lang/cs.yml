@@ -1,0 +1,4 @@
+cs:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Povolit řazení metodou Táhni & Pusť"
+    EditPermissionsFailure: "Nemáte práva k editaci"

@@ -28,7 +28,7 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		if(Member::currentUser()) { Member::currentUser()->logOut(); }
 		
 		$stateID = 'testGridStateActionField';
-		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsDisablePaginator', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
+		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
 		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		$this->assertEquals(3, $this->list->last()->SortOrder, 'Auto sort should have run');

@@ -1,0 +1,4 @@
+sk:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: "Pracovať v režime Drag&Drop"
+    EditPermissionsFailure: "Nemáte oprávnenie"

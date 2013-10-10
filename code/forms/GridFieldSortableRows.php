@@ -192,17 +192,28 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			
 			foreach($list as $obj) {
 				if($many_many) {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn .'" = ' . ($max + $i)
-							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+					$queryPrefix = 'UPDATE "' . $table;
+					$querySuffix = '" SET "' . $sortColumn .'" = ' . ($max + $i)
+						. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
+					DB::query($queryPrefix.$querySuffix);
+					if($obj->has_extension('Versioned')){
+						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						DB::query($queryPrefixLive.$querySuffix);
+					}
 				}else {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
-							. ' WHERE "ID" = '. $obj->ID);
-							
-					DB::query('UPDATE "' . $baseDataClass
-							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
-							. ' WHERE "ID" = '. $obj->ID);
+					$queryPrefix = 'UPDATE "' . $table;
+					$querySuffix = '" SET "' . $sortColumn . '" = ' . ($max + $i)
+						. ' WHERE "ID" = '. $obj->ID;
+					DB::query($queryPrefix.$querySuffix);
+					if($obj->has_extension('Versioned')){
+						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						DB::query($queryPrefixLive.$querySuffix);
+					}
+					
+					$queryPrefix = 'UPDATE "' . $baseDataClass;
+					$querySuffix = '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
+						. ' WHERE "ID" = '. $obj->ID;
+					DB::query($queryPrefix.$querySuffix);
 				}
 				
 				$i++;
@@ -334,14 +345,26 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		for($sort = 0;$sort<count($ids);$sort++) {
 			$id = intval($ids[$sort]);
 			if ($many_many) {
-				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . (($sort + 1) + $pageOffset)
-						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
-			} else {
-				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
-						. ' WHERE "ID" = '. $id);
+				$queryPrefix = 'UPDATE "' . $table;
+				$querySuffix = '" SET "' . $sortColumn.'" = ' . (($sort + 1) + $pageOffset)
+					. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID;
+				DB::query($queryPrefix.$querySuffix);
+				if($items->First()->has_extension('Versioned')){
+					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+					DB::query($queryPrefixLive.$querySuffix);
+				}
 				
+			} else {
+				$queryPrefix = 'UPDATE "' . $table;
+				$querySuffix = '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
+					. ' WHERE "ID" = '. $id;
+
+				DB::query($queryPrefix.$querySuffix);
+				if($items->First()->has_extension('Versioned')){
+					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+					DB::query($queryPrefixLive.$querySuffix);
+				}
+
 				DB::query('UPDATE "' . $baseDataClass
 						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
@@ -433,9 +456,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		if($data['Target']=='previouspage') {
 			if ($many_many) {
-				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . $sortPositions[0]
-						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+				$queryPrefix = 'UPDATE "' . $table;
+				$querySuffix = '" SET "' . $sortColumn.'" = ' . $sortPositions[0]
+					. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
+				DB::query($queryPrefix.$querySuffix);
+				if($owner->has_extension('Versioned')){
+					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+					DB::query($queryPrefixLive.$querySuffix);
+				}
 			} else {
 				$targetItem->$sortColumn = $sortPositions[0];
 				$targetItem->write();
@@ -450,9 +478,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				
 				
 				if ($many_many) {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
-							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+					$queryPrefix = 'UPDATE "' . $table;
+					$querySuffix = '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
+						. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
+					DB::query($queryPrefix.$querySuffix);
+					
+					if($obj->has_extension('Versioned')){
+						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						DB::query($queryPrefixLive.$querySuffix);
+					}
 				} else {
 					$obj->$sortColumn = $sortPositions[$i];
 					$obj->write();
@@ -462,9 +496,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			}
 		} else {
 			if ($many_many) {
-				DB::query('UPDATE "' . $table
-						. '" SET "' . $sortColumn.'" = ' . $sortPositions[count($sortPositions) - 1]
-						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+				$queryPrefix = 'UPDATE "' . $table;
+				$querySuffix = '" SET "' . $sortColumn.'" = ' . $sortPositions[count($sortPositions) - 1]
+						. ' WHERE "' . $componentField . '" = ' . $targetItem->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
+				DB::query($queryPrefix.$querySuffix);
+				if($obj->has_extension('Versioned')){
+					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+					DB::query($queryPrefixLive.$querySuffix);
+				}
+				
 			} else {
 				$targetItem->$sortColumn = $sortPositions[count($sortPositions) - 1];
 				$targetItem->write();
@@ -479,9 +519,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				
 				
 				if ($many_many) {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
-							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+					$queryPrefix = 'UPDATE "' . $table;
+					$querySuffix = '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
+						. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
+					DB::query($queryPrefix.$querySuffix);
+					if($obj->has_extension('Versioned')){
+						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						DB::query($queryPrefixLive.$querySuffix);
+					}
 				} else {
 					$obj->$sortColumn = $sortPositions[$i];
 					$obj->write();

@@ -46,7 +46,7 @@ To move an item to another page drag the row over the respective page button and
 GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGridFieldRowSort(), onBeforeGridFieldPageSort() and onAfterGridFieldPageSort(). These "events" are passed a clone of the DataList used in GridFieldSortableRows, in the case of page sorting this list has a limit that shows you the current page plus/minus one object. For GridFieldSortableRows that are on ModelAdmin decendents these events are called on the ModelAdmin if they do not have a owner DataObject, if you are using GridFieldSortableRows on a GridField for a DataObject's relationship the events are called on that DataObject.
 
 #### Appending to the top instead of the bottom
-GridFieldSortable rows allows you to append new records to the top by calling setAppendToTop(true).
+By default GridFieldSortable rows appends to the bottom of the list for performance on large data sets, however you can set new records to append new records to the top by calling setAppendToTop(true) on your GridFieldSortableRows instance.
 ```php
 $myGridConfig->addComponent(GridFieldSortableRows::create('SortOrder')->setAppendToTop(true));
 ```

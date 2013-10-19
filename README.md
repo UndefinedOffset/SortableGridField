@@ -45,6 +45,12 @@ To move an item to another page drag the row over the respective page button and
 #### Events
 GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGridFieldRowSort(), onBeforeGridFieldPageSort() and onAfterGridFieldPageSort(). These "events" are passed a clone of the DataList used in GridFieldSortableRows, in the case of page sorting this list has a limit that shows you the current page plus/minus one object. For GridFieldSortableRows that are on ModelAdmin decendents these events are called on the ModelAdmin if they do not have a owner DataObject, if you are using GridFieldSortableRows on a GridField for a DataObject's relationship the events are called on that DataObject.
 
+#### Appending to the top instead of the bottom
+GridFieldSortable rows allows you to append new records to the top by calling setAppendToTop(true).
+```php
+$myGridConfig->addComponent(GridFieldSortableRows::create('SortOrder')->setAppendToTop(true));
+```
+
 ## Migrating from SilverStripe 2.4 and Data Object Manager's SortableDataObject
 SortableGridField is not the same as SortableDataObject, since it is only a component of GridField it does not have the ability to catch the object when it is saved for the first time. So SortableGridField uses 1 as the first sort index because 0 is the default for an integer field/column in the database. For migrations from 2.4 with SortableDataObject you need to setup your DataObject based on the instructions above however you must name your sort column "SortOrder" to maintain your sort indexes defined by SortableDataObject. Then you need to run the following query on the table containing your sort field, for many_many relationships this will be something like {RelationshipClass}_{RelationshipName}. This query will maintain your sort order from SortableDataObject but increment the index by 1 giving it a starting number of 1.
 

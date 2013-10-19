@@ -189,20 +189,48 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				DB::getConn()->transactionStart();
 			}
 			
+			$append_to_top = Config::inst()->get('GridFieldSortableRows', 'append_to_top');
 			
 			foreach($list as $obj) {
 				if($many_many) {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn .'" = ' . ($max + $i)
-							. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
-				}else {
-					DB::query('UPDATE "' . $table
-							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
-							. ' WHERE "ID" = '. $obj->ID);
-							
-					DB::query('UPDATE "' . $baseDataClass
-							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
-							. ' WHERE "ID" = '. $obj->ID);
+					if ($append_to_top) {
+						// Upgrade all the records (including the last iserted from 0 to 1)
+						DB::query('UPDATE "' . $table
+								. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
+								. ' WHERE "' . $parentField . '" = ' . $owner->ID);
+					} else {
+						// Append the last record to the bottom
+						DB::query('UPDATE "' . $table
+								. '" SET "' . $sortColumn .'" = ' . ($max + $i)
+								. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
+					}
+				} else {
+										
+					if ($append_to_top) {
+						/*
+						*  Append to top
+						*/
+						// Upgrade all the records (including the last iserted from 0 to 1)
+						DB::query('UPDATE "' . $table
+								. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
+								. ' WHERE "' . $list->foreignKey . '" = '. $owner->ID);
+						// LastEdited
+						DB::query('UPDATE "' . $baseDataClass
+								. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
+								. ' WHERE "' . $list->foreignKey . '" = '. $owner->ID);		
+					} else {
+						/*
+						*  Append to bottom
+						*/
+					 // Append the last record to the bottom
+					 DB::query('UPDATE "' . $table
+							 . '" SET "' . $sortColumn . '" = ' . ($max + $i)
+							 . ' WHERE "ID" = '. $obj->ID);
+					 // LastEdited
+					 DB::query('UPDATE "' . $baseDataClass
+							 . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
+							 . ' WHERE "ID" = '. $obj->ID);
+					}
 				}
 				
 				$i++;

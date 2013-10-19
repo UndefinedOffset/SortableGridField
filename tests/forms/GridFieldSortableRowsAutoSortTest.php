@@ -33,6 +33,20 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		$this->assertEquals(3, $this->list->last()->SortOrder, 'Auto sort should have run');
 	}
+	
+	public function testAppendToTopAutoSort() {
+		if(Member::currentUser()) { Member::currentUser()->logOut(); }
+		
+		$this->gridField->getConfig()->getComponentByType('GridFieldSortableRows')->setAppendToTop(true);
+		
+		$this->assertEquals(0, $this->list->last()->SortOrder, 'Auto sort should not have run');
+		
+		$stateID = 'testGridStateActionField';
+		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
+		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
+		$this->assertEquals(3, $this->list->last()->SortOrder, 'Auto sort should have run');
+	}
 }
 
 class GridFieldAction_SortOrder_Player extends DataObject implements TestOnly {

@@ -205,13 +205,19 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$idCondition='"ID" IN(\''.implode("','", $list->getIDList()).'\')';
 			}
 			
+			if($this->append_to_top) {
+				$topIncremented=array();
+			}
+			
 			foreach($list as $obj) {
 				if($many_many) {
 					if($this->append_to_top) {
-						//Upgrade all the records (including the last iserted from 0 to 1)
+						//Upgrade all the records (including the last inserted from 0 to 1)
 						DB::query('UPDATE "' . $table
 								. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
-								. ' WHERE "' . $parentField . '" = ' . $owner->ID);
+								. ' WHERE "' . $parentField . '" = ' . $owner->ID . (!empty($topIncremented) ? ' AND "' . $componentField . '" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
+						
+						$topIncremented[]=$obj->ID;
 					}else {
 						//Append the last record to the bottom
 						DB::query('UPDATE "' . $table
@@ -219,15 +225,17 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 								. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID);
 					}
 				}else if($this->append_to_top) {
-					//Upgrade all the records (including the last iserted from 0 to 1)
+					//Upgrade all the records (including the last inserted from 0 to 1)
 					DB::query('UPDATE "' . $table
 							. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
-							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition));
+							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
 					
 					//LastEdited
 					DB::query('UPDATE "' . $baseDataClass
 							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
-							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition));		
+							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));		
+					
+					$topIncremented[]=$obj->ID;
 				}else {
 					//Append the last record to the bottom
 					DB::query('UPDATE "' . $table

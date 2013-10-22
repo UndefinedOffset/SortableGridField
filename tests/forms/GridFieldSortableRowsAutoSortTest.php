@@ -31,7 +31,15 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
 		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
+		
+		//Insure sort ran
 		$this->assertEquals(3, $this->list->last()->SortOrder, 'Auto sort should have run');
+		
+		
+		//Check for duplicates (there shouldn't be any)
+		$count=$this->list->Count();
+		$indexes=count(array_unique($this->list->column('SortOrder')));
+		$this->assertEquals(0, $count-$indexes, 'Duplicate indexes detected');
 	}
 	
 	public function testAppendToTopAutoSort() {
@@ -45,7 +53,15 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
 		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
+		
+		//Insure sort ran
 		$this->assertEquals(3, $this->list->last()->SortOrder, 'Auto sort should have run');
+		
+		
+		//Check for duplicates (there shouldn't be any)
+		$count=$this->list->Count();
+		$indexes=count(array_unique($this->list->column('SortOrder')));
+		$this->assertEquals(0, $count-$indexes, 'Duplicate indexes detected');
 	}
 }
 

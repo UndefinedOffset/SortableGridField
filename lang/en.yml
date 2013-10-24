@@ -1,4 +1,4 @@
 en:
   GridFieldSortableRows:
-    ALLOW_DRAG_DROP: "Allow Drag and Drop"
-    EditPermissionsFailure: "No edit permissions"
+    ALLOW_DRAG_DROP: 'Allow drag and drop re-ordering'
+    EditPermissionsFailure: 'No edit permissions'

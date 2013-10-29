@@ -1,4 +1,4 @@
 it:
   GridFieldSortableRows:
-    ALLOW_DRAG_DROP: "Consenti il trascinamento"
-    EditPermissionsFailure: "Non hai i permessi per modificare"
+    ALLOW_DRAG_DROP: 'Consenti il trascinamento'
+    EditPermissionsFailure: 'Non hai i permessi per modificare'

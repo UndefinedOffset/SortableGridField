@@ -1,0 +1,4 @@
+ar:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'السماح بإعادة الترتيب عن طريق السحب والإسقاط'
+    EditPermissionsFailure: 'التحرير غير مرخص له'

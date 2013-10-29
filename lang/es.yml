@@ -1,4 +1,4 @@
 es:
   GridFieldSortableRows:
-    ALLOW_DRAG_DROP: "Permitir arrastrar y soltar"
-    EditPermissionsFailure: "No tienes permisos de edición"
+    ALLOW_DRAG_DROP: 'Permitir arrastrar y soltar'
+    EditPermissionsFailure: 'No tienes permisos de edición'

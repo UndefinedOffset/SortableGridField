@@ -1,0 +1,4 @@
+mi:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Tukuna te raupapa anō mā te tō me te taka'
+    EditPermissionsFailure: 'Kāore he whakaaetanga whakatika'

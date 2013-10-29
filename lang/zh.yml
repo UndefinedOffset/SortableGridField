@@ -1,0 +1,4 @@
+zh:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: '允许拖放重新排序'
+    EditPermissionsFailure: '没有编辑权限'

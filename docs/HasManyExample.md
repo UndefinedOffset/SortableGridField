@@ -27,6 +27,10 @@ class TestObject extends DataObject {
 		'Title'=>'Text',
 		'SortOrder'=>'Int'
 	);
+    
+    public static $has_one=array(
+        'Parent'=>'TestObject'
+    );
 	
 	public static $default_sort='SortOrder';
 }

@@ -29,7 +29,7 @@ class TestObject extends DataObject {
 	);
     
     public static $has_one=array(
-        'Parent'=>'TestObject'
+        'Parent'=>'TestPage'
     );
 	
 	public static $default_sort='SortOrder';

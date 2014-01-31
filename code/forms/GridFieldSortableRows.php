@@ -26,12 +26,9 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		if(class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
 			return array();
 		}
-		
+
 		$state = $gridField->State->GridFieldSortableRows;
-		if(!is_bool($state->sortableToggle)) {
-			$state->sortableToggle = false;
-		}
-		
+
 		//Ensure user can edit
 		if(!singleton($gridField->getModelClass())->canEdit()){
 			return array();
@@ -70,18 +67,17 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$data = array('SortableToggle' => $sortOrderToggle,
 					'SortOrderSave' => $sortOrderSave,
 					'SortToPage' => $sortToPage,
-					'Checked' => ($state->sortableToggle == true ? ' checked = "checked"':''));
+					'Checked' => $state->sortableToggle(false) ? ' checked="checked"' : ''
+		);
 		
 		$forTemplate = new ArrayData($data);
-		
-		
+
 		//Inject Requirements
 		Requirements::css(SORTABLE_GRIDFIELD_BASE . '/css/GridFieldSortableRows.css');
 		Requirements::javascript(SORTABLE_GRIDFIELD_BASE . '/javascript/GridFieldSortableRows.js');
 		
 		
 		$args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID());
-		
 		return array('header' => $forTemplate->renderWith('GridFieldSortableRows', $args));
 	}
 	
@@ -98,11 +94,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		$headerState = $gridField->State->GridFieldSortableHeader;
 		$state = $gridField->State->GridFieldSortableRows;
-		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
+		if (!$state->sortableToggle(false) && $headerState && !empty($headerState->SortColumn)) {
 			return $dataList;
 		}
 		
-		if ($state->sortableToggle == true) {
+		if ($state->sortableToggle(false) == true) {
 			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
@@ -276,9 +272,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	public function handleAction(GridField $gridField, $actionName, $arguments, $data) {
 		$state = $gridField->State->GridFieldSortableRows;
-		if (!is_bool($state->sortableToggle)) {
-			$state->sortableToggle = false;
-		} else if ($state->sortableToggle == true) {
+		if ($state->sortableToggle(false) == true) {
 			$gridField->getConfig()->removeComponentsByType('GridFieldFilterHeader');
 			$gridField->getConfig()->removeComponentsByType('GridFieldSortableHeader');
 		}
@@ -548,4 +542,3 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 	}
 }
-?>

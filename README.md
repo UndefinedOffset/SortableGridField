@@ -48,7 +48,8 @@ GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGri
 #### Appending to the top instead of the bottom
 By default GridFieldSortable rows appends to the bottom of the list for performance on large data sets, however you can set new records to append new records to the top by calling setAppendToTop(true) on your GridFieldSortableRows instance.
 ```php
-$myGridConfig->addComponent(GridFieldSortableRows::create('SortOrder')->setAppendToTop(true));
+$myGridConfig->addComponent($sortable=new GridFieldSortableRows('SortOrder'));
+$sortable->setAppendToTop(true);
 ```
 
 ## Migrating from SilverStripe 2.4 and Data Object Manager's SortableDataObject

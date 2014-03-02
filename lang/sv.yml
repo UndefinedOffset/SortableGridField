@@ -1,0 +1,4 @@
+sv:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Aktivera dra och släpp sortering'
+    EditPermissionsFailure: 'Rättighet för att redigera saknas'

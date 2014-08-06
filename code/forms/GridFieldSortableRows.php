@@ -153,7 +153,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		$max = $list->Max($this->sortColumn);
-		$list=$list->filter($this->sortColumn, 0);
+		$list=$list->filter($this->sortColumn, 0)->sort("Created,ID");
 		if($list->Count()>0) {
 			$owner = $gridField->Form->getRecord();
 			$sortColumn = $this->sortColumn;

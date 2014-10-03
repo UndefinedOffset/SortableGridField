@@ -99,7 +99,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$headerState = $gridField->State->GridFieldSortableHeader;
 		$state = $gridField->State->GridFieldSortableRows;
 		if ((!is_bool($state->sortableToggle) || $state->sortableToggle==false) && $headerState && !empty($headerState->SortColumn)) {
-			return $dataList;
+			return $dataList->sort($this->sortColumn);
 		}
 		
 		if ($state->sortableToggle == true) {

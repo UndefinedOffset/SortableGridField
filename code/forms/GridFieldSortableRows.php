@@ -164,7 +164,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$extraFields=$owner->many_many_extraFields($gridField->getName());
 				
 				if(!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn]=='Int' || is_subclass_of('Int', $extraFields[$this->sortColumn]))) {
-					user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$fieldType, E_USER_ERROR);
+					user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$extraFields[$this->sortColumn], E_USER_ERROR);
 					exit;
 				}
 			}else {

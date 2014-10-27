@@ -1,0 +1,4 @@
+eo:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Enŝalti reordigadon ŝove kaj demete'
+    EditPermissionsFailure: 'Mankas enhavopermesoj'

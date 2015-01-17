@@ -222,7 +222,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						
 					}else {
 						//Append the last record to the bottom
-							$queryPrefix = 'UPDATE "' . $table;
+						$queryPrefix = 'UPDATE "' . $table;
 						$querySuffix = '" SET "' . $sortColumn .'" = ' . ($max + $i)
 								. ' WHERE "' . $componentField . '" = ' . $obj->ID . ' AND "' . $parentField . '" = ' . $owner->ID;
 						DB::query($queryPrefix.$querySuffix);
@@ -236,7 +236,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':'');
 					
 					DB::query($queryPrefix.$querySuffix);
-					if($obj->has_extension('Versioned')){
+					if(Object::has_extension($obj->ClassName, 'Versioned')){
 						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
 						DB::query($queryPrefixLive.$querySuffix);
 					}
@@ -254,7 +254,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					$querySuffix = '" SET "' . $sortColumn . '" = ' . ($max + $i)
 							 . ' WHERE "ID" = '. $obj->ID;
 					DB::query($queryPrefix.$querySuffix);
-					if($obj->has_extension('Versioned')){
+                    
+					if(Object::has_extension($obj->ClassName, 'Versioned')){
 						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
 						DB::query($queryPrefixLive.$querySuffix);
 					}
@@ -395,21 +396,22 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		for($sort = 0;$sort<count($ids);$sort++) {
 			$id = intval($ids[$sort]);
 			if ($many_many) {
-					$queryPrefix = 'UPDATE "' . $table;
+				$queryPrefix = 'UPDATE "' . $table;
 				$querySuffix = '" SET "' . $sortColumn.'" = ' . (($sort + 1) + $pageOffset)
 						. ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID;
 				DB::query($queryPrefix.$querySuffix);
 
 			} else {
-
-	             $queryPrefix = 'UPDATE "' . $table;
+				$queryPrefix = 'UPDATE "' . $table;
 				$querySuffix = '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
 						. ' WHERE "ID" = '. $id;
 				DB::query($queryPrefix.$querySuffix);
-				if($items->First()->has_extension('Versioned')){
+                
+				if(Object::has_extension($table, 'Versioned')){
 					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
 					DB::query($queryPrefixLive.$querySuffix);
 				}
+                
 				DB::query('UPDATE "' . $baseDataClass
 						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
@@ -585,3 +587,4 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 	}
 }
+?>

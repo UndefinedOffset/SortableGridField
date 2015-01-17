@@ -7,12 +7,14 @@
 class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionProvider, GridField_DataManipulator {
 	protected $sortColumn;
 	protected $append_to_top=false;
+    protected $versioned_table_suffix='Live';
 	
 	/**
 	 * @param String $sortColumn Column that should be used to update the sort information
 	 */
-	public function __construct($sortColumn) {
+	public function __construct($sortColumn, $versionedTableSuffix='Live') {
 		$this->sortColumn = $sortColumn;
+        $this->versioned_table_suffix = $versionedTableSuffix;
 	}
 	
 	/**
@@ -117,6 +119,16 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	public function setAppendToTop($value) {
 		$this->append_to_top=$value;
+		return $this;
+	}
+	
+	/**
+	 * Sets the suffix of the versioned table that should be updated, by default this is "Live"
+	 * @param string $value Versioned table suffix, this should be the table you want to update
+	 * @return GridFieldSortableRows Returns the current instance
+	 */
+	public function setVersionedTableSuffix($value) {
+		$this->versioned_table_suffix=$value;
 		return $this;
 	}
 	
@@ -237,7 +249,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					
 					DB::query($queryPrefix.$querySuffix);
 					if(Object::has_extension($obj->ClassName, 'Versioned')){
-						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						$queryPrefixLive = 'UPDATE "' . $table.'_'.$this->versioned_table_suffix;
 						DB::query($queryPrefixLive.$querySuffix);
 					}
 
@@ -256,7 +268,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					DB::query($queryPrefix.$querySuffix);
                     
 					if(Object::has_extension($obj->ClassName, 'Versioned')){
-						$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+						$queryPrefixLive = 'UPDATE "' . $table.'_'.$this->versioned_table_suffix;
 						DB::query($queryPrefixLive.$querySuffix);
 					}
 					
@@ -408,7 +420,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				DB::query($queryPrefix.$querySuffix);
                 
 				if(Object::has_extension($table, 'Versioned')){
-					$queryPrefixLive = 'UPDATE "' . $table.'_Live';
+					$queryPrefixLive = 'UPDATE "' . $table.'_'.$this->versioned_table_suffix;
 					DB::query($queryPrefixLive.$querySuffix);
 				}
                 

@@ -30,6 +30,12 @@
 														pageSort=false;
 														return;
 													}
+
+													$('.ss-gridfield-item').removeClass('first last odd even');
+													$('.ss-gridfield-item').first().addClass('first');
+													$('.ss-gridfield-item:odd').last().addClass('last');
+													$('.ss-gridfield-item:even').addClass('even');
+													$('.ss-gridfield-item:odd').addClass('odd');
 													
 													var dataRows=[];
 													var gridItems=gridField.getItems();

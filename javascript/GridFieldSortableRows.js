@@ -60,7 +60,11 @@
 																				form.removeClass('loading');
 																			});
 												}
-											}).disableSelection();
+											});
+
+				if(refCheckbox.hasClass('gridfield-sortablerows-noselection')){
+					gridField.find('tbody').disableSelection();
+				}
 				
 				gridField.find('.datagrid-pagination .ss-gridfield-previouspage, .datagrid-pagination .ss-gridfield-nextpage').each(function() {
 																$(this).droppable({

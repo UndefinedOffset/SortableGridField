@@ -6,13 +6,16 @@
  */
 class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionProvider, GridField_DataManipulator {
 	protected $sortColumn;
+	protected $disable_selection=true;
 	protected $append_to_top=false;
-	
+
 	/**
 	 * @param String $sortColumn Column that should be used to update the sort information
+	 * @param bool   $disableSelection
 	 */
-	public function __construct($sortColumn) {
+	public function __construct($sortColumn, $disableSelection = true) {
 		$this->sortColumn = $sortColumn;
+		$this->disable_selection = $disableSelection;
 	}
 	
 	/**
@@ -80,7 +83,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		Requirements::javascript(SORTABLE_GRIDFIELD_BASE . '/javascript/GridFieldSortableRows.js');
 		
 		
-		$args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID());
+		$args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection);
 		
 		return array('header' => $forTemplate->renderWith('GridFieldSortableRows', $args));
 	}
@@ -117,6 +120,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	public function setAppendToTop($value) {
 		$this->append_to_top=$value;
+		return $this;
+	}
+
+	/**
+	 * @param bool $value Boolean true to disable selection of table contents false to enable selection
+	 * @return GridFieldSortableRows Returns the current instance
+	 */
+	public function setDisableSelection($value){
+		$this->disable_selection = $value;
 		return $this;
 	}
 	

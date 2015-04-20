@@ -79,8 +79,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		//Inject Requirements
-		Requirements::css(SORTABLE_GRIDFIELD_BASE . '/css/GridFieldSortableRows.css');
-		Requirements::javascript(SORTABLE_GRIDFIELD_BASE . '/javascript/GridFieldSortableRows.js');
+		$custom = Config::inst()->get('GridFieldSortableRows', 'Base');
+		$base = $custom ?: SORTABLE_GRIDFIELD_BASE;
+
+		Requirements::css($base . '/css/GridFieldSortableRows.css');
+		Requirements::javascript($base . '/javascript/GridFieldSortableRows.js');
 		
 		
 		$args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection);

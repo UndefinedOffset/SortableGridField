@@ -217,7 +217,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			
 			$idCondition=null;
 			if($this->append_to_top && !($list instanceof RelationList)) {
-				$idCondition='"ID" IN(\''.implode("','", $list->getIDList()).'\')';
+				$idCondition='"ID" IN(\''.implode("','", $dataList->getIDList()).'\')';
 			}
 			
 			if($this->append_to_top) {

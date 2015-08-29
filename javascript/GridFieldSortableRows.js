@@ -30,15 +30,16 @@
 														pageSort=false;
 														return;
 													}
-
-													$('.ss-gridfield-item').removeClass('first last odd even');
-													$('.ss-gridfield-item').first().addClass('first');
-													$('.ss-gridfield-item:odd').last().addClass('last');
-													$('.ss-gridfield-item:even').addClass('even');
-													$('.ss-gridfield-item:odd').addClass('odd');
+													
+													var gridItems=gridField.getItems();
+													
+													gridItems.removeClass('first last odd even');
+													gridItems.first().addClass('first');
+													gridItems.last().addClass('last');
+													gridItems.filter(':even').addClass('odd');
+													gridItems.filter(':odd').addClass('even');
 													
 													var dataRows=[];
-													var gridItems=gridField.getItems();
 													var button=refCheckbox.parent().find('.sortablerows-savesort');
 													
 													

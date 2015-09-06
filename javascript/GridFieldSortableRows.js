@@ -28,7 +28,7 @@
 													return ui;
 												},
 												start: function(event, ui) {
-												    pageArrows.show();
+													pageArrows.show();
 													pageArrows.startMoveTracking();
 												},
 												stop: function(event, ui) {
@@ -36,7 +36,7 @@
 													pageArrows.hide();
 												},
 												sort: function(event, ui) {
-												    pageArrows.moveTracking(event, ui);
+													pageArrows.moveTracking(event, ui);
 												},
 												update: function(event, ui) {
 													if(self.getPageSort()) {
@@ -122,13 +122,13 @@
 				var sortableCheckbox=gridField.find('.gridfield-sortablerows input');
 				var self=$(this);
 				
-				/*if($(this).hasClass('sortablerows-prev-page') && gridField.find('.ss-gridfield-previouspage').is(':disabled')) {
+				if($(this).hasClass('sortablerows-prev-page') && gridField.find('.ss-gridfield-previouspage').is(':disabled')) {
 					$(this).remove();
 					return;
 				}else if($(this).hasClass('sortablerows-next-page') && gridField.find('.ss-gridfield-nextpage').is(':disabled')) {
 					$(this).remove();
 					return;
-				}*/
+				}
 				
 				$(this).droppable({
 									disabled: $(this).is(':disabled'),
@@ -184,20 +184,20 @@
 				self.setArrowIcon(self.find('i'));
 			},
 			stopMoveTracking: function() {
-			    $(this).setArrowIcon(null);
+				$(this).setArrowIcon(null);
 			},
 			moveTracking: function(e, ui) {
-			    var self=$(this);
+				var self=$(this);
 				var arrowIcon=self.getArrowIcon();
 				if(arrowIcon) {
-				    var selfOffset=self.offset().top;
-				    var arrowIconHeight=arrowIcon.width()+10;
-				    var railHeight=self.height()-arrowIconHeight;
-				    var helperPos=ui.helper.offset().top;
-				    
-				    if(helperPos>selfOffset+10 && helperPos<selfOffset+railHeight) {
-				        arrowIcon.css('top', ((helperPos-selfOffset)+arrowIconHeight/2)+'px');
-				    }
+					var selfOffset=self.offset().top;
+					var arrowIconHeight=arrowIcon.width()+10;
+					var railHeight=self.height()-arrowIconHeight;
+					var helperPos=ui.helper.offset().top;
+					
+					if(helperPos>selfOffset+10 && helperPos<selfOffset+railHeight) {
+						arrowIcon.css('top', ((helperPos-selfOffset)+arrowIconHeight/2)+'px');
+					}
 				}
 			}
 		});

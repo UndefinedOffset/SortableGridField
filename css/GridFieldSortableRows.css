@@ -42,31 +42,31 @@
 }
 
 .cms .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow i {
-    display: block;
-    
-    position: relative;
-    
-    position: absolute;
-    top: 50%;
-    
-    white-space: nowrap;
+	display: block;
+	
+	position: relative;
+	
+	position: absolute;
+	top: 50%;
+	
+	white-space: nowrap;
 }
 
 .cms .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow i:before {
 	display: block;
 	
 	content: " ";
-    
-    position: absolute;
-    top: -30px;
-    left: 50%;
+	
+	position: absolute;
+	top: -30px;
+	left: 50%;
 	
 	height: 0;
 	width: 0;
 	
 	border: solid transparent;
 	border-width: 14px;
-    border-bottom-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
 	
 	margin-left: -8px;
 }
@@ -82,19 +82,19 @@
 }
 
 .cms .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-prev-page i {
-    left: 20px;
-    
-    -o-transform: rotate(270deg) translateX(-50%);
-    -ms-transform: rotate(270deg) translateX(-50%);
-    -moz-transform: rotate(270deg) translateX(-50%);
-    -webkit-transform: rotate(270deg) translateX(-50%);
-    transform: rotate(270deg) translateX(-50%);
-    
-    -o-transform-origin: top left;
-    -ms-transform-origin: top left;
-    -moz-transform-origin: top left;
-    -webkit-transform-origin: top left;
-    transform-origin: top left;
+	left: 20px;
+	
+	-o-transform: rotate(270deg) translateX(-50%);
+	-ms-transform: rotate(270deg) translateX(-50%);
+	-moz-transform: rotate(270deg) translateX(-50%);
+	-webkit-transform: rotate(270deg) translateX(-50%);
+	transform: rotate(270deg) translateX(-50%);
+	
+	-o-transform-origin: top left;
+	-ms-transform-origin: top left;
+	-moz-transform-origin: top left;
+	-webkit-transform-origin: top left;
+	transform-origin: top left;
 }
 
 .cms .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-next-page {
@@ -102,19 +102,19 @@
 }
 
 .cms .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-next-page i {
-    right: 36px;
-    
-    -moz-transform: rotate(90deg) translateX(50%);
-    -o-transform: rotate(90deg) translateX(50%);
-    -ms-transform: rotate(90deg) translateX(50%);
-    -webkit-transform: rotate(90deg) translateX(50%);
-    transform: rotate(90deg) translateX(50%);
-    
-    -o-transform-origin: bottom right;
-    -ms-transform-origin: bottom right;
-    -moz-transform-origin: bottom right;
-    -webkit-transform-origin: bottom right;
-    transform-origin: bottom right;
+	right: 36px;
+	
+	-moz-transform: rotate(90deg) translateX(50%);
+	-o-transform: rotate(90deg) translateX(50%);
+	-ms-transform: rotate(90deg) translateX(50%);
+	-webkit-transform: rotate(90deg) translateX(50%);
+	transform: rotate(90deg) translateX(50%);
+	
+	-o-transform-origin: bottom right;
+	-ms-transform-origin: bottom right;
+	-moz-transform-origin: bottom right;
+	-webkit-transform-origin: bottom right;
+	transform-origin: bottom right;
 }
 
 .cms table.ss-gridfield-table.dragSorting tbody tr td {

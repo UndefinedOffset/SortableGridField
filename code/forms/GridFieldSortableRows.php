@@ -73,7 +73,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$data = array('SortableToggle' => $sortOrderToggle,
 					'SortOrderSave' => $sortOrderSave,
 					'SortToPage' => $sortToPage,
-					'Checked' => ($state->sortableToggle == true ? ' checked = "checked"':''));
+					'Checked' => ($state->sortableToggle == true ? ' checked = "checked"':''),
+					'List' => $dataList);
 		
 		$forTemplate = new ArrayData($data);
 		
@@ -88,7 +89,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		$args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection);
 		
-		return array('header' => $forTemplate->renderWith('GridFieldSortableRows', $args));
+		
+		$fragments=array('header' => $forTemplate->renderWith('GridFieldSortableRows', $args));
+		
+		if($gridField->getConfig()->getComponentByType('GridFieldPaginator')) {
+			$fragments['after']=$forTemplate->renderWith('GridFieldSortableRows_paginator');
+		}
+		
+		return $fragments;
 	}
 	
 	/**
@@ -348,7 +356,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}else {
 			//Find table containing the sort column
 			$table=false;
-			$class=$gridField->getModelClass();			
+			$class=$gridField->getModelClass();
 			$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
 			if(!empty($db) && array_key_exists($sortColumn, $db)) {
 				$table=$class;

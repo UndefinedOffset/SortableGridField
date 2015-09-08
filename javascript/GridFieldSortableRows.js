@@ -140,7 +140,6 @@
 										self.stopMoveTracking();
 										
 										sortableCheckbox.setPageSort(true);
-										sortableCheckbox.setPageArrows(null);
 										
 										var button=gridField.find('.gridfield-sortablerows .sortablerows-sorttopage');
 										var itemID=$(ui.draggable).data('id');

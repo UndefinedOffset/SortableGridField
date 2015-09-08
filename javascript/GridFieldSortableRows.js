@@ -29,6 +29,7 @@
 												},
 												start: function(event, ui) {
 													pageArrows.show();
+													pageArrows.redraw();
 													pageArrows.startMoveTracking();
 												},
 												stop: function(event, ui) {

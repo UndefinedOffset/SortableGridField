@@ -19,14 +19,6 @@
 				gridField.find('tbody').sortable({
 												opacity: 0.6,
 												disabled: ($(this).is(':checked')==false),
-												helper: function(e, ui) {
-													//Maintains width of the columns
-													ui.children().each(function(index) {
-														$(this).width($(this).width());
-													});
-													
-													return ui;
-												},
 												start: function(event, ui) {
 													pageArrows.show();
 													pageArrows.redraw();

@@ -120,3 +120,7 @@
 .cms table.ss-gridfield-table.dragSorting tbody tr td {
 	cursor: move;
 }
+
+.cms table.ss-gridfield-table.dragSorting .ui-sortable-helper {
+	display: table;
+}

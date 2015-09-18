@@ -8,15 +8,17 @@ Adds drag and drop functionality to SilverStripe 3's GridField
 * SilverStripe 3.0.x, 3.1.x, 3.2.x
 
 ## Installation
+__Composer (recommended):__
+```
+composer require undefinedoffset/sortablegridfield
+```
+
+If you prefer you may also install manually:
 * Download the module from here https://github.com/UndefinedOffset/SortableGridField/archive/master.zip
 * Extract the downloaded archive into your site root so that the destination folder is called SortableGridField, opening the extracted folder should contain _config.php in the root along with other files/folders
 * Run dev/build?flush=all to regenerate the manifest
 * Upon entering the cms and using GridFieldSortableRows component for the first time you make need to add ?flush=all to the end of the address to force the templates to regenerate
 
-If you prefer you may also install using composer:
-```
-composer require undefinedoffset/sortablegridfield
-```
 
 ## Usage
 To enable sorting on a has_many relationship set up an integer field on your data object. Also for has_many relationships make sure to set the $default_sort on the dataobject to this new integer field to ensure that the sort order is applied when the relationship is requested. For many_many relationships you must add a $many_many_extraFields static to the data object defining the relationship, see the SilverStripe documentation for more information on this. If you are using a many_many relationship you will need to do a custom getter to set the sort order of this relationship for use on the front end see below for an example. As well for many_many relationships the name of the GridField *must* be the same as the relationship name other wise error's will occur. For new DataObjects you do not need to increment the Sort order yourself in your DataObject GridFieldSortableRows will automatically do this the next time the grid is displayed.

@@ -115,10 +115,10 @@
 				var sortableCheckbox=gridField.find('.gridfield-sortablerows input');
 				var self=$(this);
 				
-				if($(this).hasClass('sortablerows-prev-page') && gridField.find('.ss-gridfield-previouspage').is(':disabled')) {
+				if($(this).hasClass('sortablerows-prev-page') && (gridField.find('.ss-gridfield-previouspage').length==0 || gridField.find('.ss-gridfield-previouspage').is(':disabled'))) {
 					$(this).remove();
 					return;
-				}else if($(this).hasClass('sortablerows-next-page') && gridField.find('.ss-gridfield-nextpage').is(':disabled')) {
+				}else if($(this).hasClass('sortablerows-next-page') && (gridField.find('.ss-gridfield-nextpage').length==0 || gridField.find('.ss-gridfield-nextpage').is(':disabled'))) {
 					$(this).remove();
 					return;
 				}

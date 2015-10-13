@@ -37,7 +37,7 @@ To enable drag and drop sorting on the grid field add the following to your grid
 $myGridConfig->addComponent(new GridFieldSortableRows('{Column to store sort}'));
 ```
 
-To move an item to another page drag the row over the respective page button and release.
+To move an item to another page drag the row over the respective move to page button which appear on the left and right of the GridField and release.
 
 #### Full code Examples
 * [has_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/HasManyExample.md)

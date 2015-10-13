@@ -14,12 +14,6 @@ env:
  - DB=SQLITE3 CORE_RELEASE=3.0
  - DB=SQLITE3 CORE_RELEASE=3.1
  - DB=SQLITE3 CORE_RELEASE=3.2
-
-matrix:
-    allow_failures:
-     - env: DB=MYSQL CORE_RELEASE=3.2
-     - env: DB=PGSQL CORE_RELEASE=3.2
-     - env: DB=SQLITE3 CORE_RELEASE=3.2
  
 before_script:
  - phpenv rehash

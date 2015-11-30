@@ -67,7 +67,11 @@
 																				form.removeClass('loading');
 																			});
 												}
-											}).disableSelection();
+											});
+				
+				if(refCheckbox.hasClass('gridfield-sortablerows-noselection') || $(this).is(':checked')) {
+					gridField.find('tbody').disableSelection();
+				}
 			},
 			
 			onchange: function(e) {

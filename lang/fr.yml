@@ -1,0 +1,4 @@
+fr:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Activer le classement par glisser-déposer'
+    EditPermissionsFailure: 'Vous n''avez pas les permissions pour éditer'

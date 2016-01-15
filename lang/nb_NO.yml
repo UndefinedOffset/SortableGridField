@@ -1,0 +1,4 @@
+nb_NO:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Tillat dra og slipp-sortering'
+    EditPermissionsFailure: 'Ingen redigeringstilgang'

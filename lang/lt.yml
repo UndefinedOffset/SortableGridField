@@ -1,0 +1,6 @@
+lt:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Įjungti tempimo ir įmetimo rėžimą rikiavimui'
+    EditPermissionsFailure: 'Nėra leidimų redagavimui'
+    NEXT: 'Perkelti į kitą puslapį'
+    PREVIOUS: 'Perkelti į ankstesnį puslapį'

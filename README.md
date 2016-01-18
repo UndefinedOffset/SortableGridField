@@ -5,7 +5,7 @@ SortableGridField
 Adds drag and drop functionality to SilverStripe 3's GridField
 
 ## Requirements
-* SilverStripe 3.0.x, 3.1.x, 3.2.x
+* SilverStripe 3.x
 
 ## Installation
 __Composer (recommended):__

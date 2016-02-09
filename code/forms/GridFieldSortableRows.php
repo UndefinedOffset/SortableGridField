@@ -9,16 +9,19 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	protected $disable_selection=true;
 	protected $append_to_top=false;
 	protected $update_versioned_stage=null;
+	protected $custom_relation_name=null;
 
 	/**
 	 * @param string $sortColumn Column that should be used to update the sort information
 	 * @param bool	$disableSelection Disable selection on the GridField when dragging
 	 * @param string $updateVersionStage Name of the versioned stage to update this disabled by default unless this is set
+	 * @param string $customRelatinoName Name of the relationship to use, if left null the name is determined from the GridField's name
 	 */
-	public function __construct($sortColumn, $disableSelection = true, $updateVersionStage = null) {
+	public function __construct($sortColumn, $disableSelection = true, $updateVersionStage = null, $customRelationName = null) {
 		$this->sortColumn = $sortColumn;
 		$this->disable_selection = $disableSelection;
 		$this->update_versioned_stage = $updateVersionStage;
+		$this->custom_relation_name = $customRelationName;
 	}
 	
 	/**
@@ -136,7 +139,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$this->append_to_top=$value;
 		return $this;
 	}
-
+	
 	/**
 	 * @param bool $value Boolean true to disable selection of table contents false to enable selection
 	 * @return GridFieldSortableRows Returns the current instance
@@ -145,6 +148,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		$this->disable_selection = $value;
 		return $this;
 	}
+	
 	/**
 	 * Sets the suffix of the versioned stage that should be updated along side the default stage
 	 * @param string $value Versioned Stage to update this is disabled by default unless this is set
@@ -152,6 +156,16 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 */
 	public function setUpdateVersionedStage($value) {
 		$this->update_versioned_stage=$value;
+		return $this;
+	}
+	
+	/**
+	 * Sets the name of the relationship to use, by default the name is determined from the GridField's name
+	 * @param string $value  Name of the relationship to use, by default the name is determined from the GridField's name
+	 * @return GridFieldSortableRows Returns the current instance
+	 */
+	public function setCustomRelationName($value) {
+		$this->custom_relation_name=$value;
 		return $this;
 	}
 	
@@ -195,8 +209,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$i = 1;
 			
 			if ($many_many) {
-				list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
-				$extraFields=$owner->many_many_extraFields($gridField->getName());
+				list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
+				$extraFields=$owner->many_many_extraFields((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
 				
 				if(!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn]=='Int' || is_subclass_of('Int', $extraFields[$this->sortColumn]))) {
 					user_error('Sort column '.$this->sortColumn.' must be an Int, column is of type '.$extraFields[$this->sortColumn], E_USER_ERROR);
@@ -388,7 +402,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		if ($many_many) {
-			list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
+			list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
 		}else {
 			//Find table containing the sort column
 			$table=false;
@@ -516,7 +530,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		if ($many_many) {
-			list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many($gridField->getName());
+			list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
 		}
 		
 		

@@ -1,0 +1,75 @@
+GridFieldAction_PageSortOrder_Team:
+	team1:
+		Name: Team 1
+		City: Cologne
+		SortOrder: 1
+	team2:
+		Name: Team 2
+		City: Wellington
+		SortOrder: 2
+	team3:
+		Name: Team 3
+		City: Auckland
+		SortOrder: 3
+	team4:
+		Name: Team 4
+		City: Cologne
+		SortOrder: 4
+	team5:
+		Name: Team 5
+		City: Wellington
+		SortOrder: 5
+	team6:
+		Name: Team 6
+		City: Auckland
+		SortOrder: 6
+	team7:
+		Name: Team 7
+		City: Cologne
+		SortOrder: 7
+	team8:
+		Name: Team 8
+		City: Wellington
+		SortOrder: 8
+	team9:
+		Name: Team 9
+		City: Auckland
+		SortOrder: 9
+
+GridFieldAction_PageSortOrder_VTeam:
+	team1:
+		Name: Team 1
+		City: Cologne
+		SortOrder: 1
+	team2:
+		Name: Team 2
+		City: Wellington
+		SortOrder: 2
+	team3:
+		Name: Team 3
+		City: Auckland
+		SortOrder: 3
+	team4:
+		Name: Team 4
+		City: Cologne
+		SortOrder: 4
+	team5:
+		Name: Team 5
+		City: Wellington
+		SortOrder: 5
+	team6:
+		Name: Team 6
+		City: Auckland
+		SortOrder: 6
+	team7:
+		Name: Team 7
+		City: Cologne
+		SortOrder: 7
+	team8:
+		Name: Team 8
+		City: Wellington
+		SortOrder: 8
+	team9:
+		Name: Team 9
+		City: Auckland
+		SortOrder: 9

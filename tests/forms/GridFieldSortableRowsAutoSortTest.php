@@ -94,7 +94,7 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		Versioned::reading_stage('Live');
 		
 		//Get live instance
-		$obj=Versioned::get_one_by_stage('GridFieldAction_SortOrder_VPlayer', 'Live', 'ID='.$list->last()->ID);
+		$obj=Versioned::get_one_by_stage('GridFieldAction_SortOrder_VPlayer', 'Live', '"ID"='.$list->last()->ID);
 		
 		//Insure sort ran
 		$this->assertEquals(3, $obj->SortOrder, 'Auto sort should have run on Versioned stage "Live"');

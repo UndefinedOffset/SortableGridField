@@ -287,7 +287,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					if($this->update_versioned_stage && class_exists($table) && Object::has_extension($table, 'Versioned')) {
 						DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 								. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
-								. ' WHERE "ID" = '. ($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
+								. ' WHERE '. ($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
 						
 						if(Object::has_extension($baseDataClass, 'Versioned')) {
 							DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage

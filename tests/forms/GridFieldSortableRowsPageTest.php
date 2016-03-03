@@ -33,7 +33,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest {
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortToPage', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true), 'GridFieldPaginator'=>array('currentPage'=>1))));
-		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team3->ID, 'Target'=>'nextpage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team3->ID, 'Target'=>'nextpage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true, $this->form->getSecurityToken()->getName()=>$this->form->getSecurityToken()->getValue()));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		
 		
@@ -53,7 +53,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest {
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortToPage', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true), 'GridFieldPaginator'=>array('currentPage'=>1))));
-		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team7->ID, 'Target'=>'previouspage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team7->ID, 'Target'=>'previouspage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true, $this->form->getSecurityToken()->getName()=>$this->form->getSecurityToken()->getValue()));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		
 		
@@ -84,7 +84,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest {
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortToPage', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true), 'GridFieldPaginator'=>array('currentPage'=>1))));
-		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team3->ID, 'Target'=>'nextpage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team3->ID, 'Target'=>'nextpage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true, $this->form->getSecurityToken()->getName()=>$this->form->getSecurityToken()->getValue()));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		
 		
@@ -124,7 +124,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest {
 		$this->logInWithPermission('ADMIN');
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortToPage', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true), 'GridFieldPaginator'=>array('currentPage'=>1))));
-		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team7->ID, 'Target'=>'previouspage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest('POST', 'url', array('ItemID'=>$team7->ID, 'Target'=>'previouspage'), array('action_gridFieldAlterAction?StateID='.$stateID=>true, $this->form->getSecurityToken()->getName()=>$this->form->getSecurityToken()->getValue()));
 		$this->gridField->gridFieldAlterAction(array('StateID'=>$stateID), $this->form, $request);
 		
 		

@@ -15,7 +15,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 * @param string $sortColumn Column that should be used to update the sort information
 	 * @param bool	$disableSelection Disable selection on the GridField when dragging
 	 * @param string $updateVersionStage Name of the versioned stage to update this disabled by default unless this is set
-	 * @param string $customRelatinoName Name of the relationship to use, if left null the name is determined from the GridField's name
+	 * @param string $customRelationName Name of the relationship to use, if left null the name is determined from the GridField's name
 	 */
 	public function __construct($sortColumn, $disableSelection = true, $updateVersionStage = null, $customRelationName = null) {
 		$this->sortColumn = $sortColumn;

@@ -13,10 +13,19 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		$config = GridFieldConfig::create()->addComponent(new GridFieldSortableRows('SortOrder'));
 		$gridField = new GridField('testfield', 'testfield', $list, $config);
 		$form = new Form(new Controller(), 'mockform', new FieldList(array($gridField)), new FieldList());
-		
+
+		$token = SecurityToken::inst();
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest(
+			'POST',
+			'url',
+			array(),
+			array(
+				'action_gridFieldAlterAction?StateID='.$stateID => true,
+				$token->getName() => $token->getValue(),
+			)
+		);
 		$gridField->gridFieldAlterAction(array('StateID'=>$stateID), $form, $request);
 		
 		//Insure sort ran
@@ -40,10 +49,19 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		$gridField->getConfig()->getComponentByType('GridFieldSortableRows')->setAppendToTop(true);
 		
 		$this->assertEquals(0, $list->last()->SortOrder, 'Auto sort should not have run');
-		
+
+		$token = SecurityToken::inst();
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest(
+			'POST',
+			'url',
+			array(),
+			array(
+				'action_gridFieldAlterAction?StateID='.$stateID => true,
+				$token->getName() => $token->getValue(),
+			)
+		);
 		$gridField->gridFieldAlterAction(array('StateID'=>$stateID), $form, $request);
 		
 		//Insure sort ran
@@ -73,10 +91,19 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		$config = GridFieldConfig::create()->addComponent(new GridFieldSortableRows('SortOrder', true, 'Live'));
 		$gridField = new GridField('testfield', 'testfield', $list, $config);
 		$form = new Form(new Controller(), 'mockform', new FieldList(array($gridField)), new FieldList());
-		
+
+		$token = SecurityToken::inst();
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest(
+			'POST',
+			'url',
+			array(),
+			array(
+				'action_gridFieldAlterAction?StateID='.$stateID => true,
+				$token->getName() => $token->getValue(),
+			)
+		);
 		$gridField->gridFieldAlterAction(array('StateID'=>$stateID), $form, $request);
 		
 		
@@ -128,10 +155,19 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest {
 		$gridField->getConfig()->getComponentByType('GridFieldSortableRows')->setAppendToTop(true);
 		
 		$this->assertEquals(0, $list->last()->SortOrder, 'Auto sort should not have run on Versioned stage "Stage"');
-		
+
+		$token = SecurityToken::inst();
 		$stateID = 'testGridStateActionField';
 		Session::set($stateID, array('grid'=>'', 'actionName'=>'sortableRowsToggle', 'args'=>array('GridFieldSortableRows'=>array('sortableToggle'=>true))));
-		$request = new SS_HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID='.$stateID=>true));
+		$request = new SS_HTTPRequest(
+			'POST',
+			'url',
+			array(),
+			array(
+				'action_gridFieldAlterAction?StateID='.$stateID => true,
+				$token->getName() => $token->getValue(),
+			)
+		);
 		$gridField->gridFieldAlterAction(array('StateID'=>$stateID), $form, $request);
 		
 		

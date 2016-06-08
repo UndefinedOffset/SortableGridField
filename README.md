@@ -1,6 +1,6 @@
 SortableGridField
 =================
-[![Build Status](https://travis-ci.org/UndefinedOffset/SortableGridField.png)](https://travis-ci.org/UndefinedOffset/SortableGridField)
+[![Build Status](https://travis-ci.org/UndefinedOffset/SortableGridField.png)](https://travis-ci.org/UndefinedOffset/SortableGridField) ![helpfulrobot](https://helpfulrobot.io/undefinedoffset/sortablegridfield/badge)
 
 Adds drag and drop functionality to SilverStripe 3's GridField
 

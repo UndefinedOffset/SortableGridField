@@ -9,10 +9,3 @@ Please use [https://www.transifex.com/projects/p/silverstripe-sortablegridfield]
 
 ## Reporting an issue
 When you're reporting an issue please ensure you specify what version of SilverStripe you are using i.e. 3.0.5, 3.1beta3, 3.0-master etc. Also be sure to include any JavaScript or PHP errors you receive, for PHP errors please ensure you include the full stack trace. Also please include your implementation code (where your setting up your grid field) as well as how you produced the issue. You may also be asked to provide some of the classes to aid in re-producing the issue. Stick with the issue, remember that you seen the issue not the maintainer of the module so it may take allot of questions to arrive at a fix or answer.
-
-### Notes
-* When using with GridFieldManyRelationHandler make sure that you add GridFieldSortableRows to your config before for example GridFieldManyRelationHandler:
-
-    ```php
-    $config->addComponent(new GridFieldSortableRows('SortOrder'), 'GridFieldManyRelationHandler');
-    ```

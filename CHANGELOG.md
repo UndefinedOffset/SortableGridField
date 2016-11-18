@@ -1,7 +1,13 @@
-Change Log
-=================
+# Change Log
 
-## [0.6.2](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.2)
+## [0.6.3](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.3) (2016-11-18)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.2...0.6.3)
+
+**Merged pull requests:**
+
+- Use Sort of GridField Header [\#96](https://github.com/UndefinedOffset/SortableGridField/pull/96) ([schellmax](https://github.com/schellmax))
+
+## [0.6.2](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.2) (2016-06-09)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.1...0.6.2)
 
 **Merged pull requests:**
@@ -27,7 +33,6 @@ Change Log
 
 **Closed issues:**
 
-- Support for 3.3 [\#84](https://github.com/UndefinedOffset/SortableGridField/issues/84)
 - Can't set checkbox "Allow drag and drop re-ordering" [\#76](https://github.com/UndefinedOffset/SortableGridField/issues/76)
 - Investigate build failures for PostgreSQL on 3.1 and 3.2 [\#87](https://github.com/UndefinedOffset/SortableGridField/issues/87)
 
@@ -36,6 +41,7 @@ Change Log
 
 **Closed issues:**
 
+- Support for 3.3 [\#84](https://github.com/UndefinedOffset/SortableGridField/issues/84)
 - Lithuanian translation [\#83](https://github.com/UndefinedOffset/SortableGridField/issues/83)
 
 **Merged pull requests:**
@@ -70,16 +76,16 @@ Change Log
 ## [0.4.4](https://github.com/UndefinedOffset/SortableGridField/tree/0.4.4) (2015-08-05)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.4.3...0.4.4)
 
-**Fixed bugs:**
-
-- setAppendToTop\(\) Does Not Work When the DataObjects Within the GridField are not Part of a RelationList  [\#71](https://github.com/UndefinedOffset/SortableGridField/issues/71)
-
 **Closed issues:**
 
 - 3.2 compat? [\#73](https://github.com/UndefinedOffset/SortableGridField/issues/73)
 
 ## [0.4.3](https://github.com/UndefinedOffset/SortableGridField/tree/0.4.3) (2015-05-07)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.4.2...0.4.3)
+
+**Fixed bugs:**
+
+- setAppendToTop\(\) Does Not Work When the DataObjects Within the GridField are not Part of a RelationList  [\#71](https://github.com/UndefinedOffset/SortableGridField/issues/71)
 
 **Merged pull requests:**
 
@@ -99,6 +105,7 @@ Change Log
 
 **Merged pull requests:**
 
+- Allow 'disableSelection' to be disabled [\#68](https://github.com/UndefinedOffset/SortableGridField/pull/68) ([hailwood](https://github.com/hailwood))
 - Resets the classes of .odd, .even, .first and .last for gridfields when a update \(drop\) event occurs. [\#67](https://github.com/UndefinedOffset/SortableGridField/pull/67) ([AdenFraser](https://github.com/AdenFraser))
 
 ## [0.4.1](https://github.com/UndefinedOffset/SortableGridField/tree/0.4.1) (2014-10-27)
@@ -110,6 +117,11 @@ Change Log
 
 ## [0.4.0](https://github.com/UndefinedOffset/SortableGridField/tree/0.4.0) (2014-10-16)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.3.2...0.4.0)
+
+**Merged pull requests:**
+
+- Initial sorting equals sortColumn [\#61](https://github.com/UndefinedOffset/SortableGridField/pull/61) ([ismooth](https://github.com/ismooth))
+- Fixes fixSortColumn's Random Initial Sorting [\#57](https://github.com/UndefinedOffset/SortableGridField/pull/57) ([purplespider](https://github.com/purplespider))
 
 ## [0.3.2](https://github.com/UndefinedOffset/SortableGridField/tree/0.3.2) (2014-08-02)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.3.1...0.3.2)
@@ -128,30 +140,44 @@ Change Log
 
 - Duplicate sort id's when fixing the sort with append\_to\_top [\#47](https://github.com/UndefinedOffset/SortableGridField/issues/47)
 
+**Merged pull requests:**
+
+- Chinese/Arabic/Te Reo translations [\#49](https://github.com/UndefinedOffset/SortableGridField/pull/49) ([chillu](https://github.com/chillu))
+- Transifex support [\#48](https://github.com/UndefinedOffset/SortableGridField/pull/48) ([chillu](https://github.com/chillu))
+
 ## [0.3.0](https://github.com/UndefinedOffset/SortableGridField/tree/0.3.0) (2013-10-22)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.2.1...0.3.0)
 
 **Implemented enhancements:**
 
 - Add Docs On Migration from Data Object Manager [\#16](https://github.com/UndefinedOffset/SortableGridField/issues/16)
+- Append new items to the top by default [\#42](https://github.com/UndefinedOffset/SortableGridField/pull/42) ([g4b0](https://github.com/g4b0))
+
+**Merged pull requests:**
+
+- added slovak language [\#44](https://github.com/UndefinedOffset/SortableGridField/pull/44) ([silverstripesk](https://github.com/silverstripesk))
 
 ## [0.2.1](https://github.com/UndefinedOffset/SortableGridField/tree/0.2.1) (2013-09-03)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.2.0...0.2.1)
+
+**Merged pull requests:**
+
+- Create LICENSE [\#41](https://github.com/UndefinedOffset/SortableGridField/pull/41) ([simonwelsh](https://github.com/simonwelsh))
+
+## [0.2.0](https://github.com/UndefinedOffset/SortableGridField/tree/0.2.0) (2013-08-04)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.1.3...0.2.0)
 
 **Implemented enhancements:**
 
 - \[REQUEST\] Event to indicate that there has been a change in sort order. [\#39](https://github.com/UndefinedOffset/SortableGridField/issues/39)
 
-**Closed issues:**
-
-- Breaks when used with GridFieldManyRelationHandler [\#40](https://github.com/UndefinedOffset/SortableGridField/issues/40)
-
-## [0.2.0](https://github.com/UndefinedOffset/SortableGridField/tree/0.2.0) (2013-08-04)
-[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.1.3...0.2.0)
-
 **Fixed bugs:**
 
 - Moving to next page doesn't work in FF 20.0.1 [\#33](https://github.com/UndefinedOffset/SortableGridField/issues/33)
+
+**Closed issues:**
+
+- Breaks when used with GridFieldManyRelationHandler [\#40](https://github.com/UndefinedOffset/SortableGridField/issues/40)
 
 ## [0.1.3](https://github.com/UndefinedOffset/SortableGridField/tree/0.1.3) (2013-07-10)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.1.2...0.1.3)
@@ -164,6 +190,11 @@ Change Log
 **Fixed bugs:**
 
 - Partical Cache and sortColumn update [\#35](https://github.com/UndefinedOffset/SortableGridField/issues/35)
+
+**Merged pull requests:**
+
+- Finnish language file [\#37](https://github.com/UndefinedOffset/SortableGridField/pull/37) ([mediaclinic](https://github.com/mediaclinic))
+- Added italian language [\#36](https://github.com/UndefinedOffset/SortableGridField/pull/36) ([ntd](https://github.com/ntd))
 
 ## [0.1.2](https://github.com/UndefinedOffset/SortableGridField/tree/0.1.2) (2013-04-26)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.1.1...0.1.2)
@@ -202,6 +233,15 @@ Change Log
 - sort order not being updated on delete [\#2](https://github.com/UndefinedOffset/SortableGridField/issues/2)
 - installation [\#1](https://github.com/UndefinedOffset/SortableGridField/issues/1)
 
+**Merged pull requests:**
 
-
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+- Fixing undefined variable $dataList [\#30](https://github.com/UndefinedOffset/SortableGridField/pull/30) ([halkyon](https://github.com/halkyon))
+- FIX Do not use hardcoded IDs in tests, as records from fixture might not... [\#29](https://github.com/UndefinedOffset/SortableGridField/pull/29) ([patbolo](https://github.com/patbolo))
+- BUGFIX: Use config layer to check for decorated $db fields [\#26](https://github.com/UndefinedOffset/SortableGridField/pull/26) ([unclecheese](https://github.com/unclecheese))
+- Update code/forms/GridFieldSortableRows.php [\#25](https://github.com/UndefinedOffset/SortableGridField/pull/25) ([flxbot](https://github.com/flxbot))
+- Dutch language! [\#14](https://github.com/UndefinedOffset/SortableGridField/pull/14) ([ARNHOE](https://github.com/ARNHOE))
+- spanish translation. [\#11](https://github.com/UndefinedOffset/SortableGridField/pull/11) ([dospuntocero](https://github.com/dospuntocero))
+- BUGFIX Make sure it's possible to rename the module's directory without ... [\#10](https://github.com/UndefinedOffset/SortableGridField/pull/10) ([drzax](https://github.com/drzax))
+- German Translation [\#9](https://github.com/UndefinedOffset/SortableGridField/pull/9) ([PatrickElsing](https://github.com/PatrickElsing))
+- Update lang/en.yml [\#8](https://github.com/UndefinedOffset/SortableGridField/pull/8) ([PatrickElsing](https://github.com/PatrickElsing))
+- Renamed the Items array that is sent in post [\#7](https://github.com/UndefinedOffset/SortableGridField/pull/7) ([sheadawson](https://github.com/sheadawson))

@@ -190,7 +190,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		if (!$many_many) {
 			$sng=singleton($gridField->getModelClass());
 			$fieldType=$sng->db($this->sortColumn);
-			if(!$fieldType || !(strtolower($fieldType) == 'int' || is_subclass_of('Int', $fieldType))) {
+			if(!$fieldType || !(strtolower($fieldType) == 'int' || is_subclass_of($fieldType, 'Int'))) {
 				if(is_array($fieldType)) {
 					user_error('Sort column '.$this->sortColumn.' could not be found in '.$gridField->getModelClass().'\'s ancestry', E_USER_ERROR);
 				}else {

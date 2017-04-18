@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.6.8](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.8) (2017-04-18)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.7...0.6.8)
+
+**Closed issues:**
+
+- Typo error [\#100](https://github.com/UndefinedOffset/SortableGridField/issues/100)
+
 ## [0.6.7](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.7) (2017-04-13)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.6...0.6.7)
 

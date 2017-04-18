@@ -559,7 +559,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 			$table=false;
 			$classes=ClassInfo::ancestry($className, true);
 			foreach($classes as $class) {
-				$db = Config::inst()->get($className, "db", CONFIG::UNINHERITED);
+				$db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
 				if(!empty($db) && array_key_exists($sortColumn, $db)) {
 					$table=$class;
 					break;

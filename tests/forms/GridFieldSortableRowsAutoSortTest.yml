@@ -19,3 +19,21 @@ GridFieldAction_SortOrder_VPlayer:
 	player3:
 		Name: Player 3
 		SortOrder: 0
+
+GridFieldAction_SortOrder_TestParent:
+	testparent:
+		Name: Test
+
+GridFieldAction_SortOrder_ChildObject:
+	testitem1:
+		Name: Test 1
+		SortOrder: 0
+		Parent: =>GridFieldAction_SortOrder_TestParent.testparent
+	testitem2:
+		Name: Test 2
+		SortOrder: 0
+		Parent: =>GridFieldAction_SortOrder_TestParent.testparent
+	testitem3:
+		Name: Test 3
+		SortOrder: 0
+		Parent: =>GridFieldAction_SortOrder_TestParent.testparent

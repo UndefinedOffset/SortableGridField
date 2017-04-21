@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.6.9](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.9) (2017-04-21)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.8...0.6.9)
+
+**Fixed bugs:**
+
+- Query errors when sorted field is on a relation and appending to top [\#101](https://github.com/UndefinedOffset/SortableGridField/issues/101)
+
 ## [0.6.8](https://github.com/UndefinedOffset/SortableGridField/tree/0.6.8) (2017-04-18)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/0.6.7...0.6.8)
 

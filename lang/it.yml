@@ -2,3 +2,5 @@ it:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Consenti il trascinamento'
     EditPermissionsFailure: 'Non hai i permessi per modificare'
+    NEXT: 'Vai alla pagina successiva'
+    PREVIOUS: 'Vai alla pagina precedente'

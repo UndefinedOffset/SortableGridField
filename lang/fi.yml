@@ -2,3 +2,5 @@ fi:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Salli raahaus ja pudotus'
     EditPermissionsFailure: 'Ei oikeuksia muokata'
+    NEXT: 'Siirrä seuraavalle sivulle'
+    PREVIOUS: 'Siirrä edelliselle sivulle'

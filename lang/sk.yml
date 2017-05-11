@@ -2,5 +2,5 @@ sk:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Pracovať v režime Drag & Drop (Ťahaj a pusť)'
     EditPermissionsFailure: 'Nemáte oprávnenie upravovať'
-    NEXT: 'Presunúť na nasledujúcu stránku'
-    PREVIOUS: 'Presunúť na predchádzajúcu stránku'
+    NEXT: 'Prejsť na nasledujúcu stránku'
+    PREVIOUS: 'Prejsť na predchádzajúcu stránku'

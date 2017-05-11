@@ -1,0 +1,6 @@
+ru:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Разрешить перетаскивание для сортировки'
+    EditPermissionsFailure: 'Нет прав на изменение'
+    NEXT: 'Переместить на следующую страницу'
+    PREVIOUS: 'Переместить на предыдущую страницу'

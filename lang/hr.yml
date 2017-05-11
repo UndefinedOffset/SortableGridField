@@ -1,0 +1,6 @@
+hr:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Omogući raspoređivanje drag and drop metodom'
+    EditPermissionsFailure: 'Nema dozvola uređivanja'
+    NEXT: 'Prelazak na sljedeću stranicu'
+    PREVIOUS: 'Prelazak na prethodnu stranicu'

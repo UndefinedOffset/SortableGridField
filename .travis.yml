@@ -1,23 +1,22 @@
 language: php
 
-sudo: false
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+
+env:
+  - DB=MYSQL CORE_RELEASE=4
 
 matrix:
   include:
-    - php: 5.6
-      env: DB=PGSQL CORE_RELEASE=3.5
-    - php: 5.6
-      env: DB=SQLITE3 CORE_RELEASE=3.5
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.5
-    - php: 5.3
-      env: DB=MYSQL CORE_RELEASE=3.1
+    - php: 7.1
+      env: DB=PGSQL CORE_RELEASE=4
 
 before_script:
- - phpenv rehash
- - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
- - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
- - cd ~/builds/ss
+  - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
+  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+  - cd ~/builds/ss
 
 script:
- - phpunit sortablegridfield/tests/
+  - vendor/bin/phpunit sortablegridfield/tests

@@ -2,20 +2,19 @@ SortableGridField
 =================
 [![Build Status](https://travis-ci.org/UndefinedOffset/SortableGridField.png)](https://travis-ci.org/UndefinedOffset/SortableGridField) ![helpfulrobot](https://helpfulrobot.io/undefinedoffset/sortablegridfield/badge)
 
-Adds drag and drop functionality to SilverStripe 3's GridField
+Adds drag and drop functionality to SilverStripe 4's GridField
 
 ## Requirements
-* SilverStripe 3.x
+* SilverStripe 4.x
 
 ## Installation
-__Composer (recommended):__
-```
+
+Installation is supported via composer only
+
+```sh
 composer require undefinedoffset/sortablegridfield
 ```
 
-If you prefer you may also install manually:
-* Download the module from here https://github.com/UndefinedOffset/SortableGridField/archive/master.zip
-* Extract the downloaded archive into your site root so that the destination folder is called SortableGridField, opening the extracted folder should contain _config.php in the root along with other files/folders
 * Run dev/build?flush=all to regenerate the manifest
 * Upon entering the cms and using GridFieldSortableRows component for the first time you make need to add ?flush=all to the end of the address to force the templates to regenerate
 
@@ -69,23 +68,14 @@ $sortable->setCustomRelationName('MyRelationship');
 
 ```
 
-
-## Migrating from SilverStripe 2.4 and Data Object Manager's SortableDataObject
-SortableGridField is not the same as SortableDataObject, since it is only a component of GridField it does not have the ability to catch the object when it is saved for the first time. So SortableGridField uses 1 as the first sort index because 0 is the default for an integer field/column in the database. For migrations from 2.4 with SortableDataObject you need to setup your DataObject based on the instructions above however you must name your sort column "SortOrder" to maintain your sort indexes defined by SortableDataObject. Then you need to run the following query on the table containing your sort field, for many_many relationships this will be something like {RelationshipClass}_{RelationshipName}. This query will maintain your sort order from SortableDataObject but increment the index by 1 giving it a starting number of 1.
-
-```sql
-UPDATE YourTable SET SortOrder=SortOrder+1;
-```
-
 ## Reporting an issue
 When you're reporting an issue please ensure you specify what version of SilverStripe you are using i.e. 3.0.5, 3.1beta3, 3.0-master etc. Also be sure to include any JavaScript or PHP errors you receive, for PHP errors please ensure you include the full stack trace. Also please include your implementation code (where your setting up your grid field) as well as how you produced the issue. You may also be asked to provide some of the classes to aid in re-producing the issue. Stick with the issue, remember that you seen the issue not the maintainer of the module so it may take allot of questions to arrive at a fix or answer.
 
 ### Notes
 * When using with GridFieldManyRelationHandler make sure that you add GridFieldSortableRows to your config before for example GridFieldManyRelationHandler:
-
-    ```php
-    $config->addComponent(new GridFieldSortableRows('SortOrder'), 'GridFieldManyRelationHandler');
-    ```
+```php
+$config->addComponent(new GridFieldSortableRows('SortOrder'), 'GridFieldManyRelationHandler');
+```
 
 ## Contributing
 

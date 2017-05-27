@@ -757,7 +757,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             return $this->tableMap[$tableName];
         }
 
-        $realName = (Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED)) ? Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED) : $table;
+        $realName = (Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED)) ? Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED) : $tableName;
 
         $this->tableMap[$realName] = $tableName;
 

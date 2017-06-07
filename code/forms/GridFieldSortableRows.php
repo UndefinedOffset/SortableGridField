@@ -678,4 +678,3 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		}
 	}
 }
-?>

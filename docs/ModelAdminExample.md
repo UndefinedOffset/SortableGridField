@@ -1,13 +1,12 @@
 ModelAdmin implementation Example
 =================
-Please note this example is written with 3.0.x in mind, if you are using 3.1.x make sure you scope all static properties to private not public.
 ```php
 /**** MyModelAdmin.php ****/
 class MyModelAdmin extends ModelAdmin {
-    public static $menu_title='My Model Admin';
-    public static $url_segment='my-model-admin';
+    private static $menu_title='My Model Admin';
+    private static $url_segment='my-model-admin';
     
-    public static $managed_models=array(
+    private static $managed_models=array(
                                         'MATestObject'
                                     );
     
@@ -28,11 +27,11 @@ class MyModelAdmin extends ModelAdmin {
 
 /**** MATestObject.php ****/
 class MATestObject extends DataObject {
-    public static $db=array(
+    private static $db=array(
                             'Title'=>'Varchar',
                             'SortOrder'=>'Int'
                         );
     
-    public static $default_sort='SortOrder';
+    private static $default_sort='SortOrder';
 }
 ```

@@ -1,14 +1,13 @@
 many_many Example
 =================
-Please note this example is written with 3.0.x in mind, if you are using 3.1.x make sure you scope all static properties to private not public.
 ```php
 /*** TestPage.php ***/
 class TestPage extends Page {
-	public static $many_many=array(
+	private static $many_many=array(
 		'TestObjects'=>'TestObject'
 	);
 	
-	public static $many_many_extraFields=array(
+	private static $many_many_extraFields=array(
 		'TestObjects'=>array(
 			'SortOrder'=>'Int'
 		)
@@ -34,11 +33,11 @@ class TestPage extends Page {
 
 /*** TestObject.php ***/
 class TestObject extends DataObject {
-	public static $db=array(
+	private static $db=array(
 		'Title'=>'Text'
 	);
 	
-	public static $belongs_many_many=array(
+	private static $belongs_many_many=array(
 		'TestPages'=>'TestPage'
 	);
 }

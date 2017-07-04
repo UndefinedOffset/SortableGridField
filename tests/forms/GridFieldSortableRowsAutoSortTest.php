@@ -5,6 +5,7 @@ namespace UndefinedOffset\SortableGridField\Tests;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Session;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Forms\FieldList;
@@ -49,8 +50,12 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest
         $form = new Form(new SortableGridField_DummyController(), 'mockform', new FieldList(array($gridField)), new FieldList());
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $form->getSecurityToken()->getName() => $form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
+        
         $gridField->gridFieldAlterAction(array('StateID' => $stateID), $form, $request);
 
         //Insure sort ran
@@ -81,8 +86,11 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest
         $this->assertEquals(0, $list->last()->SortOrder, 'Auto sort should not have run');
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $form->getSecurityToken()->getName() => $form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $gridField->gridFieldAlterAction(array('StateID' => $stateID), $form, $request);
 
         //Insure sort ran
@@ -117,8 +125,11 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest
         $form = new Form(new SortableGridField_DummyController(), 'mockform', new FieldList(array($gridField)), new FieldList());
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $form->getSecurityToken()->getName() => $form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $gridField->gridFieldAlterAction(array('StateID' => $stateID), $form, $request);
 
 
@@ -177,8 +188,11 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest
         $this->assertEquals(0, $list->last()->SortOrder, 'Auto sort should not have run on Versioned stage "Stage"');
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $form->getSecurityToken()->getName() => $form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $gridField->gridFieldAlterAction(array('StateID' => $stateID), $form, $request);
 
 
@@ -232,8 +246,11 @@ class GridFieldSortableRowsAutoSortTest extends SapphireTest
         $this->assertEquals(0, $list->last()->SortOrder, 'Auto sort should not have run');
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array(), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $form->getSecurityToken()->getName() => $form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortableRowsToggle', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $gridField->gridFieldAlterAction(array('StateID' => $stateID), $form, $request);
 
         //Insure sort ran

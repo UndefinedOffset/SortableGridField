@@ -5,6 +5,7 @@ namespace UndefinedOffset\SortableGridField\Tests;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Session;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Forms\FieldList;
@@ -58,8 +59,11 @@ class GridFieldSortableRowsPageTest extends SapphireTest
 
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $request = new HTTPRequest('POST', 'url', array('ItemID' => $team3->ID, 'Target' => 'nextpage'), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
 
         $team6 = $this->objFromFixture('UndefinedOffset\SortableGridField\Tests\GridFieldAction_PageSortOrder_Team', 'team6');
@@ -77,8 +81,11 @@ class GridFieldSortableRowsPageTest extends SapphireTest
 
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $request = new HTTPRequest('POST', 'url', array('ItemID' => $team7->ID, 'Target' => 'previouspage'), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
 
 
@@ -112,8 +119,11 @@ class GridFieldSortableRowsPageTest extends SapphireTest
 
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $request = new HTTPRequest('POST', 'url', array('ItemID' => $team3->ID, 'Target' => 'nextpage'), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
 
 
@@ -156,8 +166,11 @@ class GridFieldSortableRowsPageTest extends SapphireTest
 
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $request = new HTTPRequest('POST', 'url', array('ItemID' => $team7->ID, 'Target' => 'previouspage'), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'sortToPage', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true), 'GridFieldPaginator' => array('currentPage' => 1))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
 
 

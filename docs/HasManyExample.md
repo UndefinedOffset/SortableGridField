@@ -1,10 +1,9 @@
 has_many Example
 =================
-Please note this example is written with 3.0.x in mind, if you are using 3.1.x make sure you scope all static properties to private not public.
 ```php
 /*** TestPage.php ***/
 class TestPage extends Page {
-	public static $has_many=array(
+	private static $has_many=array(
 		'TestObjects'=>'TestObject'
 	);
 	
@@ -23,15 +22,15 @@ class TestPage extends Page {
 
 /*** TestObject.php ***/
 class TestObject extends DataObject {
-	public static $db=array(
+	private static $db=array(
 		'Title'=>'Text',
 		'SortOrder'=>'Int'
 	);
     
-    public static $has_one=array(
+    private static $has_one=array(
         'Parent'=>'TestPage'
     );
 	
-	public static $default_sort='SortOrder';
+	private static $default_sort='SortOrder';
 }
 ```

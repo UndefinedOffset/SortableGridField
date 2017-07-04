@@ -4,6 +4,7 @@ namespace UndefinedOffset\SortableGridField\Tests;
 
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Session;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Forms\FieldList;
@@ -57,8 +58,11 @@ class GridFieldSortableRowsTest extends SapphireTest
         $team3 = $this->objFromFixture('UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_Team', 'team3');
 
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array('ItemIDs' => "$team1->ID, $team3->ID, $team2->ID"), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
         $this->assertEquals($team3->ID, $this->list->last()->ID, 'User should\'t be able to sort records without correct permissions.');
     }
@@ -70,8 +74,11 @@ class GridFieldSortableRowsTest extends SapphireTest
         $team3 = $this->objFromFixture('UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_Team', 'team3');
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array('ItemIDs' => "$team1->ID, $team3->ID, $team2->ID"), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
         $this->assertEquals($team2->ID, $this->list->last()->ID, 'User should be able to sort records with ADMIN permission.');
     }
@@ -99,8 +106,11 @@ class GridFieldSortableRowsTest extends SapphireTest
 
         $this->logInWithPermission('ADMIN');
         $stateID = 'testGridStateActionField';
-        Session::set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $request = new HTTPRequest('POST', 'url', array('ItemIDs' => "$team1->ID, $team3->ID, $team2->ID"), array('action_gridFieldAlterAction?StateID=' . $stateID => true, $this->form->getSecurityToken()->getName() => $this->form->getSecurityToken()->getValue()));
+        $session = Injector::inst()->create(Session::class, []);
+        $request->setSession($session);
+        $session->init($request);
+        $session->set($stateID, array('grid' => '', 'actionName' => 'saveGridRowSort', 'args' => array('GridFieldSortableRows' => array('sortableToggle' => true))));
         $this->gridField->gridFieldAlterAction(array('StateID' => $stateID), $this->form, $request);
 
         $this->assertEquals($team2->ID, $list->last()->ID, 'Sort should have happened on Versioned stage "Stage"');

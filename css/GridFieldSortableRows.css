@@ -1,16 +1,22 @@
-form table.ss-gridfield-table thead tr th.sortablerowsheading {
+form table.grid-field__table thead tr th.sortablerowsheading {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-form table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows input[type=checkbox] {
+form table.grid-field__table thead tr td.sortablerowsheading label {
+    margin-bottom: 0;
+    
+    line-height: normal;
+}
+
+form table.grid-field__table thead tr td.sortablerowsheading .gridfield-sortablerows input[type=checkbox] {
 	height: auto;
 }
 
-form table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows {
+form table.grid-field__table thead tr td.sortablerowsheading .gridfield-sortablerows {
 	line-height: 28px;
 }
 
-form table.ss-gridfield-table thead tr th.sortablerowsheading .gridfield-sortablerows button {
+form table.grid-field__table thead tr td.sortablerowsheading .gridfield-sortablerows button {
 	display: none;
 }
 
@@ -19,7 +25,7 @@ form .ss-gridfield {
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow {
-	background: #98AAB6;
+	background: #5589A7;
 	
 	display: none;
 	
@@ -30,7 +36,7 @@ form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow {
 	
 	width: 40px;
 	
-	opacity: 0.4;
+	opacity: 0.6;
 	
 	text-align: center;
 	
@@ -45,6 +51,8 @@ form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow i 
 	display: block;
 	
 	position: relative;
+    
+    font-style: normal;
 	
 	position: absolute;
 	top: 50%;
@@ -72,13 +80,13 @@ form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow i:
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-psort-arrow:hover {
-	opacity: 0.7;
+	opacity: 0.8;
 	
 	text-decoration: none;
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-prev-page {
-	left: 0;
+	left: -20px;
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-prev-page i {
@@ -98,7 +106,7 @@ form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-prev-page i {
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-next-page {
-	right: 0;
+	right: -20px;
 }
 
 form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-next-page i {
@@ -117,10 +125,10 @@ form .ss-gridfield .gridfield-sortablerows-movepage .sortablerows-next-page i {
 	transform-origin: bottom right;
 }
 
-form table.ss-gridfield-table.dragSorting tbody tr td {
+form table.grid-field__table.dragSorting tbody tr td {
 	cursor: move;
 }
 
-form table.ss-gridfield-table.dragSorting .ui-sortable-helper {
+form table.grid-field__table.dragSorting .ui-sortable-helper {
 	display: table;
 }

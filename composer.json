@@ -12,8 +12,7 @@
 		}
 	],
 	"require": {
-		"silverstripe/admin": "^1.0@dev",
-		"silverstripe/framework": "^4.0@dev",
+		"silverstripe/framework": "~4.0",
 		"silverstripe/versioned": "^1.0"
 	},
 	"autoload": {
@@ -28,7 +27,7 @@
 	"extra": {
 		"installer-name": "sortablegridfield",
 		"branch-alias": {
-			"dev-master": "1.0.x-dev"
+			"dev-master": "2.0.x-dev"
 		}
 	}
 }

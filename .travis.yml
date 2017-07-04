@@ -6,12 +6,12 @@ php:
   - 7.1
 
 env:
-  - DB=MYSQL CORE_RELEASE=4
+  - DB=MYSQL CORE_RELEASE=4.0
 
 matrix:
   include:
     - php: 7.1
-      env: DB=PGSQL CORE_RELEASE=4
+      env: DB=PGSQL CORE_RELEASE=4.0
 
 before_script:
   - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support

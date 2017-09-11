@@ -29,19 +29,20 @@ public function getMyManyManyRelationship() {
 ```
 
 
-To enable drag and drop sorting on the grid field add the following to your grid field's config
-*Grid Field Config*
+To enable drag and drop sorting on the grid field add the following to your grid field's config, also make sure you add the namespace ``UndefinedOffset\SortableGridField\Forms`` to your file.
 
 ```php
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows; //Namespaces should be added to the top of your file
+
 $myGridConfig->addComponent(new GridFieldSortableRows('{Column to store sort}'));
 ```
 
 To move an item to another page drag the row over the respective move to page button which appear on the left and right of the GridField and release.
 
 #### Full code Examples
-* [has_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/HasManyExample.md)
-* [many_many relationship] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ManyManyExample.md)
-* [ModelAdmin implementation] (https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ModelAdminExample.md)
+* [has_many relationship](https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/HasManyExample.md)
+* [many_many relationship](https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ManyManyExample.md)
+* [ModelAdmin implementation](https://github.com/UndefinedOffset/SortableGridField/blob/master/docs/ModelAdminExample.md)
 
 #### Events
 GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGridFieldRowSort(), onBeforeGridFieldPageSort() and onAfterGridFieldPageSort(). These "events" are passed a clone of the DataList used in GridFieldSortableRows, in the case of page sorting this list has a limit that shows you the current page plus/minus one object. For GridFieldSortableRows that are on ModelAdmin decendents these events are called on the ModelAdmin if they do not have a owner DataObject, if you are using GridFieldSortableRows on a GridField for a DataObject's relationship the events are called on that DataObject.
@@ -49,6 +50,8 @@ GridFieldSortableRows provides 4 "events" onBeforeGridFieldRowSort(), onAfterGri
 #### Appending to the top instead of the bottom
 By default GridFieldSortableRows appends to the bottom of the list for performance on large data sets, however you can set new records to append new records to the top by calling setAppendToTop(true) on your GridFieldSortableRows instance.
 ```php
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows; //Namespaces should be added to the top of your file
+
 $myGridConfig->addComponent($sortable=new GridFieldSortableRows('SortOrder'));
 $sortable->setAppendToTop(true);
 ```
@@ -56,6 +59,8 @@ $sortable->setAppendToTop(true);
 #### Working with versioned records
 By default GridFieldSortableRows does not update any other stage for versioned than the base stage. However you can enable this by calling setUpdateVersionedStage() and passing in the name of the stage you want to update along with the base stage. For example passing in "Live" will also update the "Live" stage when any sort happens.
 ```php
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows; //Namespaces should be added to the top of your file
+
 $myGridConfig->addComponent($sortable=new GridFieldSortableRows('SortOrder'));
 $sortable->setUpdateVersionedStage('Live');
 ```
@@ -63,6 +68,8 @@ $sortable->setUpdateVersionedStage('Live');
 #### Overriding the default relationship name
 By default the relationship name comes from the name of the GridField, however you can override this lookup by calling setCustomRelationName() and passing in the name of the relationship. This allows for you to have multiple GridFields on the same form interacting with the same many_many list maybe filtered slightly differently.
 ```php
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows; //Namespaces should be added to the top of your file
+
 $myGridConfig->addComponent($sortable=new GridFieldSortableRows('SortOrder'));
 $sortable->setCustomRelationName('MyRelationship');
 
@@ -74,6 +81,8 @@ When you're reporting an issue please ensure you specify what version of SilverS
 ### Notes
 * When using with GridFieldManyRelationHandler make sure that you add GridFieldSortableRows to your config before for example GridFieldManyRelationHandler:
 ```php
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows; //Namespaces should be added to the top of your file
+
 $config->addComponent(new GridFieldSortableRows('SortOrder'), 'GridFieldManyRelationHandler');
 ```
 

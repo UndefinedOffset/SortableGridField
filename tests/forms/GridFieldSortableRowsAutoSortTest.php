@@ -27,7 +27,7 @@ use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 class GridFieldSortableRowsAutoSortTest extends SapphireTest
 {
     /** @var string */
-    public static $fixture_file = 'sortablegridfield/tests/forms/GridFieldSortableRowsAutoSortTest.yml';
+    public static $fixture_file = 'GridFieldSortableRowsAutoSortTest.yml';
 
     /** @var array */
     protected static $extra_dataobjects = array(

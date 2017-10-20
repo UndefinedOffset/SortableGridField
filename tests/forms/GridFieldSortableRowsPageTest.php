@@ -34,7 +34,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest
     protected $form;
 
     /** @var string */
-    public static $fixture_file = 'sortablegridfield/tests/forms/GridFieldSortableRowsPageTest.yml';
+    public static $fixture_file = 'GridFieldSortableRowsPageTest.yml';
 
     /** @var array */
     protected static $extra_dataobjects = array(

@@ -25,7 +25,7 @@ use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\UnsavedRelationList;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
+use SilverStripe\View\arrayData;
 use SilverStripe\View\Requirements;
 
 /**
@@ -132,8 +132,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         $custom = Config::inst()->get(GridFieldSortableRows::class, 'Base');
         $base = $custom ?: SORTABLE_GRIDFIELD_BASE;
 
-        Requirements::css('undefinedoffset/sortablegridfield:css/GridFieldSortableRows.css');
-        Requirements::javascript('undefinedoffset/sortablegridfield:javascript/GridFieldSortableRows.js');
+        Requirements::css($base . '/css/GridFieldSortableRows.css');
+        Requirements::javascript($base . '/javascript/GridFieldSortableRows.js');
 
         $args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection);
 

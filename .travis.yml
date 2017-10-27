@@ -19,4 +19,4 @@ before_script:
   - cd ~/builds/ss
 
 script:
-  - vendor/bin/phpunit vendor/undefinedoffset/sortablegridfield/tests
+  - vendor/bin/phpunit sortablegridfield/tests

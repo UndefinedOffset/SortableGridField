@@ -1,7 +1,7 @@
 {
 	"name": "undefinedoffset/sortablegridfield",
 	"description": "Adds drag and drop functionality to SilverStripe 4.x's GridField",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"keywords": ["silverstripe", "gridfield"],
     "license": "BSD-3-Clause",
 	"authors": [
@@ -13,7 +13,8 @@
 	],
 	"require": {
 		"silverstripe/framework": "~4.0",
-		"silverstripe/versioned": "^1.0"
+		"silverstripe/versioned": "^1.0",
+        "silverstripe/vendor-plugin": "^1.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -26,6 +27,10 @@
 	},
 	"extra": {
 		"installer-name": "sortablegridfield",
+        "expose": [
+            "css",
+            "javascript"
+        ],
 		"branch-alias": {
 			"dev-master": "2.0.x-dev"
 		}

@@ -128,10 +128,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
         $forTemplate = new arrayData($data);
 
-        //Inject Requirements
-        $custom = Config::inst()->get(GridFieldSortableRows::class, 'Base');
-        $base = $custom ?: SORTABLE_GRIDFIELD_BASE;
-
         Requirements::css('undefinedoffset/sortablegridfield:css/GridFieldSortableRows.css');
         Requirements::javascript('undefinedoffset/sortablegridfield:javascript/GridFieldSortableRows.js');
 

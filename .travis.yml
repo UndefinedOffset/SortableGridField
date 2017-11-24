@@ -26,7 +26,7 @@ before_script:
   - composer require --no-update silverstripe/recipe-core:1.0.x-dev
   - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:2.0.x-dev --prefer-dist; fi
   - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:2.1.x-dev --prefer-dist; fi
-  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+  - composer install --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:
   - vendor/bin/phpunit

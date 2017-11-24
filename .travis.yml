@@ -16,9 +16,17 @@ matrix:
       env: DB=SQLITE3 CORE_RELEASE=4.0
 
 before_script:
-  - git clone git://github.com/silverstripe/silverstripe-travis-support.git ~/travis-support
-  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss --require phpunit/php-file-iterator:1.3.4
-  - cd ~/builds/ss
+  # Init PHP
+  - composer self-update || true
+  - phpenv rehash
+  - phpenv config-rm xdebug.ini
+  
+  # Install composer dependencies
+  - composer validate
+  - composer require --no-update silverstripe/recipe-framework:1.0.x-dev
+  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:2.0.x-dev --prefer-dist; fi
+  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:2.1.x-dev --prefer-dist; fi
+  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:
-  - vendor/bin/phpunit vendor/undefinedoffset/sortablegridfield/tests
+  - vendor/bin/phpunit

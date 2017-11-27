@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.1](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.1) (2017-11-27)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.0...2.0.1)
+
+**Closed issues:**
+
+- Many Many relationships are broken due to renaming of many\_many and many\_many\_extraFields to manyMany and manyManyExtraFields [\#110](https://github.com/UndefinedOffset/SortableGridField/issues/110)
+
 ## [2.0.0](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.0) (2017-11-24)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.0-beta2...2.0.0)
 

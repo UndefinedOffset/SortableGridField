@@ -7,6 +7,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extensible;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
 use SilverStripe\Forms\GridField\GridField_DataManipulator;
@@ -17,6 +18,7 @@ use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DataObjectSchema;
 use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ManyManyList;
@@ -254,15 +256,19 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $i = 1;
 
             if ($many_many) {
-                list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                $schema=Injector::inst()->get(DataObjectSchema::class);
+                $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                $parentField=$componentDetails['parentField'];
+                $componentField=$componentDetails['childField'];
+                $table=$componentDetails['join'];
 
                 /** @var DataObject $table */
                 $table = $this->mapTableNameAndReturn($table);
 
-                $extraFields = $owner->many_many_extraFields((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                $extraFields = $schema->manyManyExtraFieldsForComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
 
-                if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'Int' || is_subclass_of('Int', $extraFields[$this->sortColumn]))) {
-                    user_error('Sort column ' . $this->sortColumn . ' must be an Int, column is of type ' . $extraFields[$this->sortColumn], E_USER_ERROR);
+                if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of('SilverStripe\\ORM\\FieldType\\DBInt', $extraFields[$this->sortColumn]))) {
+                    user_error('Sort column ' . $this->sortColumn . ' must be an SilverStripe\\ORM\\FieldType\\DBInt, column is of type ' . $extraFields[$this->sortColumn], E_USER_ERROR);
                     exit;
                 }
             } else {
@@ -291,7 +297,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
                 $baseDataClass = DataObject::getSchema()->baseDataClass($gridField->getModelClass());
                 $baseDataClass = $this->mapTableNameAndReturn($baseDataClass);
-
             }
 
 
@@ -459,7 +464,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
 
         if ($many_many) {
-            list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            $schema=Injector::inst()->get(DataObjectSchema::class);
+            $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            $parentField=$componentDetails['parentField'];
+            $componentField=$componentDetails['childField'];
+            $table=$componentDetails['join'];
 
             /** @var DataObject $table */
             $table = $this->mapTableNameAndReturn($table);
@@ -591,7 +600,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         }
 
         if ($many_many) {
-            list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->manyMany((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
             $table = $this->mapTableNameAndReturn($table);
         }
 

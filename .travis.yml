@@ -20,7 +20,7 @@ before_script:
   - composer self-update || true
   - phpenv rehash
   - phpenv config-rm xdebug.ini
-  
+
   # Install composer dependencies
   - composer validate
   - composer require --no-update silverstripe/recipe-core:^1.0

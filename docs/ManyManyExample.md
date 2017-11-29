@@ -1,27 +1,30 @@
 many_many Example
 =================
+
 ```php
 /*** TestPage.php ***/
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
-class TestPage extends Page {
-	private static $many_many=array(
-		'TestObjects'=>'TestObject'
-	);
+class TestPage extends Page
+{
+	private static $many_many = [
+		'TestObjects' => 'TestObject',
+	];
 
-	private static $many_many_extraFields=array(
-		'TestObjects'=>array(
-			'SortOrder'=>'Int'
-		)
-	);
+	private static $many_many_extraFields = [
+		'TestObjects' => [
+			'SortOrder' => 'Int',
+		]
+	];
 
 
-	public function getCMSFields() {
-		$fields=parent::getCMSFields();
+	public function getCMSFields()
+	{
+		$fields = parent::getCMSFields();
 
-		$conf=GridFieldConfig_RelationEditor::create(10);
+		$conf = GridFieldConfig_RelationEditor::create(10);
 		$conf->addComponent(new GridFieldSortableRows('SortOrder'));
 
 		$fields->addFieldToTab('Root.TestObjects', new GridField('TestObjects', 'TestObjects', $this->TestObjects(), $conf));
@@ -29,7 +32,8 @@ class TestPage extends Page {
 		return $fields;
 	}
 
-	public function TestObjects() {
+	public function TestObjects()
+	{
 		return $this->getManyManyComponents('TestObjects')->sort('SortOrder');
 	}
 }
@@ -38,13 +42,14 @@ class TestPage extends Page {
 /*** TestObject.php ***/
 use SilverStripe\ORM\DataObject;
 
-class TestObject extends DataObject {
-	private static $db=array(
-		'Title'=>'Text'
-	);
+class TestObject extends DataObject
+{
+	private static $db = [
+		'Title' => 'Text',
+	];
 
-	private static $belongs_many_many=array(
-		'TestPages'=>'TestPage'
-	);
+	private static $belongs_many_many = [
+		'TestPages' => 'TestPage',
+	];
 }
 ```

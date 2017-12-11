@@ -52,9 +52,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
     /** @var null|string */
     protected $custom_relation_name = null;
 
-    /** @var array */
-    protected $tableMap = [];
-
     /**
      * @param string $sortColumn Column that should be used to update the sort information
      * @param bool $disableSelection Disable selection on the GridField when dragging
@@ -293,7 +290,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                 }
 
                 $baseDataClass = DataObject::getSchema()->baseDataClass($gridField->getModelClass());
-                $baseDataClass = DataObject::getSchema()->tableName($baseDataClass);
+                $baseDataTable = DataObject::getSchema()->tableName($baseDataClass);
             }
 
 
@@ -332,7 +329,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                         . '" SET "' . $sortColumn . '" = "' . $sortColumn . '"+1'
                         . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
 
-                    if ($this->update_versioned_stage && class_exists($this->tableMap[$table]) && $this->hasVersionedExtension($this->tableMap[$table])) {
+                    if ($this->update_versioned_stage && $this->hasVersionedExtension($gridField->getModelClass())) {
                         DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
                             . '" SET "' . $sortColumn . '" = "' . $sortColumn . '"+1'
                             . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
@@ -345,17 +342,17 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                         . '" SET "' . $sortColumn . '" = ' . ($max + $i)
                         . ' WHERE "ID" = ' . $obj->ID);
                     //LastEdited
-                    DB::query('UPDATE "' . $baseDataClass
+                    DB::query('UPDATE "' . $baseDataTable
                         . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                         . ' WHERE "ID" = ' . $obj->ID);
 
-                    if ($this->update_versioned_stage && class_exists($this->tableMap[$table]) && $this->hasVersionedExtension($this->tableMap[$table])) {
+                    if ($this->update_versioned_stage && $this->hasVersionedExtension($gridField->getModelClass())) {
                         DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
                             . '" SET "' . $sortColumn . '" = ' . ($max + $i)
                             . ' WHERE "ID" = ' . $obj->ID);
 
-                        if ($this->hasVersionedExtension($this->tableMap[$baseDataClass])) {
-                            DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
+                        if ($this->hasVersionedExtension($baseDataClass)) {
+                            DB::query('UPDATE "' . $baseDataTable . '_' . $this->update_versioned_stage
                                 . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                                 . ' WHERE "ID" = ' . $obj->ID);
                         }
@@ -367,12 +364,12 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
             //Update LastEdited for affected records when using append to top on a many_many relationship
             if (!$many_many && $this->append_to_top && count($topIncremented) > 0) {
-                DB::query('UPDATE "' . $baseDataClass
+                DB::query('UPDATE "' . $baseDataTable
                     . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                     . ' WHERE "ID" IN(\'' . implode('\',\'', $topIncremented) . '\')');
 
-                if ($this->update_versioned_stage && class_exists($this->tableMap[$table]) && $this->hasVersionedExtension($this->tableMap[$table]) && $this->hasVersionedExtension($this->tableMap[$baseDataClass])) {
-                    DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
+                if ($this->update_versioned_stage && $this->hasVersionedExtension($gridField->getModelClass()) && $this->hasVersionedExtension($baseDataClass)) {
+                    DB::query('UPDATE "' . $baseDataTable . '_' . $this->update_versioned_stage
                         . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                         . ' WHERE "ID" IN(\'' . implode('\',\'', $topIncremented) . '\')');
                 }
@@ -490,7 +487,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             }
 
             $baseDataClass = DataObject::getSchema()->baseDataClass($gridField->getModelClass());
-            $baseDataClass = DataObject::getSchema()->tableName($baseDataClass);
+            $baseDataTable = DataObject::getSchema()->tableName($baseDataClass);
         }
 
 
@@ -519,17 +516,17 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                     . '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
                     . ' WHERE "ID" = ' . $id);
 
-                DB::query('UPDATE "' . $baseDataClass
+                DB::query('UPDATE "' . $baseDataTable
                     . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                     . ' WHERE "ID" = ' . $id);
 
-                if ($this->update_versioned_stage && class_exists($this->tableMap[$table]) && $this->hasVersionedExtension($this->tableMap[$table])) {
+                if ($this->update_versioned_stage && $this->hasVersionedExtension($gridField->getModelClass())) {
                     DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
                         . '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
                         . ' WHERE "ID" = ' . $id);
 
-                    if ($this->hasVersionedExtension($this->tableMap[$baseDataClass])) {
-                        DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
+                    if ($this->hasVersionedExtension($baseDataClass)) {
+                        DB::query('UPDATE "' . $baseDataTable . '_' . $this->update_versioned_stage
                             . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
                             . ' WHERE "ID" = ' . $id);
                     }
@@ -750,12 +747,12 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
     /**
      * Checks to see if $table_name is declared on the DataObject, if not returns string as given
      *
-     * @param $tableName
+     * @param $className
      * @return string
      * @deprecated Use DataObject::getSchema()->tableName() instead
      */
-    public function mapTableNameAndReturn($tableName)
+    public function mapTableNameAndReturn($className)
     {
-        return DataObject::getSchema()->tableName($baseDataClass);
+        return DataObject::getSchema()->tableName($className);
     }
 }

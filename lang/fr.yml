@@ -2,3 +2,5 @@ fr:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Activer le classement par glisser-déposer'
     EditPermissionsFailure: 'Vous n''avez pas les permissions pour éditer'
+    NEXT: 'Aller à la page suivante'
+    PREVIOUS: 'Aller à la page précédente'

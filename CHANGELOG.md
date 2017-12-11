@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.2](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.2) (2017-12-11)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.1...2.0.2)
+
+**Closed issues:**
+
+- many\_many ss 3.6 GridFieldAddNewMultiClass Column 'SortOrder' in field list is ambiguous [\#114](https://github.com/UndefinedOffset/SortableGridField/issues/114)
+- mapTableNameAndReturn can't parse namespace+classname into mysql tablename [\#113](https://github.com/UndefinedOffset/SortableGridField/issues/113)
+
 ## [2.0.1](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.1) (2017-11-29)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.0...2.0.1)
 

@@ -262,9 +262,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                 $componentField=$componentDetails['childField'];
                 $table=$componentDetails['join'];
 
-                /** @var DataObject $table */
-                $table = $this->mapTableNameAndReturn($table);
-
                 $extraFields = $schema->manyManyExtraFieldsForComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
 
                 if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of('SilverStripe\\ORM\\FieldType\\DBInt', $extraFields[$this->sortColumn]))) {
@@ -278,13 +275,13 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
                 $db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
                 if (!empty($db) && array_key_exists($sortColumn, $db)) {
-                    $table = $this->mapTableNameAndReturn($class);
+                    $table = DataObject::getSchema()->tableName($class);
                 } else {
                     $classes = ClassInfo::ancestry($class, true);
                     foreach ($classes as $class) {
                         $db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
                         if (!empty($db) && array_key_exists($sortColumn, $db)) {
-                            $table = $this->mapTableNameAndReturn($class);
+                            $table = DataObject::getSchema()->tableName($class);
                             break;
                         }
                     }
@@ -296,7 +293,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                 }
 
                 $baseDataClass = DataObject::getSchema()->baseDataClass($gridField->getModelClass());
-                $baseDataClass = $this->mapTableNameAndReturn($baseDataClass);
+                $baseDataClass = DataObject::getSchema()->tableName($baseDataClass);
             }
 
 
@@ -469,22 +466,19 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $parentField=$componentDetails['parentField'];
             $componentField=$componentDetails['childField'];
             $table=$componentDetails['join'];
-
-            /** @var DataObject $table */
-            $table = $this->mapTableNameAndReturn($table);
         } else {
             //Find table containing the sort column
             $table = false;
             $class = $gridField->getModelClass();
             $db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
             if (!empty($db) && array_key_exists($sortColumn, $db)) {
-                $table = $this->mapTableNameAndReturn($class);
+                $table = DataObject::getSchema()->tableName($class);
             } else {
                 $classes = ClassInfo::ancestry($class, true);
                 foreach ($classes as $class) {
                     $db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
                     if (!empty($db) && array_key_exists($sortColumn, $db)) {
-                        $table = $this->mapTableNameAndReturn($class);
+                        $table = DataObject::getSchema()->tableName($class);
                         break;
                     }
                 }
@@ -496,7 +490,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             }
 
             $baseDataClass = DataObject::getSchema()->baseDataClass($gridField->getModelClass());
-            $baseDataClass = $this->mapTableNameAndReturn($baseDataClass);
+            $baseDataClass = DataObject::getSchema()->tableName($baseDataClass);
         }
 
 
@@ -600,8 +594,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         }
 
         if ($many_many) {
-            list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->manyMany((!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
-            $table = $this->mapTableNameAndReturn($table);
+            $schema=Injector::inst()->get(DataObjectSchema::class);
+            $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            $parentField=$componentDetails['parentField'];
+            $componentField=$componentDetails['childField'];
+            $table=$componentDetails['join'];
         }
 
         if ($data['Target'] == 'previouspage') {
@@ -628,7 +625,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             foreach ($classes as $class) {
                 $db = Config::inst()->get($class, "db", CONFIG::UNINHERITED);
                 if (!empty($db) && array_key_exists($sortColumn, $db)) {
-                    $table = $this->mapTableNameAndReturn($class);
+                    $table = DataObject::getSchema()->tableName($class);
                     break;
                 }
             }
@@ -754,18 +751,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
      * Checks to see if $table_name is declared on the DataObject, if not returns string as given
      *
      * @param $tableName
-     * @return mixed
+     * @return string
+     * @deprecated Use DataObject::getSchema()->tableName() instead
      */
     public function mapTableNameAndReturn($tableName)
     {
-        if (array_key_exists($tableName, $this->tableMap)) {
-            return $this->tableMap[$tableName];
-        }
-
-        $realName = (Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED)) ? Config::inst()->get($tableName, 'table_name', CONFIG::UNINHERITED) : $tableName;
-
-        $this->tableMap[$realName] = $tableName;
-
-        return $realName;
+        return DataObject::getSchema()->tableName($baseDataClass);
     }
 }

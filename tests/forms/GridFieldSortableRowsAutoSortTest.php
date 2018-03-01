@@ -301,7 +301,7 @@ class GridFieldAction_SortOrder_VPlayer extends DataObject implements TestOnly
     private static $table_name = 'GridFieldAction_SortOrder_VPlayer';
 
     private static $db = array(
-        'Name' => DBVarchar:class,
+        'Name' => DBVarchar::class,
         'SortOrder' => DBInt::class
     );
 

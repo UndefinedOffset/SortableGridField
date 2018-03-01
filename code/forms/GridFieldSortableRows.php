@@ -212,7 +212,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				list($parentClass, $componentClass, $parentField, $componentField, $table) = $owner->many_many((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
 				$extraFields=$owner->many_many_extraFields((!empty($this->custom_relation_name) ? $this->custom_relation_name:$gridField->getName()));
 				
-				if(!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !(strtolower($extraFields[$this->sortColumn])=='int' || is_subclass_of('Int', $extraFields[$this->sortColumn])) || strtolower($extraFields[$this->sortColumn])=='dbint' || is_subclass_of('DBInt', $extraFields[$this->sortColumn]))) {
+				if(!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !(strtolower($extraFields[$this->sortColumn])=='int' || is_subclass_of('Int', $extraFields[$this->sortColumn]) || strtolower($extraFields[$this->sortColumn])=='dbint' || is_subclass_of('DBInt', $extraFields[$this->sortColumn]))) {
 					user_error('Sort column '.$this->sortColumn.' must be an instance of DBInt, column is of type '.$extraFields[$this->sortColumn], E_USER_ERROR);
 					exit;
 				}

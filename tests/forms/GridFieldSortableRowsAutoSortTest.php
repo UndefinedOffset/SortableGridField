@@ -15,6 +15,8 @@ use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use SilverStripe\ORM\FieldType\DBInt;
+use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\Security\Member;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
@@ -280,8 +282,8 @@ class GridFieldAction_SortOrder_Player extends DataObject implements TestOnly
     private static $table_name = 'GridFieldAction_SortOrder_Player';
 
     private static $db = array(
-        'Name' => 'Varchar',
-        'SortOrder' => 'Int'
+        'Name' => DBVarchar::class,
+        'SortOrder' => DBInt::class
     );
 
     private static $default_sort = 'SortOrder';
@@ -299,8 +301,8 @@ class GridFieldAction_SortOrder_VPlayer extends DataObject implements TestOnly
     private static $table_name = 'GridFieldAction_SortOrder_VPlayer';
 
     private static $db = array(
-        'Name' => 'Varchar',
-        'SortOrder' => 'Int'
+        'Name' => DBVarchar:class,
+        'SortOrder' => DBInt::class
     );
 
     private static $default_sort = 'SortOrder';
@@ -322,7 +324,7 @@ class GridFieldAction_SortOrder_TestParent extends DataObject implements TestOnl
     private static $table_name = 'GridFieldAction_SortOrder_TestParent';
 
     private static $db = array(
-        'Name' => 'Varchar'
+        'Name' => DBVarchar::class
     );
 
     private static $has_many = array(
@@ -341,7 +343,7 @@ class GridFieldAction_SortOrder_BaseObject extends DataObject implements TestOnl
     private static $table_name = 'GridFieldAction_SortOrder_BaseObject';
 
     private static $db = array(
-        'Name' => 'Varchar'
+        'Name' => DBVarchar::class
     );
 }
 
@@ -357,7 +359,7 @@ class GridFieldAction_SortOrder_ChildObject extends GridFieldAction_SortOrder_Ba
     private static $table_name = 'GridFieldAction_SortOrder_ChildObject';
 
     private static $db = array(
-        'SortOrder' => 'Int'
+        'SortOrder' => DBInt::class
     );
 
     private static $has_one = array(

@@ -14,6 +14,8 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_Base;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBInt;
+use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
@@ -204,9 +206,9 @@ class GridFieldAction_PageSortOrder_Team extends DataObject implements TestOnly
     private static $table_name = 'GridFieldAction_PageSortOrder_Team';
 
     private static $db = array(
-        'Name' => 'Varchar',
-        'City' => 'Varchar',
-        'SortOrder' => 'Int'
+        'Name' => DBVarchar::class,
+        'City' => DBVarchar::class,
+        'SortOrder' => DBInt::class
     );
 
     private static $default_sort = 'SortOrder';
@@ -225,9 +227,9 @@ class GridFieldAction_PageSortOrder_VTeam extends DataObject implements TestOnly
     private static $table_name = 'GridFieldAction_PageSortOrder_VTeam';
 
     private static $db = array(
-        'Name' => 'Varchar',
-        'City' => 'Varchar',
-        'SortOrder' => 'Int'
+        'Name' => DBVarchar::class,
+        'City' => DBVarchar::class,
+        'SortOrder' => DBInt::class
     );
 
     private static $default_sort = 'SortOrder';

@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.4](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.4) (2018-03-07)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.3...2.0.4)
+
+**Closed issues:**
+
+- Int to DBInt [\#120](https://github.com/UndefinedOffset/SortableGridField/issues/120)
+
 ## [2.0.3](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.3) (2018-03-01)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.2...2.0.3)
 

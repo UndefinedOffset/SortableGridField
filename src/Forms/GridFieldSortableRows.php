@@ -234,7 +234,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $sng = singleton($gridField->getModelClass());
             $fieldType = $sng->config()->db[$this->sortColumn];
 
-            if (!$fieldType || !($fieldType == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of($fieldType, 'SilverStripe\\ORM\\FieldType\\DBInt'))) {
+            if (!$fieldType || !($fieldType == 'Int' || $fieldType == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of($fieldType, 'SilverStripe\\ORM\\FieldType\\DBInt'))) {
                 if (is_array($fieldType)) {
                     user_error('Sort column ' . $this->sortColumn . ' could not be found in ' . $gridField->getModelClass() . '\'s ancestry', E_USER_ERROR);
                 } else {
@@ -261,7 +261,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
                 $extraFields = $schema->manyManyExtraFieldsForComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
 
-                if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of('SilverStripe\\ORM\\FieldType\\DBInt', $extraFields[$this->sortColumn]))) {
+                if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'Int' || $extraFields[$this->sortColumn] == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of('SilverStripe\\ORM\\FieldType\\DBInt', $extraFields[$this->sortColumn]))) {
                     user_error('Sort column ' . $this->sortColumn . ' must be an SilverStripe\\ORM\\FieldType\\DBInt, column is of type ' . $extraFields[$this->sortColumn], E_USER_ERROR);
                     exit;
                 }

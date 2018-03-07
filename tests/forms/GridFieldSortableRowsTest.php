@@ -137,7 +137,7 @@ class GridFieldAction_SortOrder_Team extends DataObject implements TestOnly
     private static $db = array(
         'Name' => DBVarchar::class,
         'City' => DBVarchar::class,
-        'SortOrder' => DBInt::class
+        'SortOrder' => 'Int'
     );
 
     private static $default_sort = 'SortOrder';

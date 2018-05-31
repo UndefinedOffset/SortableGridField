@@ -656,7 +656,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
             $i = 1;
             foreach ($items as $obj) {
-                if ($obj->ID == $targetItem->ID) {
+                if ($obj->ID == $targetItem->ID || $i >= count($sortPositions)) {
                     continue;
                 }
 

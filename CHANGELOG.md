@@ -1,11 +1,18 @@
 # Change Log
 
-## [2.0.4](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.4) (2018-03-07)
-[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.3...2.0.4)
+## [2.0.5](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.5) (2018-06-07)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.4...2.0.5)
 
 **Closed issues:**
 
 - Int to DBInt [\#120](https://github.com/UndefinedOffset/SortableGridField/issues/120)
+
+**Merged pull requests:**
+
+- Fixes "undefined offset" error when moving a many\_many item to previous page [\#121](https://github.com/UndefinedOffset/SortableGridField/pull/121) ([ChrissiQ](https://github.com/ChrissiQ))
+
+## [2.0.4](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.4) (2018-03-07)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.3...2.0.4)
 
 ## [2.0.3](https://github.com/UndefinedOffset/SortableGridField/tree/2.0.3) (2018-03-01)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.2...2.0.3)

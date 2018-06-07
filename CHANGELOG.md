@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.0.2](https://github.com/UndefinedOffset/SortableGridField/tree/1.0.2) (2018-06-07)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/1.0.1...1.0.2)
+
 ## [1.0.1](https://github.com/UndefinedOffset/SortableGridField/tree/1.0.1) (2018-03-01)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/1.0.0...1.0.1)
 

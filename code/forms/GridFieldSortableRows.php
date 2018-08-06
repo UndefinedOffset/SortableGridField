@@ -279,7 +279,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
 							. ' WHERE '.($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
 					
-					if($this->update_versioned_stage && class_exists($table) && Object::has_extension($table, 'Versioned')) {
+					if($this->update_versioned_stage && class_exists($table) && SS_Object::has_extension($table, 'Versioned')) {
 						DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 								. '" SET "' . $sortColumn . '" = "' . $sortColumn .'"+1'
 								. ' WHERE '. ($list instanceof RelationList ? '"' . $list->foreignKey . '" = '. $owner->ID:$idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\''.implode('\',\'', $topIncremented).'\')':''));
@@ -296,7 +296,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							 . '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 							 . ' WHERE "ID" = '. $obj->ID);
 	 				
-	 				if($this->update_versioned_stage && class_exists($table) && Object::has_extension($table, 'Versioned')) {
+	 				if($this->update_versioned_stage && class_exists($table) && SS_Object::has_extension($table, 'Versioned')) {
 	 					DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 	 							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
 	 							. ' WHERE "ID" = '. $obj->ID);
@@ -318,7 +318,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" IN(\''.implode('\',\'', $topIncremented).'\')');
 				
-				if($this->update_versioned_stage && class_exists($table) && Object::has_extension($table, 'Versioned') && Object::has_extension($baseDataClass, 'Versioned')) {
+				if($this->update_versioned_stage && class_exists($table) && SS_Object::has_extension($table, 'Versioned') && SS_Object::has_extension($baseDataClass, 'Versioned')) {
 					DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
 							. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 							. ' WHERE "ID" IN(\''.implode('\',\'', $topIncremented).'\')');
@@ -463,7 +463,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 						. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 						. ' WHERE "ID" = '. $id);
 				
-				if($this->update_versioned_stage && class_exists($table) && Object::has_extension($table, 'Versioned')) {
+				if($this->update_versioned_stage && class_exists($table) && SS_Object::has_extension($table, 'Versioned')) {
 					DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 							. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
 							. ' WHERE "ID" = '. $id);
@@ -556,7 +556,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 		
 		
 		//Find the sort column
-		if($this->update_versioned_stage && Object::has_extension($className, 'Versioned')) {
+		if($this->update_versioned_stage && SS_Object::has_extension($className, 'Versioned')) {
 			$table=false;
 			$classes=ClassInfo::ancestry($className, true);
 			foreach($classes as $class) {
@@ -588,7 +588,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$targetItem->$sortColumn = $sortPositions[0];
 				$targetItem->write();
 				
-				if($this->update_versioned_stage && Object::has_extension($className, 'Versioned')) {
+				if($this->update_versioned_stage && SS_Object::has_extension($className, 'Versioned')) {
 					DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 							. '" SET "' . $sortColumn.'" = ' . $sortPositions[0]
 							. ' WHERE "ID" = ' . $targetItem->ID);
@@ -611,7 +611,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					$obj->$sortColumn = $sortPositions[$i];
 					$obj->write();
 					
-					if($this->update_versioned_stage && Object::has_extension($className, 'Versioned')) {
+					if($this->update_versioned_stage && SS_Object::has_extension($className, 'Versioned')) {
 						DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 								. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
 								. ' WHERE "ID" = ' . $obj->ID);
@@ -629,7 +629,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 				$targetItem->$sortColumn = $sortPositions[count($sortPositions) - 1];
 				$targetItem->write();
 				
-				if($this->update_versioned_stage && Object::has_extension($className, 'Versioned')) {
+				if($this->update_versioned_stage && SS_Object::has_extension($className, 'Versioned')) {
 					DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 							. '" SET "' . $sortColumn.'" = ' . $sortPositions[count($sortPositions) - 1]
 							. ' WHERE "ID" = ' . $targetItem->ID);
@@ -652,7 +652,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 					$obj->$sortColumn = $sortPositions[$i];
 					$obj->write();
 					
-					if($this->update_versioned_stage && Object::has_extension($className, 'Versioned')) {
+					if($this->update_versioned_stage && SS_Object::has_extension($className, 'Versioned')) {
 						DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
 								. '" SET "' . $sortColumn.'" = ' . $sortPositions[$i]
 								. ' WHERE "ID" = ' . $obj->ID);

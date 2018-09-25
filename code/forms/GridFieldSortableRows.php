@@ -301,7 +301,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 	 							. '" SET "' . $sortColumn . '" = ' . ($max + $i)
 	 							. ' WHERE "ID" = '. $obj->ID);
 	 					
-	 					if(Object::has_extension($baseDataClass, 'Versioned')) {
+	 					if(SS_Object::has_extension($baseDataClass, 'Versioned')) {
 	 						DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
 	 								. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 	 								. ' WHERE "ID" = '. $obj->ID);
@@ -468,7 +468,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 							. '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
 							. ' WHERE "ID" = '. $id);
 					
-					if(Object::has_extension($baseDataClass, 'Versioned')) {
+					if(SS_Object::has_extension($baseDataClass, 'Versioned')) {
 						DB::query('UPDATE "' . $baseDataClass . '_' . $this->update_versioned_stage
 								. '" SET "LastEdited" = \'' . date('Y-m-d H:i:s') . '\''
 								. ' WHERE "ID" = '. $id);

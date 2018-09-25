@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.0.3](https://github.com/UndefinedOffset/SortableGridField/tree/1.0.3) (2018-09-25)
+[Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/2.0.6...1.0.3)
+
+**Merged pull requests:**
+
+- Missing adaptions for SS 3.7 & PHP 7.2 [\#124](https://github.com/UndefinedOffset/SortableGridField/pull/124) ([th3hamm0r](https://github.com/th3hamm0r))
+- Ensure compatibility with SS 3.7 & PHP 7.2 [\#123](https://github.com/UndefinedOffset/SortableGridField/pull/123) ([axllent](https://github.com/axllent))
+
 ## [1.0.2](https://github.com/UndefinedOffset/SortableGridField/tree/1.0.2) (2018-06-07)
 [Full Changelog](https://github.com/UndefinedOffset/SortableGridField/compare/1.0.1...1.0.2)
 

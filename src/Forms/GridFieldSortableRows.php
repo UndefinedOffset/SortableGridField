@@ -22,6 +22,7 @@ use SilverStripe\ORM\DataObjectSchema;
 use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ManyManyList;
+use SilverStripe\ORM\ManyManyThroughList;
 use SilverStripe\ORM\RelationList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\UnsavedRelationList;
@@ -231,8 +232,13 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
         $many_many = ($list instanceof ManyManyList);
         if (!$many_many) {
-            $sng = singleton($gridField->getModelClass());
-            $fieldType = $sng->config()->db[$this->sortColumn];
+            if($list instanceof ManyManyThroughList) {
+                $fieldType = $list->getExtraFields();
+                $fieldType = $fieldType[$this->sortColumn];
+            } else {
+                $sng = singleton($gridField->getModelClass());
+                $fieldType = $sng->config()->db[$this->sortColumn];
+            }
 
             if (!$fieldType || !($fieldType == 'Int' || $fieldType == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of($fieldType, 'SilverStripe\\ORM\\FieldType\\DBInt'))) {
                 if (is_array($fieldType)) {

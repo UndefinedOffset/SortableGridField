@@ -126,7 +126,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             'Checked' => ($state->sortableToggle == true ? ' checked = "checked"' : ''),
             'List' => $dataList);
 
-        $forTemplate = new arrayData($data);
+        $forTemplate = new ArrayData($data);
 
         Requirements::css('undefinedoffset/sortablegridfield:css/GridFieldSortableRows.css');
         Requirements::javascript('undefinedoffset/sortablegridfield:javascript/GridFieldSortableRows.js');
@@ -230,15 +230,10 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             return $query;
         });
 
-        $many_many = ($list instanceof ManyManyList);
+        $many_many = ($list instanceof ManyManyList || $list instanceof ManyManyThroughList);
         if (!$many_many) {
-            if($list instanceof ManyManyThroughList) {
-                $fieldType = $list->getExtraFields();
-                $fieldType = $fieldType[$this->sortColumn];
-            } else {
-                $sng = singleton($gridField->getModelClass());
-                $fieldType = $sng->config()->db[$this->sortColumn];
-            }
+            $sng = singleton($gridField->getModelClass());
+            $fieldType = $sng->config()->db[$this->sortColumn];
 
             if (!$fieldType || !($fieldType == 'Int' || $fieldType == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of($fieldType, 'SilverStripe\\ORM\\FieldType\\DBInt'))) {
                 if (is_array($fieldType)) {
@@ -264,8 +259,13 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                 $parentField=$componentDetails['parentField'];
                 $componentField=$componentDetails['childField'];
                 $table=$componentDetails['join'];
+                
+                //For ManyManyThroughLists get the right join table
+                if ($list instanceof ManyManyThroughList && class_exists($table)) {
+                    $table=$schema->tableName($table);
+                }
 
-                $extraFields = $schema->manyManyExtraFieldsForComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                $extraFields = $list->getExtraFields();
 
                 if (!$extraFields || !array_key_exists($this->sortColumn, $extraFields) || !($extraFields[$this->sortColumn] == 'Int' || $extraFields[$this->sortColumn] == 'SilverStripe\\ORM\\FieldType\\DBInt' || is_subclass_of('SilverStripe\\ORM\\FieldType\\DBInt', $extraFields[$this->sortColumn]))) {
                     user_error('Sort column ' . $this->sortColumn . ' must be an SilverStripe\\ORM\\FieldType\\DBInt, column is of type ' . $extraFields[$this->sortColumn], E_USER_ERROR);
@@ -470,7 +470,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         $className = $gridField->getModelClass();
         $owner = $gridField->Form->getRecord();
         $items = clone $gridField->getList();
-        $many_many = ($items instanceof ManyManyList);
+        $many_many = ($items instanceof ManyManyList || $items instanceof ManyManyThroughList);
         $sortColumn = $this->sortColumn;
         $pageOffset = 0;
 
@@ -489,6 +489,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $parentField=$componentDetails['parentField'];
             $componentField=$componentDetails['childField'];
             $table=$componentDetails['join'];
+            
+            //For ManyManyThroughLists get the right join table
+            if ($items instanceof ManyManyThroughList && class_exists($table)) {
+                $table=$schema->tableName($table);
+            }
         } else {
             //Find table containing the sort column
             $table = false;
@@ -612,7 +617,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         /** @var DataList $items */
         $items = clone $gridField->getList();
 
-        $many_many = ($items instanceof ManyManyList);
+        $many_many = ($items instanceof ManyManyList || $items instanceof ManyManyThroughList);
         $sortColumn = $this->sortColumn;
         $targetItem = $items->byID(intval($data['ItemID']));
 
@@ -633,6 +638,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $parentField=$componentDetails['parentField'];
             $componentField=$componentDetails['childField'];
             $table=$componentDetails['join'];
+            
+            //For ManyManyThroughLists get the right join table
+            if ($items instanceof ManyManyThroughList && class_exists($table)) {
+                $table=$schema->tableName($table);
+            }
         }
 
         if ($data['Target'] == 'previouspage') {

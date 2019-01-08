@@ -107,7 +107,7 @@
                     dataType: 'html',
                     success: callback,
                     error: function (e) {
-                        alert(ss.i18n._t('GRIDFIELD.ERRORINTRANSACTION'));
+                        alert(ss.i18n._t('Admin.ERRORINTRANSACTION', 'An error occured while fetching data from the server\n Please try again later.'));
                     }
                 }, ajaxOpts));
             }

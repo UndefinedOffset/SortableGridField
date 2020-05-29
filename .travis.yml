@@ -1,21 +1,26 @@
+os: linux
+dist: xenial
+
 language: php
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-
-env:
-  - DB=MYSQL CORE_RELEASE=4.3
-
-matrix:
+jobs:
   include:
+    - php: 7.2
+      env: DB=MYSQL CORE_RELEASE=4.5
+      services:
+        - mysql
+    - php: 7.2
+      env: DB=PGSQL CORE_RELEASE=4.5
+      services:
+        - postgresql
     - php: 7.1
-      env: DB=PGSQL CORE_RELEASE=4.3
-    - php: 7.1
-      env: DB=SQLITE3 CORE_RELEASE=4.3
+      env: DB=MYSQL CORE_RELEASE=4.4
+      services:
+        - mysql
     - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=4.2
+      env: DB=MYSQL CORE_RELEASE=4.4
+      services:
+        - mysql
 
 before_script:
   # Init PHP
@@ -27,9 +32,7 @@ before_script:
   - composer validate
   - composer require --no-update silverstripe/recipe-core:"^$CORE_RELEASE"
   - composer require --no-update phpunit/phpunit:^5.7
-  - if [[ $CORE_RELEASE == 4.2 ]]; then composer require --no-update silverstripe/versioned:^1.2; fi
   - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:~2.0 --prefer-dist --no-update; fi
-  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:~2.0 --prefer-dist --no-update; fi
   - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:

@@ -2,7 +2,6 @@ has_many Example
 =================
 
 ```php
-<?php
 
 /*** TestPage.php ***/
 use SilverStripe\Forms\GridField\GridField;

@@ -14,7 +14,7 @@ class MyModelAdmin extends ModelAdmin
     private static $url_segment = 'my-model-admin';
     
     private static $managed_models = [
-        'MATestObject',
+        MATestObject::class,
     ];
     
     public function getEditForm($id = null, $fields = null)
@@ -22,7 +22,8 @@ class MyModelAdmin extends ModelAdmin
         $form = parent::getEditForm($id, $fields);
         
         //This check is simply to ensure you are on the managed model you want adjust accordingly
-        if($this->modelClass == 'MATestObject' && $gridField = $form->Fields()->dataFieldByName($this->sanitiseClassName($this->modelClass))) {
+        if($this->modelClass === MATestObject::class) {
+            $gridField = $form->Fields()->dataFieldByName($this->sanitiseClassName($this->modelClass))
             //This is just a precaution to ensure we got a GridField from dataFieldByName() which you should have
             if($gridField instanceof GridField) {
                 $gridField->getConfig()->addComponent(new GridFieldSortableRows('SortOrder'));
@@ -41,6 +42,10 @@ class MATestObject extends DataObject
     private static $db = [
         'Title' => 'Varchar',
         'SortOrder' => 'Int',
+    ];
+    
+    private static $indexes = [
+        'SortOrder' => true,
     ];
 
     private static $default_sort = 'SortOrder';

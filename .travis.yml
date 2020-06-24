@@ -1,26 +1,27 @@
-os: linux
-dist: xenial
-
 language: php
 
-jobs:
+dist: xenial
+
+services:
+  - mysql
+  - postgresql
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+matrix:
   include:
-    - php: 7.2
-      env: DB=MYSQL CORE_RELEASE=4.5
-      services:
-        - mysql
-    - php: 7.2
-      env: DB=PGSQL CORE_RELEASE=4.5
-      services:
-        - postgresql
-    - php: 7.1
-      env: DB=MYSQL CORE_RELEASE=4.4
-      services:
-        - mysql
     - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=4.4
-      services:
-        - mysql
+      env: DB=MYSQL CORE_RELEASE=4.4.x-dev PHPUNIT_TEST=1
+    - php: 7.1
+      env: DB=MYSQL CORE_RELEASE=4.5.x-dev PHPUNIT_TEST=1 PDO=1
+    - php: 7.2
+      env: DB=PGSQL CORE_RELEASE=4.6.x-dev PHPUNIT_TEST=1
+    - php: 7.3
+      env: DB=MYSQL CORE_RELEASE=4.6.x-dev PHPUNIT_TEST=1 
+    - php: 7.4
+      env: DB=MYSQL CORE_RELEASE=4.x-dev PHPUNIT_TEST=1
 
 before_script:
   # Init PHP
@@ -30,9 +31,11 @@ before_script:
 
   # Install composer dependencies
   - composer validate
-  - composer require --no-update silverstripe/recipe-core:"^$CORE_RELEASE"
+  - composer require --no-update silverstripe/recipe-core:$CORE_RELEASE
   - composer require --no-update phpunit/phpunit:^5.7
-  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:~2.0 --prefer-dist --no-update; fi
+  # Fix for running phpunit 5 on php 7.4+
+  - composer require --no-update sminnee/phpunit-mock-objects:^3
+  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:^2 --prefer-dist --no-update; fi
   - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:

@@ -2,3 +2,5 @@ pl:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Pozwól na reorganizację przez drag and drop'
     EditPermissionsFailure: 'Brak możliwości edycji'
+    NEXT: 'Przenieś do następnej strony'
+    PREVIOUS: 'Przenieś do poprzedniej strony'

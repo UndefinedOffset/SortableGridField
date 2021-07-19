@@ -1,0 +1,6 @@
+da:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Tillad træk og slip sortering'
+    EditPermissionsFailure: 'Manglende tilladelse til at redigere'
+    NEXT: 'Flyt til næste side'
+    PREVIOUS: 'Flyt til forrige side'

@@ -2,3 +2,5 @@ nl:
   GridFieldSortableRows:
     ALLOW_DRAG_DROP: 'Rangschikken met drag & drop toestaan'
     EditPermissionsFailure: 'Geen toegang'
+    NEXT: 'Verplaats naar Volgende Pagina'
+    PREVIOUS: 'Verplaats naar Vorige Pagina'

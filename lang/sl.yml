@@ -1,0 +1,6 @@
+sl:
+  GridFieldSortableRows:
+    ALLOW_DRAG_DROP: 'Omogoči razvrščanje s "povleci in spusti" '
+    EditPermissionsFailure: 'Nimate pravic za urejanje'
+    NEXT: 'Prestavi na naslednjo stran'
+    PREVIOUS: 'Prestavi na prejšnjo stran'

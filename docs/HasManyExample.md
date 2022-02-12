@@ -17,16 +17,16 @@ class TestPage extends Page
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        
+
         $conf = GridFieldConfig_RelationEditor::create(10);
-        $conf->addComponent(new GridFieldSortableRows('SortOrder'));
+        $conf->addComponent(GridFieldSortableRows::create('SortOrder'));
 
         $fields->addFieldToTab(
-            'Root.TestObjects', 
+            'Root.TestObjects',
             GridField::create(
-                'TestObjects', 
-                'TestObjects', 
-                $this->TestObjects(), 
+                'TestObjects',
+                'TestObjects',
+                $this->TestObjects(),
                 $conf
             )
         );

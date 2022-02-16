@@ -90,7 +90,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\Bootstrap\\GitHubActionsAnnotatorPrinter
+        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
   silverstripe_410_php80:
     name: "Silverstripe 4.10 | PHP 8.0"
@@ -167,7 +167,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\Bootstrap\\GitHubActionsAnnotatorPrinter
+        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
   silverstripe_49_php74:
     name: "Silverstripe 4.9 | PHP 7.4"
@@ -244,7 +244,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\Bootstrap\\GitHubActionsAnnotatorPrinter
+        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
   phpcs:
     name: "PHP_CodeSniffer"

@@ -1,5 +1,5 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Bootstrap;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Bootstrap;
 
 use PHPUnit\Framework\TestFailure;
 use PHPUnit\TextUI\DefaultResultPrinter;

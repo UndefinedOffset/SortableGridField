@@ -2,6 +2,11 @@ SortableGridField
 =================
 
 [![CI](https://github.com/UndefinedOffset/SortableGridField/actions/workflows/ci.yml/badge.svg)](https://github.com/UndefinedOffset/SortableGridField/actions/workflows/ci.yml)
+[![Latest Stable Version](https://poser.pugx.org/undefinedoffset/sortablegridfield/version.svg)](http://www.silverstripe.org/stable-download/)
+[![Latest Unstable Version](https://poser.pugx.org/undefinedoffset/sortablegridfield/v/unstable.svg)](https://packagist.org/packages/undefinedoffset/sortablegridfield)
+[![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
+[![Total Downloads](https://poser.pugx.org/undefinedoffset/sortablegridfield/downloads.svg)](https://packagist.org/packages/undefinedoffset/sortablegridfield)
+[![License](https://poser.pugx.org/undefinedoffset/sortablegridfield/license.svg)](https://github.com/UndefinedOffset/SortableGridField/blob/master/LICENSE)
 
 Adds drag and drop functionality to SilverStripe 4's GridField
 
@@ -25,12 +30,12 @@ to the end of the address to force the templates to regenerate
 
 To enable sorting on a `has_many` relationship set up an integer field on your data object. Also for `has_many`
 relationships make sure to set the `$default_sort` on the `DataObject` to this new integer field to ensure that the sort
-order is applied when the relationship is requested. For `many_many` relationships you must add a 
-`$many_many_extraFields` static to the `DataObject` defining the relationship, see the 
-[SilverStripe documentation](https://docs.silverstripe.org/en/3/developer_guides/model/relations/#many-many) 
-for more information on this. If you are using a `many_many` relationship you will need to do a custom getter to set the 
+order is applied when the relationship is requested. For `many_many` relationships you must add a
+`$many_many_extraFields` static to the `DataObject` defining the relationship, see the
+[SilverStripe documentation](https://docs.silverstripe.org/en/3/developer_guides/model/relations/#many-many)
+for more information on this. If you are using a `many_many` relationship you will need to do a custom getter to set the
 sort order of this relationship for use on the front end see below for an example. As well for `many_many` relationships
-the name of the GridField *must* be the same as the relationship name other wise error's will occur. For new 
+the name of the GridField *must* be the same as the relationship name other wise error's will occur. For new
 `DataObject`s you do not need to increment the sort order yourself in your `DataObject`, `GridFieldSortableRows` will
 automatically do this the next time the grid is displayed.
 
@@ -116,7 +121,7 @@ When you're reporting an issue please ensure you specify what version of SilverS
 3.1beta3, 3.0-master etc. Also be sure to include any JavaScript or PHP errors you receive, for PHP errors please ensure
 you include the full stack trace. Also please include your implementation code (where your setting up your grid field)
 as well as how you produced the issue. You may also be asked to provide some of the classes to aid in re-producing the
-issue. Stick with the issue, remember that you seen the issue not the maintainer of the module so it may take a lot of 
+issue. Stick with the issue, remember that you seen the issue not the maintainer of the module so it may take a lot of
 questions to arrive at a fix or answer.
 
 ### Notes

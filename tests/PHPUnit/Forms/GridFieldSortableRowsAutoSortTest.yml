@@ -1,4 +1,4 @@
-UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_Player:
+UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\Player:
   player1:
     Name: Player 1
     SortOrder: 0
@@ -9,7 +9,7 @@ UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_Player:
     Name: Player 3
     SortOrder: 0
 
-UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_VPlayer:
+UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer:
   player1:
     Name: Player 1
     SortOrder: 0
@@ -20,20 +20,20 @@ UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_VPlayer:
     Name: Player 3
     SortOrder: 0
 
-UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_TestParent:
+UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent:
   testparent:
     Name: Test
 
-UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_ChildObject:
+UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\ChildObject:
   testitem1:
     Name: Test 1
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent
   testitem2:
     Name: Test 2
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent
   testitem3:
     Name: Test 3
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\GridFieldAction_SortOrder_TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent

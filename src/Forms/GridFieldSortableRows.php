@@ -1,5 +1,4 @@
 <?php
-
 namespace UndefinedOffset\SortableGridField\Forms;
 
 use SilverStripe\Admin\ModelAdmin;
@@ -30,8 +29,6 @@ use SilverStripe\View\Requirements;
 
 /**
  * This component provides a checkbox which when checked enables drag-and-drop re-ordering of elements displayed in a {@link GridField}
- *
- * @package forms
  */
 class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionProvider, GridField_DataManipulator
 {

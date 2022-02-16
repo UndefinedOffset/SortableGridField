@@ -13,10 +13,10 @@ use SilverStripe\Security\Member;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
-use UndefinedOffset\SortableGridField\Tests\Forms\RowsTest\Team;
-use UndefinedOffset\SortableGridField\Tests\Forms\RowsTest\VTeam;
+use UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\Team;
+use UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\VTeam;
 
-class GridFieldSortableRowsTest extends SapphireTest
+class OrderingTest extends SapphireTest
 {
     /** @var ArrayList */
     protected $list;
@@ -28,7 +28,7 @@ class GridFieldSortableRowsTest extends SapphireTest
     protected $form;
 
     /** @var string */
-    public static $fixture_file = 'GridFieldSortableRowsTest.yml';
+    public static $fixture_file = 'OrderingTest.yml';
 
     /** @var array */
     protected static $extra_dataobjects = [

@@ -19,13 +19,10 @@ use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\Player;
 use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent;
 use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer;
 
-/**
- * Class \UndefinedOffset\SortableGridField\Tests\GridFieldSortableRowsAutoSortTest
- */
-class GridFieldSortableRowsAutoSortTest extends SapphireTest
+class AutoSortTest extends SapphireTest
 {
     /** @var string */
-    public static $fixture_file = 'GridFieldSortableRowsAutoSortTest.yml';
+    public static $fixture_file = 'AutoSortTest.yml';
 
     /** @var array */
     protected static $extra_dataobjects = [

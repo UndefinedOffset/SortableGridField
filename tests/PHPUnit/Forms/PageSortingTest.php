@@ -11,13 +11,13 @@ use SilverStripe\Forms\GridField\GridFieldConfig_Base;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
-use UndefinedOffset\SortableGridField\Tests\Forms\RowsPageTest\Team;
-use UndefinedOffset\SortableGridField\Tests\Forms\RowsPageTest\VTeam;
+use UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\Team;
+use UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\VTeam;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\GridFieldSortableRowsPageTest
+ * Class \UndefinedOffset\SortableGridField\Tests\PageSortingTest
  */
-class GridFieldSortableRowsPageTest extends SapphireTest
+class PageSortingTest extends SapphireTest
 {
     /** @var ArrayList */
     protected $list;
@@ -29,7 +29,7 @@ class GridFieldSortableRowsPageTest extends SapphireTest
     protected $form;
 
     /** @var string */
-    public static $fixture_file = 'GridFieldSortableRowsPageTest.yml';
+    public static $fixture_file = 'PageSortingTest.yml';
 
     /** @var array */
     protected static $extra_dataobjects = [

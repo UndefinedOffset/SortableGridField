@@ -6,7 +6,6 @@ use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Extensible;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
@@ -16,10 +15,8 @@ use SilverStripe\Forms\GridField\GridField_HTMLProvider;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataObjectSchema;
-use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\ORM\ManyManyThroughList;
@@ -77,7 +74,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         $dataList = $gridField->getList();
 
         if (class_exists('UnsavedRelationList') && $dataList instanceof UnsavedRelationList) {
-            return array();
+            return [];
         }
 
         $state = $gridField->State->GridFieldSortableRows;
@@ -87,7 +84,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
         //Ensure user can edit
         if (!singleton($gridField->getModelClass())->canEdit()) {
-            return array();
+            return [];
         }
 
 
@@ -120,20 +117,22 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         )->addExtraClass('sortablerows-sorttopage');
 
 
-        $data = array('SortableToggle' => $sortOrderToggle,
+        $data = [
+            'SortableToggle' => $sortOrderToggle,
             'SortOrderSave' => $sortOrderSave,
             'SortToPage' => $sortToPage,
             'Checked' => ($state->sortableToggle == true ? ' checked = "checked"' : ''),
-            'List' => $dataList);
+            'List' => $dataList,
+        ];
 
         $forTemplate = new ArrayData($data);
 
         Requirements::css('undefinedoffset/sortablegridfield:css/GridFieldSortableRows.css');
         Requirements::javascript('undefinedoffset/sortablegridfield:javascript/GridFieldSortableRows.js');
 
-        $args = array('Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection);
+        $args = ['Colspan' => count($gridField->getColumns()), 'ID' => $gridField->ID(), 'DisableSelection' => $this->disable_selection];
 
-        $fragments = array('header' => $forTemplate->renderWith('SortableGridField\Forms\Includes\GridFieldSortableRows', $args));
+        $fragments = ['header' => $forTemplate->renderWith('SortableGridField\Forms\Includes\GridFieldSortableRows', $args)];
 
         if ($gridField->getConfig()->getComponentByType(GridFieldPaginator::class)) {
             $fragments['after'] = $forTemplate->renderWith('SortableGridField\Forms\Includes\GridFieldSortableRows_paginator');
@@ -145,8 +144,8 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
     /**
      * Manipulate the datalist as needed by this grid modifier.
      * @param GridField $gridField Grid Field Reference
-     * @param SS_List|DataList $dataList Data List to adjust
-     * @return DataList Modified Data List
+     * @param SS_List|\SilverStripe\ORM\DataList $dataList Data List to adjust
+     * @return \SilverStripe\ORM\DataList Modified Data List
      */
     public function getManipulatedData(GridField $gridField, SS_List $dataList)
     {
@@ -214,7 +213,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
     /**
      * Detects and corrects items with a sort column value of 0, by appending them to the bottom of the list
      * @param GridField $gridField Grid Field Reference
-     * @param SS_List|DataList $dataList Data List of items to be checked
+     * @param SS_List|\SilverStripe\ORM\DataList $dataList Data List of items to be checked
      */
     protected function fixSortColumn($gridField, SS_List $dataList)
     {
@@ -222,11 +221,11 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             return;
         }
 
-        /** @var SS_List|DataList $list */
+        /** @var SS_List|\SilverStripe\ORM\DataList $list */
         $list = clone $dataList;
         $list = $list->alterDataQuery(function ($query, SS_List $tmplist) {
-            /** @var DataQuery $query */
-            $query->limit(array());
+            /** @var \SilverStripe\ORM\DataQuery $query */
+            $query->limit([]);
             return $query;
         });
 
@@ -254,15 +253,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             $i = 1;
 
             if ($many_many) {
-                $schema=Injector::inst()->get(DataObjectSchema::class);
-                $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
-                $parentField=$componentDetails['parentField'];
-                $componentField=$componentDetails['childField'];
-                $table=$componentDetails['join'];
-                
+                $schema = Injector::inst()->get(DataObjectSchema::class);
+                $componentDetails = $schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                $parentField = $componentDetails['parentField'];
+                $componentField = $componentDetails['childField'];
+                $table = $componentDetails['join'];
+
                 //For ManyManyThroughLists get the right join table
                 if ($list instanceof ManyManyThroughList && class_exists($table)) {
-                    $table=$schema->tableName($table);
+                    $table = $schema->tableName($table);
                 }
 
                 $extraFields = $list->getExtraFields();
@@ -311,7 +310,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             }
 
             if ($this->append_to_top) {
-                $topIncremented = array();
+                $topIncremented = [];
             }
 
             $modelClass = $gridField->getModelClass();
@@ -341,7 +340,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                                 $item->write();
                             }
                         }
-                    }else {
+                    } else {
                         //Upgrade all the records (including the last inserted from 0 to 1)
                         DB::query('UPDATE "' . $table
                             . '" SET "' . $sortColumn . '" = "' . $sortColumn . '"+1'
@@ -416,7 +415,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
      */
     public function getActions($gridField)
     {
-        return array('saveGridRowSort', 'sortableRowsToggle', 'sortToPage');
+        return ['saveGridRowSort', 'sortableRowsToggle', 'sortToPage'];
     }
 
     /**
@@ -484,15 +483,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
 
         if ($many_many) {
-            $schema=Injector::inst()->get(DataObjectSchema::class);
-            $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
-            $parentField=$componentDetails['parentField'];
-            $componentField=$componentDetails['childField'];
-            $table=$componentDetails['join'];
-            
+            $schema = Injector::inst()->get(DataObjectSchema::class);
+            $componentDetails = $schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            $parentField = $componentDetails['parentField'];
+            $componentField = $componentDetails['childField'];
+            $table = $componentDetails['join'];
+
             //For ManyManyThroughLists get the right join table
             if ($items instanceof ManyManyThroughList && class_exists($table)) {
-                $table=$schema->tableName($table);
+                $table = $schema->tableName($table);
             }
         } else {
             //Find table containing the sort column
@@ -545,14 +544,14 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
                     . '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
                     . ' WHERE "' . $componentField . '" = ' . $id . ' AND "' . $parentField . '" = ' . $owner->ID);
             } else {
-                if($hasVersioned) {
+                if ($hasVersioned) {
                     // For versioned objects, modify them with the ORM so that the *_versions table is updated
                     $obj = $modelClass::get()->byID(intval($id));
                     if (!empty($obj) && $obj !== false && $obj->exists()) {
                         $obj->$sortColumn = (($sort + 1) + $pageOffset);
                         $obj->write();
                     }
-                }else {
+                } else {
                     DB::query('UPDATE "' . $table
                         . '" SET "' . $sortColumn . '" = ' . (($sort + 1) + $pageOffset)
                         . ' WHERE "ID" = ' . $id);
@@ -610,7 +609,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
             user_error('No target page', E_USER_ERROR);
         }
 
-        /** @var Extensible $className */
+        /** @var \SilverStripe\Core\Extensible $className */
         $className = $gridField->getModelClass();
         $owner = $gridField->Form->getRecord();
 
@@ -633,15 +632,15 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
         }
 
         if ($many_many) {
-            $schema=Injector::inst()->get(DataObjectSchema::class);
-            $componentDetails=$schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
-            $parentField=$componentDetails['parentField'];
-            $componentField=$componentDetails['childField'];
-            $table=$componentDetails['join'];
-            
+            $schema = Injector::inst()->get(DataObjectSchema::class);
+            $componentDetails = $schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            $parentField = $componentDetails['parentField'];
+            $componentField = $componentDetails['childField'];
+            $table = $componentDetails['join'];
+
             //For ManyManyThroughLists get the right join table
             if ($items instanceof ManyManyThroughList && class_exists($table)) {
-                $table=$schema->tableName($table);
+                $table = $schema->tableName($table);
             }
         }
 
@@ -782,8 +781,7 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
     /**
      * Check to see if the given class name has the Versioned extension
-     *
-     * @param Extensible|string $className
+     * @param \SilverStripe\Core\Extensible|string $className
      * @return bool
      */
     public function hasVersionedExtension($className)
@@ -793,7 +791,6 @@ class GridFieldSortableRows implements GridField_HTMLProvider, GridField_ActionP
 
     /**
      * Checks to see if $table_name is declared on the DataObject, if not returns string as given
-     *
      * @param $className
      * @return string
      * @deprecated Use DataObject::getSchema()->tableName() instead

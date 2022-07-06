@@ -15,8 +15,8 @@ on:
 
 
 jobs:
-  silverstripe_410_php74:
-    name: "Silverstripe 4.10 | PHP 7.4"
+  silverstripe_411_php74:
+    name: "Silverstripe 4.11 | PHP 7.4"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
@@ -69,8 +69,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss410-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss410-php74-
+          key: ${{ runner.os }}-composer-ss411-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss411-php74-
 
       - name: Install Composer dependencies
         env:
@@ -78,8 +78,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/admin 1.10.* --no-update
-          composer require silverstripe/versioned 1.10.*
+          composer require silverstripe/admin 1.11.* --no-update
+          composer require silverstripe/versioned 1.11.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -92,8 +92,8 @@ jobs:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
-  silverstripe_410_php80:
-    name: "Silverstripe 4.10 | PHP 8.0"
+  silverstripe_411_php80:
+    name: "Silverstripe 4.11 | PHP 8.0"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
@@ -146,8 +146,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss410-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss410-php80-
+          key: ${{ runner.os }}-composer-ss411-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss411-php80-
 
       - name: Install Composer dependencies
         env:
@@ -155,85 +155,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/admin 1.10.* --no-update
-          composer require silverstripe/versioned 1.10.*
-          composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
-
-      - name: Configure Environment
-        run: |
-          cp tests/utils/actions.env.template .env
-          mkdir artifacts
-
-      - name: Perform PHPUnit Tests
-        env:
-          SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
-
-  silverstripe_49_php74:
-    name: "Silverstripe 4.9 | PHP 7.4"
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
-    env:
-      php_version: 7.4
-      php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: testpassword
-          MYSQL_DATABASE: test_db
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP Extension Cache
-        id: cache-env
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ env.php_version }}
-          extensions: ${{ env.php_extensions }}
-          key: php74-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
-
-      - name: Cache PHP Extensions
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.cache-env.outputs.dir }}
-          key: ${{ steps.cache-env.outputs.key }}
-          restore-keys: ${{ steps.cache-env.outputs.key }}
-
-      - name: Setup PHP, with composer and extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.php_version }}
-          extensions: ${{ env.php_extensions }}
-          ini-values: log_errors=On, error_log="${{github.workspace}}/artifacts/php_errors.log"
-          coverage: none
-          tools: composer:v1
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss49-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss49-php74-
-
-      - name: Install Composer dependencies
-        env:
-            GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer self-update --ansi || true
-          if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/admin 1.9.* --no-update
-          composer require silverstripe/versioned 1.9.*
+          composer require silverstripe/admin 1.11.* --no-update
+          composer require silverstripe/versioned 1.11.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment

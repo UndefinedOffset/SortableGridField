@@ -155,6 +155,9 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
+          composer config allow-plugins.composer/installers true
+          composer config allow-plugins.silverstripe/recipe-plugin true
+          composer config allow-plugins.silverstripe/vendor-plugin true
           composer require silverstripe/admin 1.11.* --no-update
           composer require silverstripe/versioned 1.11.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi

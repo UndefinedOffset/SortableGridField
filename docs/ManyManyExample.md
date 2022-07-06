@@ -25,9 +25,9 @@ class TestPage extends Page
 		$fields = parent::getCMSFields();
 
 		$conf = GridFieldConfig_RelationEditor::create(10);
-		$conf->addComponent(new GridFieldSortableRows('SortOrder'));
+		$conf->addComponent(GridFieldSortableRows::create('SortOrder'));
 
-		$fields->addFieldToTab('Root.TestObjects', new GridField('TestObjects', 'TestObjects', $this->TestObjects(), $conf));
+		$fields->addFieldToTab('Root.TestObjects', GridField::create('TestObjects', 'TestObjects', $this->TestObjects(), $conf));
 
 		return $fields;
 	}

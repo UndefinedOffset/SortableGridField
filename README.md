@@ -12,7 +12,7 @@ Adds drag and drop functionality to SilverStripe 4's GridField
 
 ## Requirements
 
-* SilverStripe 4.x
+* SilverStripe 4.11+
 
 ## Installation
 

@@ -111,7 +111,7 @@ class AutoSortTest extends SapphireTest
 
         //Publish all records
         foreach ($list as $item) {
-            $item->publish('Stage', 'Live');
+            $item->publishSingle();
         }
 
 
@@ -168,7 +168,7 @@ class AutoSortTest extends SapphireTest
 
         //Publish all records
         foreach ($list as $item) {
-            $item->publish('Stage', 'Live');
+            $item->publishSingle();
         }
 
 

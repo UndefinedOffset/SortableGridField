@@ -107,7 +107,7 @@ class PageSortingTest extends SapphireTest
 
         //Publish all records
         foreach ($list as $item) {
-            $item->publish('Stage', 'Live');
+            $item->publishSingle();
         }
 
 
@@ -154,7 +154,7 @@ class PageSortingTest extends SapphireTest
 
         //Publish all records
         foreach ($list as $item) {
-            $item->publish('Stage', 'Live');
+            $item->publishSingle();
         }
 
 

@@ -223,7 +223,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         $list = clone $dataList;
         $list = $list->alterDataQuery(function ($query, SS_List $tmplist) {
             /** @var \SilverStripe\ORM\DataQuery $query */
-            $query->limit([]);
+            $query->limit(null);
             return $query;
         });
 

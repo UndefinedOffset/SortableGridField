@@ -15,12 +15,12 @@ on:
 
 
 jobs:
-  silverstripe_411_php74:
-    name: "Silverstripe 4.11 | PHP 7.4"
+  silverstripe_5_php81:
+    name: "Silverstripe 5.0 | PHP 8.1"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
-      php_version: 7.4
+      php_version: 8.1
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
     services:
       mysql:
@@ -69,8 +69,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss411-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss411-php74-
+          key: ${{ runner.os }}-composer-ss5-php81-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss5-php81-
 
       - name: Install Composer dependencies
         env:
@@ -78,8 +78,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/admin 1.11.* --no-update
-          composer require silverstripe/versioned 1.11.*
+          composer require silverstripe/admin 2.0.* --no-update
+          composer require silverstripe/versioned 2.0.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -177,7 +177,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
-      php_version: 7.4
+      php_version: 8.0
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
 
     steps:

@@ -1,6 +1,7 @@
 <?php
 namespace UndefinedOffset\SortableGridField\Tests;
 
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
@@ -9,7 +10,8 @@ use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\ORM\ValidationException;
-use SilverStripe\Security\Member;
+use SilverStripe\Security\IdentityStore;
+use SilverStripe\Security\Security;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
@@ -48,8 +50,8 @@ class OrderingTest extends SapphireTest
 
     public function testSortActionWithoutCorrectPermission()
     {
-        if (Member::currentUser()) {
-            Member::currentUser()->logOut();
+        if (Security::getCurrentUser()) {
+            Injector::inst()->get(IdentityStore::class)->logOut(Controller::curr()->getRequest());
         }
 
         $this->expectException(ValidationException::class);
@@ -97,7 +99,7 @@ class OrderingTest extends SapphireTest
 
         //Publish all records
         foreach ($list as $item) {
-            $item->publish('Stage', 'Live');
+            $item->publishSingle();
         }
 
         $team1 = $this->objFromFixture(VTeam::class, 'team1');

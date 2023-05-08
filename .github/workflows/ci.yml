@@ -78,6 +78,9 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
+          composer config allow-plugins.composer/installers true
+          composer config allow-plugins.silverstripe/recipe-plugin true
+          composer config allow-plugins.silverstripe/vendor-plugin true
           composer require silverstripe/admin 2.0.* --no-update
           composer require silverstripe/versioned 2.0.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
@@ -226,6 +229,9 @@ jobs:
           rm composer.json
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
+          composer config allow-plugins.composer/installers true
+          composer config allow-plugins.silverstripe/recipe-plugin true
+          composer config allow-plugins.silverstripe/vendor-plugin true
           composer require squizlabs/php_codesniffer ~3.4
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
           mkdir artifacts

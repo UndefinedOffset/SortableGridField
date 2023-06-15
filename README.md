@@ -1,6 +1,9 @@
 SortableGridField
 =================
 
+__NOTE__: This module is no longer commercially supported in Silverstripe CMS 5 and it does not provide a CMS5-compatible version.
+Module [symbiote/silverstripe-gridfieldextensions](https://packagist.org/packages/symbiote/silverstripe-gridfieldextensions) provides equivalent functionality.
+
 [![CI](https://github.com/UndefinedOffset/SortableGridField/actions/workflows/ci.yml/badge.svg)](https://github.com/UndefinedOffset/SortableGridField/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/undefinedoffset/sortablegridfield/version.svg)](http://www.silverstripe.org/stable-download/)
 [![Latest Unstable Version](https://poser.pugx.org/undefinedoffset/sortablegridfield/v/unstable.svg)](https://packagist.org/packages/undefinedoffset/sortablegridfield)

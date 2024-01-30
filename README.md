@@ -7,11 +7,11 @@ SortableGridField
 [![Total Downloads](https://poser.pugx.org/undefinedoffset/sortablegridfield/downloads.svg)](https://packagist.org/packages/undefinedoffset/sortablegridfield)
 [![License](https://poser.pugx.org/undefinedoffset/sortablegridfield/license.svg)](https://github.com/UndefinedOffset/SortableGridField/blob/master/LICENSE)
 
-Adds drag and drop functionality to SilverStripe 4's GridField
+Adds drag and drop functionality to Silverstripe's GridField
 
 ## Requirements
 
-* SilverStripe 4.11+
+* Silverstripe 4.11+ or 5.0+
 
 ## Installation
 

@@ -1,6 +1,6 @@
 {
 	"name": "undefinedoffset/sortablegridfield",
-	"description": "Adds drag and drop functionality to SilverStripe 4.x's GridField",
+	"description": "Adds drag and drop functionality to Silverstripe's GridField",
 	"type": "silverstripe-vendormodule",
 	"keywords": ["silverstripe", "gridfield", "sortable", "sort"],
     "license": "BSD-3-Clause",

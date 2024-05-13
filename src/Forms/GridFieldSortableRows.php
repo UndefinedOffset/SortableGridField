@@ -253,6 +253,10 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
             if ($many_many) {
                 $schema = Injector::inst()->get(DataObjectSchema::class);
                 $componentDetails = $schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+                if (empty($componentDetails)) {
+                    user_error('Could not find the relationship "' . (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()) . '" on "' . get_class($owner) . '"', E_USER_ERROR);
+                }
+
                 $parentField = $componentDetails['parentField'];
                 $componentField = $componentDetails['childField'];
                 $table = $componentDetails['join'];
@@ -483,6 +487,10 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         if ($many_many) {
             $schema = Injector::inst()->get(DataObjectSchema::class);
             $componentDetails = $schema->manyManyComponent(get_class($owner), (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()));
+            if (empty($componentDetails)) {
+                user_error('Could not find the relationship "' . (!empty($this->custom_relation_name) ? $this->custom_relation_name : $gridField->getName()) . '" on "' . get_class($owner) . '"', E_USER_ERROR);
+            }
+
             $parentField = $componentDetails['parentField'];
             $componentField = $componentDetails['childField'];
             $table = $componentDetails['join'];

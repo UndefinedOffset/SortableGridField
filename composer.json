@@ -13,7 +13,7 @@
 	],
 	"require": {
 		"silverstripe/framework": "~6.0",
-		"silverstripe/versioned": "^2"
+		"silverstripe/versioned": "~3.0"
 	},
     "require-dev": {
         "phpunit/phpunit": "^11.3",

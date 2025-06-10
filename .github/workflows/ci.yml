@@ -16,9 +16,8 @@ on:
 
 jobs:
   silverstripe_5_php81:
-    name: "Silverstripe 5.0 | PHP 8.1"
+    name: "Silverstripe 5.4 | PHP 8.1"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
       php_version: 8.1
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
@@ -35,7 +34,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP Extension Cache
         id: cache-env
@@ -46,7 +45,7 @@ jobs:
           key: php74-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
@@ -66,7 +65,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-ss5-php81-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
@@ -81,8 +80,8 @@ jobs:
           composer config allow-plugins.composer/installers true
           composer config allow-plugins.silverstripe/recipe-plugin true
           composer config allow-plugins.silverstripe/vendor-plugin true
-          composer require silverstripe/admin 2.0.* --no-update
-          composer require silverstripe/versioned 2.0.*
+          composer require silverstripe/admin 2.4.* --no-update
+          composer require silverstripe/versioned 2.4.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -95,10 +94,9 @@ jobs:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
-  silverstripe_411_php80:
-    name: "Silverstripe 4.11 | PHP 8.0"
+  silverstripe_413_php80:
+    name: "Silverstripe 4.13 | PHP 8.0"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
       php_version: 8.0
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
@@ -115,7 +113,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP Extension Cache
         id: cache-env
@@ -126,7 +124,7 @@ jobs:
           key: php80-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
@@ -146,7 +144,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-ss411-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
@@ -161,8 +159,8 @@ jobs:
           composer config allow-plugins.composer/installers true
           composer config allow-plugins.silverstripe/recipe-plugin true
           composer config allow-plugins.silverstripe/vendor-plugin true
-          composer require silverstripe/admin 1.11.* --no-update
-          composer require silverstripe/versioned 1.11.*
+          composer require silverstripe/admin 1.13.* --no-update
+          composer require silverstripe/versioned 1.13.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -178,14 +176,13 @@ jobs:
   phpcs:
     name: "PHP_CodeSniffer"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
       php_version: 8.0
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP Extension Cache
         id: cache-env
@@ -196,7 +193,7 @@ jobs:
           key: php74-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
@@ -216,7 +213,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-phpcs-${{ hashFiles('.github/workflows/ci.yml') }}

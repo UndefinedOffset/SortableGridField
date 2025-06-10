@@ -11,7 +11,7 @@ Adds drag and drop functionality to Silverstripe's GridField
 
 ## Requirements
 
-* Silverstripe 4.11+ or 5.0+
+* Silverstripe 6.0+
 
 ## Installation
 

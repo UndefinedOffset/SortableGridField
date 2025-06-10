@@ -6,6 +6,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\Forms\GridField\AbstractGridFieldComponent;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
@@ -15,17 +16,16 @@ use SilverStripe\Forms\GridField\GridField_HTMLProvider;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\SS_List;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataObjectSchema;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\ORM\ManyManyThroughList;
 use SilverStripe\ORM\RelationList;
-use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\UnsavedRelationList;
-use SilverStripe\ORM\ValidationException;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
 /**

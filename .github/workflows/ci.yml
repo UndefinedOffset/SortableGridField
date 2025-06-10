@@ -15,15 +15,15 @@ on:
 
 
 jobs:
-  silverstripe_5_php81:
-    name: "Silverstripe 5.4 | PHP 8.1"
+  silverstripe_6_php81:
+    name: "Silverstripe 6.0 | PHP 8.3"
     runs-on: ubuntu-latest
     env:
-      php_version: 8.1
+      php_version: 8.3
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: testpassword
@@ -42,7 +42,7 @@ jobs:
         with:
           php-version: ${{ env.php_version }}
           extensions: ${{ env.php_extensions }}
-          key: php74-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
+          key: php83-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
         uses: actions/cache@v4
@@ -80,87 +80,8 @@ jobs:
           composer config allow-plugins.composer/installers true
           composer config allow-plugins.silverstripe/recipe-plugin true
           composer config allow-plugins.silverstripe/vendor-plugin true
-          composer require silverstripe/admin 2.4.* --no-update
-          composer require silverstripe/versioned 2.4.*
-          composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
-
-      - name: Configure Environment
-        run: |
-          cp tests/utils/actions.env.template .env
-          mkdir artifacts
-
-      - name: Perform PHPUnit Tests
-        env:
-          SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer UndefinedOffset\\SortableGridField\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
-
-  silverstripe_413_php80:
-    name: "Silverstripe 4.13 | PHP 8.0"
-    runs-on: ubuntu-latest
-    env:
-      php_version: 8.0
-      php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: testpassword
-          MYSQL_DATABASE: test_db
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PHP Extension Cache
-        id: cache-env
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ env.php_version }}
-          extensions: ${{ env.php_extensions }}
-          key: php80-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
-
-      - name: Cache PHP Extensions
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.cache-env.outputs.dir }}
-          key: ${{ steps.cache-env.outputs.key }}
-          restore-keys: ${{ steps.cache-env.outputs.key }}
-
-      - name: Setup PHP, with composer and extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.php_version }}
-          extensions: ${{ env.php_extensions }}
-          ini-values: log_errors=On, error_log="${{github.workspace}}/artifacts/php_errors.log"
-          coverage: none
-          tools: composer:v2
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss411-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss411-php80-
-
-      - name: Install Composer dependencies
-        env:
-            GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer self-update --ansi || true
-          if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer config allow-plugins.composer/installers true
-          composer config allow-plugins.silverstripe/recipe-plugin true
-          composer config allow-plugins.silverstripe/vendor-plugin true
-          composer require silverstripe/admin 1.13.* --no-update
-          composer require silverstripe/versioned 1.13.*
+          composer require silverstripe/admin 3.0.* --no-update
+          composer require silverstripe/versioned 3.0.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -177,7 +98,7 @@ jobs:
     name: "PHP_CodeSniffer"
     runs-on: ubuntu-latest
     env:
-      php_version: 8.0
+      php_version: 8.3
       php_extensions: ctype, dom, fileinfo, hash, intl, mbstring, session, simplexml, tokenizer, xml, pdo, mysqli, gd, zip
 
     steps:
@@ -190,7 +111,7 @@ jobs:
         with:
           php-version: ${{ env.php_version }}
           extensions: ${{ env.php_extensions }}
-          key: php74-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
+          key: php83-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
         uses: actions/cache@v4

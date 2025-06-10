@@ -1,5 +1,5 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;

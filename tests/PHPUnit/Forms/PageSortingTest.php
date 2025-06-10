@@ -1,5 +1,5 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -15,7 +15,7 @@ use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\Team;
 use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\VTeam;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\PageSortingTest
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\PageSortingTest
  */
 class PageSortingTest extends SapphireTest
 {

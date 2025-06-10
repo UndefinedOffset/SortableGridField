@@ -95,7 +95,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --teamcity
+        run: SS_PHPUNIT_FLUSH=1 vendor/bin/phpunit --colors=always --teamcity
 
   phpcs:
     name: "PHP_CodeSniffer"

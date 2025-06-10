@@ -1,5 +1,5 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -12,12 +12,12 @@ use SilverStripe\ORM\DB;
 use SilverStripe\Security\Security;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\BaseObject;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\ChildObject;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\Player;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\BaseObject;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\ChildObject;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\DummyController;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\Player;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\VPlayer;
 
 class AutoSortTest extends SapphireTest
 {

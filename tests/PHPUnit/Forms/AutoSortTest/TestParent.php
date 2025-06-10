@@ -1,11 +1,11 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest;
 
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\ORM\DataObject;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent
  *
  * @package SortableGridField\Tests
  * @property string Name

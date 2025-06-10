@@ -1,4 +1,4 @@
-UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\Player:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\Player:
   player1:
     Name: Player 1
     SortOrder: 0
@@ -9,7 +9,7 @@ UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\Player:
     Name: Player 3
     SortOrder: 0
 
-UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\VPlayer:
   player1:
     Name: Player 1
     SortOrder: 0
@@ -20,20 +20,20 @@ UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer:
     Name: Player 3
     SortOrder: 0
 
-UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent:
   testparent:
     Name: Test
 
-UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\ChildObject:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\ChildObject:
   testitem1:
     Name: Test 1
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent.testparent
   testitem2:
     Name: Test 2
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent.testparent
   testitem3:
     Name: Test 3
     SortOrder: 0
-    Parent: =>UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\TestParent.testparent
+    Parent: =>UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\TestParent.testparent

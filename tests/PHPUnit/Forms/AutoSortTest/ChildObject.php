@@ -1,11 +1,11 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest;
 
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\ORM\FieldType\DBInt;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\ChildObject
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\ChildObject
  *
  * @package SortableGridField\Tests
  * @property int SortOrder

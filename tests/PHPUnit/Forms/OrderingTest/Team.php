@@ -1,11 +1,11 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest;
 
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\ORM\DataObject;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\Team
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest\Team
  *
  * @property string Name
  * @property string City

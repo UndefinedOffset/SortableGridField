@@ -1,4 +1,4 @@
-UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\Team:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\Team:
   team1:
     Name: Team 1
     City: Cologne
@@ -36,7 +36,7 @@ UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\Team:
     City: Auckland
     SortOrder: 9
 
-UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\VTeam:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\VTeam:
   team1:
     Name: Team 1
     City: Cologne

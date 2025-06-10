@@ -1,4 +1,4 @@
-UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\Team:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest\Team:
   team1:
     Name: Team 1
     City: Cologne
@@ -12,7 +12,7 @@ UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\Team:
     City: Auckland
     SortOrder: 3
 
-UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\VTeam:
+UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest\VTeam:
   team1:
     Name: Team 1
     City: Cologne

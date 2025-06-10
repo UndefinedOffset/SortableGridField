@@ -1,10 +1,10 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest;
 
 use SilverStripe\Control\Controller;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\DummyController
  */
 class DummyController extends Controller
 {

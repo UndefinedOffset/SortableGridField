@@ -1,9 +1,9 @@
 <?php
 namespace UndefinedOffset\SortableGridField\Tests;
 
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
@@ -14,9 +14,9 @@ use SilverStripe\Security\IdentityStore;
 use SilverStripe\Security\Security;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
-use UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\Team;
-use UndefinedOffset\SortableGridField\Tests\Forms\OrderingTest\VTeam;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\DummyController;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest\Team;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\OrderingTest\VTeam;
 
 class OrderingTest extends SapphireTest
 {

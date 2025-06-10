@@ -1,12 +1,12 @@
 <?php
-namespace UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest;
+namespace UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest;
 
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
 /**
- * Class \UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\VPlayer
+ * Class \UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\VPlayer
  *
  * @property string Name
  * @property int SortOrder

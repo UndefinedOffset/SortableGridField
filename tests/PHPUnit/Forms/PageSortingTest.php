@@ -10,9 +10,9 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_Base;
 use SilverStripe\Versioned\Versioned;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
-use UndefinedOffset\SortableGridField\Tests\Forms\AutoSortTest\DummyController;
-use UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\Team;
-use UndefinedOffset\SortableGridField\Tests\Forms\PageSortingTest\VTeam;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\AutoSortTest\DummyController;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\Team;
+use UndefinedOffset\SortableGridField\Tests\PHPUnit\Forms\PageSortingTest\VTeam;
 
 /**
  * Class \UndefinedOffset\SortableGridField\Tests\PageSortingTest

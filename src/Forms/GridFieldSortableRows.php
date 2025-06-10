@@ -530,7 +530,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         //Event to notify the Controller or owner DataObject before list sort
         if ($owner && $owner instanceof DataObject && method_exists($owner, 'onBeforeGridFieldRowSort')) {
             $owner->onBeforeGridFieldRowSort(clone $items);
-        } else if (Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldRowSort')) {
+        } else if (Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldRowSort')) {
             Controller::curr()->onBeforeGridFieldRowSort(clone $items);
         }
 
@@ -591,7 +591,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         //Event to notify the Controller or owner DataObject after list sort
         if ($owner && $owner instanceof DataObject && method_exists($owner, 'onAfterGridFieldRowSort')) {
             $owner->onAfterGridFieldRowSort(clone $items);
-        } else if (Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldRowSort')) {
+        } else if (Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldRowSort')) {
             Controller::curr()->onAfterGridFieldRowSort(clone $items);
         }
     }
@@ -663,7 +663,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         //Event to notify the Controller or owner DataObject before list sort
         if ($owner && $owner instanceof DataObject && method_exists($owner, 'onBeforeGridFieldPageSort')) {
             $owner->onBeforeGridFieldPageSort(clone $items);
-        } else if (Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldPageSort')) {
+        } else if (Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onBeforeGridFieldPageSort')) {
             Controller::curr()->onBeforeGridFieldPageSort(clone $items);
         }
 
@@ -780,7 +780,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
         //Event to notify the Controller or owner DataObject after list sort
         if ($owner && $owner instanceof DataObject && method_exists($owner, 'onAfterGridFieldPageSort')) {
             $owner->onAfterGridFieldPageSort(clone $items);
-        } else if (Controller::has_curr() && Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldPageSort')) {
+        } else if (Controller::curr() instanceof ModelAdmin && method_exists(Controller::curr(), 'onAfterGridFieldPageSort')) {
             Controller::curr()->onAfterGridFieldPageSort(clone $items);
         }
     }

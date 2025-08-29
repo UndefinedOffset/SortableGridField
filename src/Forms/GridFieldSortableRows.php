@@ -335,7 +335,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
                 } else if ($this->append_to_top) {
                     if ($hasVersioned) {
                         // For versioned objects, modify them with the ORM so that the *_versions table is updated
-                        $itemsToUpdate = $modelClass::get()->where(($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
+                        $itemsToUpdate = $modelClass::get()->where(($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : '"' . $table . '".' . $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
                         if ($itemsToUpdate->exists()) {
                             foreach ($itemsToUpdate as $item) {
                                 $item->$sortColumn = $item->$sortColumn + 1;
@@ -346,13 +346,13 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
                         //Upgrade all the records (including the last inserted from 0 to 1)
                         DB::query('UPDATE "' . $table
                             . '" SET "' . $sortColumn . '" = "' . $sortColumn . '"+1'
-                            . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
+                            . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : '"' . $table . '".' . $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
                     }
 
                     if ($this->update_versioned_stage && $this->hasVersionedExtension($gridField->getModelClass())) {
                         DB::query('UPDATE "' . $table . '_' . $this->update_versioned_stage
                             . '" SET "' . $sortColumn . '" = "' . $sortColumn . '"+1'
-                            . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
+                            . ' WHERE ' . ($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : '"' . $table . '_' . $this->update_versioned_stage . '".' . $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
                     }
 
                     $topIncremented[] = $obj->ID;

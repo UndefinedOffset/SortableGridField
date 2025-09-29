@@ -335,7 +335,7 @@ class GridFieldSortableRows extends AbstractGridFieldComponent implements GridFi
                 } else if ($this->append_to_top) {
                     if ($hasVersioned) {
                         // For versioned objects, modify them with the ORM so that the *_versions table is updated
-                        $itemsToUpdate = $modelClass::get()->where(($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : '"' . $table . '".' . $idCondition) . (!empty($topIncremented) ? ' AND "ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
+                        $itemsToUpdate = $modelClass::get()->where(($list instanceof RelationList ? '"' . $list->foreignKey . '" = ' . $owner->ID : '"' . $table . '".' . $idCondition) . (!empty($topIncremented) ? ' AND "' . $table . '"."ID" NOT IN(\'' . implode('\',\'', $topIncremented) . '\')' : ''));
                         if ($itemsToUpdate->exists()) {
                             foreach ($itemsToUpdate as $item) {
                                 $item->$sortColumn = $item->$sortColumn + 1;
